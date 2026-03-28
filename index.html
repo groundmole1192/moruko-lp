@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>モルコ(Moruko) - あなた専用のフルオートAI秘書</title>
+    <meta name="description" content="Telegramに話しかけるだけで動く、自分専用AIアシスタント「モルコ(Moruko)」。自宅のミニPCで安全・快適な秘書機能を提供します。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 1. Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="morukoimage/moruko_logo_wide.png" alt="Moruko">
+            </div>
+            <div class="nav-links">
+                <a href="#features">できること</a>
+                <a href="#pricing">料金</a>
+                <a href="#pricing" class="btn btn-primary btn-sm">申し込む</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Section -->
+    <header class="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="container hero-container fade-in-up">
+            <div class="hero-content">
+                <div class="badge highlight-badge">⚠️ 2026年6月末まで・先着10名限定モニター！</div>
+                <h1 class="hero-title">
+                    <span class="pc-only">チャットでなんでもおまかせ<br>あなた専用のAI秘書 <span class="text-orange">「モルコ」</span></span>
+                    <span class="sp-only">チャットで<br>なんでもおまかせ<br>あなた専用のAI秘書<br><span class="text-orange">「モルコ」</span></span>
+                </h1>
+                <p class="hero-subtitle">
+                    自宅に置く小型ミニPCで稼働する、新しい形のプライベートAIアシスタント。<br>
+                    日々のタスクやスケジュール管理、面倒なメール対応を代行します。
+                </p>
+                <div class="hero-actions">
+                    <a href="#pricing" class="btn btn-primary btn-lg pulse">モニター価格で申し込む</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="glow-bg"></div>
+                <!-- Moruko Character Image -->
+                <img src="morukoimage/moruko_character.png" alt="Moruko Character" class="char-img floating">
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. About Section -->
+    <section id="about" class="about section">
+        <div class="container fade-in-up">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 class="section-title">完全自分専用の<br>AIサーバーをご自宅に</h2>
+                    <p class="section-desc">
+                        クラウド上の誰かのサーバーではなく、あなたの自宅に置く「ミニPC」の中でモルコは動き続けます。<br><br>
+                        これまでのチャットAIにない「能動的にあなたの作業を代行する」体験を実現。初期設定はすべて完了した状態でお届けするので、コンセントに挿してTelegramを連携するだけで、すぐにモルコとの日々が始まります。
+                    </p>
+                </div>
+                <div class="about-visual">
+                    <div class="glass-card pc-illustration">
+                        <img src="morukoimage/moruko_logo_squaire.png" alt="Moruko Logo Squaire" class="about-logo">
+                        <div class="pc-specs">
+                            <span>Moruko AI Server</span>
+                            <span>Ready to use</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Features Section -->
+    <section id="features" class="features section bg-light">
+        <div class="container fade-in-up">
+            <div class="section-header center">
+                <h2 class="section-title">モルコができること</h2>
+                <p class="section-desc">あなたの時間を増やす、多彩な秘書スキル</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card glass-card hover-lift">
+                    <div class="feature-image"><img src="morukoimage/feature_email.png" alt="メール管理"></div>
+                    <h3 class="feature-title">メール管理</h3>
+                    <p class="feature-text">重要なメールをチェックし、返信の下書きを自動で作成します。</p>
+                </div>
+                <div class="feature-card glass-card hover-lift">
+                    <div class="feature-image"><img src="morukoimage/feature_schedule.png" alt="スケジュール調整"></div>
+                    <h3 class="feature-title">スケジュール調整</h3>
+                    <p class="feature-text">カレンダーと連携し、予定の追加やリマインドをTelegram経由で行います。</p>
+                </div>
+                <div class="feature-card glass-card hover-lift">
+                    <div class="feature-image"><img src="morukoimage/feature_tasks.png" alt="タスク管理"></div>
+                    <h3 class="feature-title">タスク管理</h3>
+                    <p class="feature-text">口頭(テキスト)で伝えたことをTodoリストに整理し、進捗を管理します。</p>
+                </div>
+                <div class="feature-card glass-card hover-lift">
+                    <div class="feature-image"><img src="morukoimage/feature_diary.png" alt="日記自動生成"></div>
+                    <h3 class="feature-title">日記自動生成</h3>
+                    <p class="feature-text">毎日の出来事を話すだけで、綺麗にまとまった日記を自動生成・保存します。</p>
+                </div>
+                <div class="feature-card glass-card hover-lift">
+                    <div class="feature-image"><img src="morukoimage/feature_drive.png" alt="Drive操作"></div>
+                    <h3 class="feature-title">Drive操作・整理</h3>
+                    <p class="feature-text">Google Drive内のファイルを検索したり、指定したフォルダに自動整理します。</p>
+                </div>
+                <div class="feature-card glass-card hover-lift">
+                    <div class="feature-image"><img src="morukoimage/feature_sns.png" alt="SNS下書き"></div>
+                    <h3 class="feature-title">SNS下書き</h3>
+                    <p class="feature-text">投稿したい内容のアイデアから、SNS用の魅力的な文章を自動生成します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Pricing Section with Flash News -->
+    <section class="flash-news-section fade-in-up">
+        <div class="container text-center">
+            <h2 class="flash-title"><span class="blink">🚨 緊急速報 🚨</span><br><span class="text-yellow">2026年6月末まで・先着10名様限定！</span></h2>
+            <div class="flash-content">
+                <p>超特大のモニター割引キャンペーンを実施中です！</p>
+                <div class="flash-grid">
+                    <div class="flash-item">
+                        <span class="flash-label">買い切りプラン</span>
+                        <div class="flash-price">
+                            <span class="old-price">通常 200,000円</span>
+                            <span class="arrow">▶︎</span>
+                            <span class="new-price">100,000円<small>(税込)</small></span>
+                        </div>
+                    </div>
+                    <div class="flash-item">
+                        <span class="flash-label">サブスクプラン (PC無償譲渡)</span>
+                        <div class="flash-price">
+                            <span class="old-price">通常 2年(24回)支払い</span>
+                            <span class="arrow">▶︎</span>
+                            <span class="new-price">半分の1年(12回)で譲渡！</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing section">
+        <div class="container fade-in-up">
+            <div class="section-header center">
+                <h2 class="section-title">料金プラン詳細</h2>
+            </div>
+
+            <div class="pricing-story glass-card fade-in-up">
+                <div class="story-content">
+                    <div class="story-badge">Why Moruko?</div>
+                    <h3 class="story-title">「Mac mini＋OpenClaw」以上の体験を、安心の価格で。</h3>
+                    <p class="story-desc">
+                        AIを自宅で動かす際、「Mac mini (109,800円〜) に OpenClaw を導入する」構成が注目されています。<br>
+                        しかし、環境構築や情報の安全性に不安を感じる方も少なくありません。<br>
+                        モルコは、<strong>高額なMac miniを必要とせず、より安全で独立した自分専用のミニPC上で動作する専用設計</strong>です。<br>
+                        初期設定等のパッケージでありながら、<strong>「100,000円（税込）」というMac mini単体を買うよりも安価な究極のコストパフォーマンス</strong>を実現しました。
+                    </p>
+                </div>
+                <div class="story-visual">
+                    <img src="morukoimage/moruko_with_miniPC.png" alt="Moruko and Mini PC" class="floating">
+                </div>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Plan A -->
+                <div class="pricing-card glass-card hover-lift">
+                    <div class="plan-header">
+                        <h3 class="plan-name">A. 買い切りプラン</h3>
+                        <div class="plan-price">
+                            <span class="currency">¥</span>100,000<span class="tax">（税込）</span>
+                        </div>
+                        <p class="plan-subtitle"><del style="color:#999; font-weight:normal;">通常 ¥200,000</del><br><strong>モニター半額！(PC本体込み)</strong></p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>✔️ ミニPC本体 お買い上げ</li>
+                        <li>✔️ 初期設定・カスタマイズ込み</li>
+                        <li>✔️ Telegram 使い方レクチャー</li>
+                        <li>✔️ 専用相談Bot 利用権</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline btn-block mt-auto">このプランを選ぶ</a>
+                </div>
+
+                <!-- Plan B -->
+                <div class="pricing-card glass-card hover-lift popular">
+                    <div class="popular-badge">おすすめ</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">B. サブスクプラン</h3>
+                        <div class="plan-initial">初期費用: ¥30,000</div>
+                        <div class="plan-price">
+                            <span class="currency">¥</span>10,000<span class="period">/月</span>
+                        </div>
+                        <p class="plan-subtitle"><del style="color:#999; font-weight:normal;">通常 2年(24回)払い</del><br><strong>モニター特典で1年(12回)でPC譲渡！</strong></p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>✔️ ミニPC レンタル提供</li>
+                        <li>✔️ 初期設定・カスタマイズ込み</li>
+                        <li>✔️ Telegram 使い方レクチャー</li>
+                        <li>✔️ 1年(12回)満期でPC完全譲渡</li>
+                    </ul>
+                    <div class="cancel-warning">
+                        <small>⚠️ <strong>途中解約時のご注意</strong><br>解約時はPCをご返却いただきます。セキュリティ保護のため内部データは即時完全消去され、データの抽出・返却は一切できません。</small>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-block mt-auto">このプランを選ぶ</a>
+                </div>
+            </div>
+            
+            <p class="pricing-note text-center">
+                ※両プラン共通: 別途 Claude (Anthropic) のサブスクリプション契約が必要となります。
+            </p>
+        </div>
+    </section>
+
+    <!-- 6. Support & Guarantee Section -->
+    <section class="support section bg-light">
+        <div class="container fade-in-up">
+            <div class="support-content glass-card">
+                <h2 class="section-title text-center">安心のサポート＆解約保証</h2>
+                <div class="support-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>届いてすぐ使える</h4>
+                        <p>面倒なPCの初期設定やモルコのインストールはすべて完了した状態でお届けします。</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>マンツーマンレクチャー</h4>
+                        <p>Telegramアプリの連携方法からモルコへの話しかけ方まで、丁寧にサポートします。</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>厳格なデータ消去（セキュリティ）</h4>
+                        <p>サブスクプランの途中解約でPCをご返却いただく際、皆様のプライバシー保護のため、内部のデータは即時・完全消去されます。（※データの抽出や返却は一切行われません）</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. How it Works Section -->
+    <section id="how-it-works" class="howto section">
+        <div class="container fade-in-up">
+            <div class="section-header center">
+                <h2 class="section-title">導入の流れ</h2>
+                <p class="section-desc">お申し込みから使い始めるまで、シンプルな5ステップ</p>
+            </div>
+
+            <div class="howto-steps">
+                <div class="howto-step">
+                    <div class="howto-icon">📝</div>
+                    <div class="howto-num">STEP 1</div>
+                    <h4 class="howto-title">お申し込み</h4>
+                    <p class="howto-desc">ページ内のボタンからプランを選んでお申し込みください。</p>
+                </div>
+                <div class="howto-arrow">▶</div>
+                <div class="howto-step">
+                    <div class="howto-icon">💳</div>
+                    <div class="howto-num">STEP 2</div>
+                    <h4 class="howto-title">入金確認</h4>
+                    <p class="howto-desc">お支払いを確認後、担当者よりご連絡いたします。</p>
+                </div>
+                <div class="howto-arrow">▶</div>
+                <div class="howto-step">
+                    <div class="howto-icon">⚙️</div>
+                    <div class="howto-num">STEP 3</div>
+                    <h4 class="howto-title">PC設定・カスタマイズ</h4>
+                    <p class="howto-desc">モルコを専用チューニングしたミニPCを1台ずつ丁寧に仕上げます。<br><small>※発送まで約1週間いただきます</small></p>
+                </div>
+                <div class="howto-arrow">▶</div>
+                <div class="howto-step">
+                    <div class="howto-icon">📦</div>
+                    <div class="howto-num">STEP 4</div>
+                    <h4 class="howto-title">ご自宅に発送</h4>
+                    <p class="howto-desc">設定済みのミニPCをお届けします。届いたらコンセントに挿すだけ！</p>
+                </div>
+                <div class="howto-arrow">▶</div>
+                <div class="howto-step">
+                    <div class="howto-icon">🤖</div>
+                    <div class="howto-num">STEP 5</div>
+                    <h4 class="howto-title">Telegram連携・スタート</h4>
+                    <p class="howto-desc">Telegramとモルコを連携して、あなた専用AI秘書との毎日が始まります。</p>
+                </div>
+            </div>
+
+            <div class="howto-notes glass-card">
+                <h4>📋 事前にご準備いただくもの</h4>
+                <ul>
+                    <li>✅ <strong>Googleアカウント（モルコ専用の捨て垢）</strong>：モルコがGmailやカレンダーを操作するための専用アカウントです。</li>
+                    <li>✅ <strong>Telegramアプリ</strong>：スマホにインストールしておいてください。</li>
+                </ul>
+                <div class="howto-subscnote">
+                    ⚠️ <strong>サブスクプランの方へ</strong>：PCのお届けは全12回のお支払い完了後となります。月額お支払い中はクラウド版でモルコをお試しいただけます。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="morukoimage/moruko_logo_wide.png" alt="Moruko Logo" style="max-width: 150px;">
+                    <p class="mt-4">あなたの毎日に、専属AI秘書を。</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">特定商取引法に基づく表記</a>
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">お問い合わせ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Moruko AI Project. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll animation script
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                observer.observe(el);
+            });
+            
+            // Nav background class on scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
