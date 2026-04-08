@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1080px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: linear-gradient(145deg, #F7931E 0%, #FFB347 60%, #F7931E 100%);
+  position: relative;
+}
+
+/* 背景装飾サークル */
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.deco-circle.c1 { width: 500px; height: 500px; top: -150px; left: -150px; }
+.deco-circle.c2 { width: 350px; height: 350px; bottom: -80px; left: 80px; }
+.deco-circle.c3 { width: 200px; height: 200px; top: 200px; right: -60px; }
+
+/* スライド番号 */
+.slide-badge {
+  position: absolute;
+  top: 40px;
+  left: 48px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+}
+
+/* メインコンテンツ */
+.main-content {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 80px 0 72px;
+  gap: 0;
+}
+
+/* 左テキストゾーン */
+.text-zone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.pre-copy {
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+
+.main-copy {
+  font-size: 80px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  margin-bottom: 48px;
+  white-space: nowrap;
+}
+
+/* 吹き出し */
+.bubble-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.bubble {
+  background: #fff;
+  border-radius: 20px;
+  padding: 22px 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  position: relative;
+}
+
+/* 吹き出しのしっぽ（右向き） */
+.bubble::after {
+  content: '';
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 10px solid transparent;
+  border-left: 18px solid #fff;
+}
+
+.bubble-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.bubble-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: #D4640A;
+  line-height: 1.4;
+}
+
+/* モルコイラスト */
+.moruko-wrap {
+  flex-shrink: 0;
+  width: 400px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  padding-bottom: 0;
+}
+
+.moruko-img {
+  width: 380px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,0.18));
+  /* ひょっこり感を演出：下からちょっと出てくる */
+  transform: translateY(20px);
+}
+
+/* ロゴ */
+.logo-wrap {
+  position: absolute;
+  bottom: 40px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-wrap img {
+  height: 32px;
+  filter: brightness(0) invert(1) opacity(0.6);
+}
+</style>
+</head>
+<body>
+
+<div class="deco-circle c1"></div>
+<div class="deco-circle c2"></div>
+<div class="deco-circle c3"></div>
+
+<div class="slide-badge">4 / 6</div>
+
+<div class="main-content">
+
+  <div class="text-zone">
+    <div class="pre-copy">そのとき——</div>
+    <div class="main-copy">
+      そこに、<br>morukoが<br>いた。
+    </div>
+    <div class="bubble-wrap">
+      <div class="bubble">
+        <span class="bubble-icon">🐾</span>
+        <span class="bubble-text">はい！<br>任せてください！</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="moruko-wrap">
+    <img class="moruko-img" src="../morukoimage/moruko_with_miniPC.png" alt="moruko">
+  </div>
+
+</div>
+
+<div class="logo-wrap">
+  <img src="../morukoimage/moruko_logo_wide.png" alt="moruko">
+</div>
+
+</body>
+</html>
