@@ -1033,6 +1033,68 @@ img {
     }
 }
 
+/* ==============================
+   Voices Section
+   ============================== */
+.voices-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.voice-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.voice-role {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: rgba(255, 138, 0, 0.1);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    width: fit-content;
+}
+
+.voice-quote {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-main);
+    border-left: 3px solid var(--primary);
+    padding-left: 1rem;
+    font-style: normal;
+}
+
+.voice-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.voice-tags li {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--bg-light);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(36, 36, 36, 0.08);
+}
+
+@media (max-width: 900px) {
+    .voices-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Mobile Responsiveness Rules */
 .pc-only { display: inline-block; }
 .sp-only { display: none; }
