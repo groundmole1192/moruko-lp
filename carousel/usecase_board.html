@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>moruko 利用シーンボード</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1200px;
+  height: 1600px;
+  overflow: hidden;
+  font-family: 'Noto Sans JP', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 138, 0, 0.16), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(255, 241, 224, 0.95), transparent 42%),
+    linear-gradient(180deg, #ffffff 0%, #fffaf5 100%);
+  color: #333;
+  position: relative;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 56px 56px 48px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 138, 0, 0.10);
+  color: #D86E00;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 18px;
+}
+
+.hero {
+  flex: 1;
+  max-width: 610px;
+}
+
+.eyebrow {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #FF8A00;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+}
+
+.title .accent { color: #FF8A00; }
+
+.lead {
+  font-size: 24px;
+  line-height: 1.7;
+  color: #555;
+  max-width: 540px;
+}
+
+.preview {
+  width: 336px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 138, 0, 0.14);
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(95, 52, 0, 0.10);
+  padding: 24px 22px 18px;
+  position: relative;
+}
+
+.preview::before {
+  content: 'LPの見せ方';
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #333;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.preview-copy {
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 34px;
+}
+
+.card {
+  min-height: 344px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 138, 0, 0.12);
+  border-radius: 28px;
+  box-shadow: 0 18px 42px rgba(95, 52, 0, 0.08);
+  padding: 26px 26px 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: auto -36px -36px auto;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 138, 0, 0.12), transparent 68%);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.card-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #FF8A00;
+  letter-spacing: 0.08em;
+}
+
+.pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #FFF1E0;
+  color: #A85B00;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.card-title {
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  font-weight: 900;
+}
+
+.card-copy {
+  font-size: 20px;
+  line-height: 1.75;
+  color: #555;
+  margin-bottom: 18px;
+}
+
+.prompt {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #FAFAFB;
+  border: 1px solid rgba(51, 51, 51, 0.08);
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.prompt strong {
+  color: #FF8A00;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 138, 0, 0.08);
+  color: #D86E00;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 22px;
+  padding: 18px 22px;
+  border-radius: 24px;
+  background: linear-gradient(90deg, rgba(255, 138, 0, 0.10), rgba(255, 241, 224, 0.76));
+  border: 1px solid rgba(255, 138, 0, 0.12);
+}
+
+.footer strong {
+  font-size: 18px;
+}
+
+.footer span {
+  font-size: 15px;
+  color: #666;
+}
+
+.logo {
+  height: 44px;
+  width: auto;
+}
+
+.mini-note {
+  font-size: 14px;
+  color: #8a6a52;
+  text-align: right;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  body { width: 1200px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <img class="logo" src="../morukoimage/moruko_logo_wide.png" alt="moruko">
+
+  <div class="top">
+    <div class="hero">
+      <div class="badge">USE CASE BOARD</div>
+      <div class="eyebrow">LPのレイアウト参考にするなら</div>
+      <div class="title">morukoは、<span class="accent">相談したら動く</span><br>AI秘書です</div>
+      <p class="lead">「作る」「自動化する」「記録する」「更新する」を、会話のまま進められる。<br>この4場面を並べると、機能説明より先に価値が伝わる。</p>
+    </div>
+
+    <div class="preview">
+      <img src="../morukoimage/moruko_with_miniPC.png" alt="moruko preview">
+      <div class="preview-copy">カード型の利用シーンを置くと、LPの途中で「何に使えるか」が一目で伝わる。右のビジュアルはキャラ固定で使い回せる。</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <div class="card-head">
+        <div class="card-kicker">01 / 制作する</div>
+        <div class="pill">HP・仕組みを作る</div>
+      </div>
+      <h2 class="card-title">焼肉屋のHP、予約サイト、<br>占術エンジンまで。</h2>
+      <p class="card-copy">知人の焼肉屋のサイト制作や、民泊の予約ページづくり。<br>さらに、占いのロジックを作って日々の投稿へ変換するような「自分用のソフト」も作れる。</p>
+      <div class="prompt"><strong>Telegramで送る例</strong><br>「今の占術メモを、毎日投稿に変換する仕組みを作って」</div>
+      <div class="chips"><span class="chip">サイト構築</span><span class="chip">予約導線</span><span class="chip">投稿生成</span></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div class="card-kicker">02 / 自動化する</div>
+        <div class="pill">面倒を減らす</div>
+      </div>
+      <h2 class="card-title">迷惑メールの削除も、<br>画像生成も、まとめて自動化。</h2>
+      <p class="card-copy">会話モデルで終わらず、実際に動く仕組みにできるのが強み。<br>「これ手でやってるのしんどい」を、日々のルールとして置き換えられる。</p>
+      <div class="prompt"><strong>Telegramで送る例</strong><br>「この条件のメールは消して、残りはスプレッドシートに記録して」</div>
+      <div class="chips"><span class="chip">メール整理</span><span class="chip">画像生成</span><span class="chip">ルーチン化</span></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div class="card-kicker">03 / 記録する</div>
+        <div class="pill">日々のメモが残る</div>
+      </div>
+      <h2 class="card-title">ダイエット記録や、<br>会った人の情報もまとめる。</h2>
+      <p class="card-copy">その日あったことを整理して、あとから探せる形に残す。<br>散らかったメモを、習慣として蓄積できるのが強い。スプレッドシート管理とも相性がいい。</p>
+      <div class="prompt"><strong>Telegramで送る例</strong><br>「今日は体重と食事、会った人のメモをまとめておいて」</div>
+      <div class="chips"><span class="chip">日報</span><span class="chip">ダイエット</span><span class="chip">人脈メモ</span></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div class="card-kicker">04 / 更新する</div>
+        <div class="pill">Sheetsを動かす</div>
+      </div>
+      <h2 class="card-title">Telegramに送るだけで、<br>リストや台帳が更新される。</h2>
+      <p class="card-copy">スプレッドシートにまとめている人ほど刺さる導線。<br>メッセージをそのまま記録に変えられるので、入力の手間が減る。</p>
+      <div class="prompt"><strong>Telegramで送る例</strong><br>「この人を追加、来月の予定にフラグを立てて、表も更新」</div>
+      <div class="chips"><span class="chip">台帳更新</span><span class="chip">タスク管理</span><span class="chip">Sheet連携</span></div>
+    </section>
+  </div>
+
+  <div class="footer">
+    <div>
+      <strong>LPでは、この4枚を「利用シーン」として並べると伝わりやすい。</strong><br>
+      <span>機能一覧より先に、使っている姿を見せるのがポイント。</span>
+    </div>
+    <div class="mini-note">moruko / use case board<br>layout reference</div>
+  </div>
+</div>
+</body>
+</html>
