@@ -1050,6 +1050,20 @@ img {
     padding: 2rem;
 }
 
+.voice-image {
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+.voice-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
 .voice-role {
     display: inline-block;
     font-size: 0.75rem;
