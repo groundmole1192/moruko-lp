@@ -1034,6 +1034,59 @@ img {
 }
 
 /* ==============================
+   CM Video Section
+   ============================== */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 16 / 9;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ==============================
+   Community Section
+   ============================== */
+.community-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: center;
+    padding: 3rem;
+}
+
+.community-image {
+    width: 180px;
+    flex-shrink: 0;
+}
+
+.community-image img {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .community-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .community-image {
+        width: 120px;
+        margin: 0 auto;
+    }
+}
+
+/* ==============================
    Voices Section
    ============================== */
 .voices-grid {
