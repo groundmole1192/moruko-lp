@@ -149,18 +149,18 @@
         }
 
         .gears-flow {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
             margin-top: 32px;
         }
 
         .gears-flow-item {
+            flex: 1;
             text-align: center;
             padding: 24px 16px;
             background: var(--gears-green-light);
             border-radius: 12px;
-            position: relative;
         }
 
         .gears-flow-item .flow-num {
@@ -187,9 +187,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 22px;
             color: var(--gears-green);
-            font-weight: 700;
+            flex-shrink: 0;
+            width: 28px;
         }
 
         /* Collaborator section */
@@ -454,11 +455,15 @@
             .zero-cost-hero .big-zero { font-size: 56px; }
 
             .gears-flow {
-                grid-template-columns: 1fr;
-                gap: 16px;
+                flex-direction: column;
+                gap: 8px;
             }
 
-            .gears-flow-arrow { transform: rotate(90deg); }
+            .gears-flow-arrow {
+                transform: rotate(90deg);
+                width: auto;
+                height: 24px;
+            }
 
             .gears-card { padding: 24px; }
 
