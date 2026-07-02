@@ -567,8 +567,9 @@ img {
 }
 
 .flash-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
 }
 
@@ -580,6 +581,8 @@ img {
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     transform: scale(1.02);
     transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 480px;
 }
 
 .flash-item:hover {
@@ -630,7 +633,6 @@ img {
         font-size: 1.75rem;
     }
     .flash-grid {
-        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     .flash-item {
