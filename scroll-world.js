@@ -28,7 +28,9 @@ function mountScrollWorld(container, config) {
   const topbar = el('div', 'sw-topbar');
   const brand = el('a', 'sw-brand');
   brand.href = config.brand?.href || '#';
-  brand.innerHTML = '<span class="sw-brand__mark"></span><span class="sw-brand__name">' + (config.brand?.name || 'moruko') + '</span>';
+  brand.innerHTML = config.brand?.logo
+    ? '<img class="sw-brand__logo" src="' + config.brand.logo + '" alt="' + (config.brand?.name || 'moruko') + '" />'
+    : '<span class="sw-brand__mark"></span><span class="sw-brand__name">' + (config.brand?.name || 'moruko') + '</span>';
   topbar.appendChild(brand);
 
   const nav = el('nav', 'sw-nav');
@@ -353,11 +355,11 @@ function seedParticles(host, reduce) {
 function injectCSS() {
   if (document.getElementById('sw-css')) return;
   const css = `
-  .sw-root{--sw-bg:#14101c;--sw-ink:#f4f1fa;--sw-ink-soft:#b3a9c8;--sw-accent:#8a7bff;--sw-font-display:'Noto Sans JP','Inter',system-ui,sans-serif;--sw-font-body:'Inter','Noto Sans JP',system-ui,sans-serif;}
+  .sw-root{--sw-bg:#fbf9f6;--sw-ink:#241c12;--sw-ink-soft:#6f675c;--sw-accent:#ed7014;--sw-font-display:'Noto Sans JP','Inter',system-ui,sans-serif;--sw-font-body:'Inter','Noto Sans JP',system-ui,sans-serif;}
   html,body{margin:0;background:var(--sw-bg);overflow-x:hidden;color:var(--sw-ink);font-family:var(--sw-font-body);}
   .sw-particles{position:absolute;inset:-6% -2%;will-change:transform;}
   .sw-pt{position:absolute;width:13px;height:13px;transform:scale(var(--sw-sc,1));opacity:0;animation:sw-drift linear infinite;}
-  .sw-pt::before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.65),rgba(255,255,255,0) 72%);} .sw-pt--ring::before{background:transparent;border:1.5px solid color-mix(in srgb,var(--sw-accent) 55%,transparent);} 
+  .sw-pt::before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(237,112,20,.5),rgba(237,112,20,0) 72%);} .sw-pt--ring::before{background:transparent;border:1.5px solid color-mix(in srgb,var(--sw-accent) 55%,transparent);} 
   @keyframes sw-drift{0%{opacity:0;transform:scale(var(--sw-sc)) translate(0,12vh) rotate(0)}12%{opacity:.5}88%{opacity:.45}100%{opacity:0;transform:scale(var(--sw-sc)) translate(4vw,-22vh) rotate(210deg)}}
   @media (prefers-reduced-motion: reduce){.sw-pt{display:none;}}
   `;
@@ -371,7 +373,7 @@ if (typeof window !== 'undefined') {
   window.mountScrollWorld = mountScrollWorld;
   window.addEventListener('DOMContentLoaded', () => {
     mountScrollWorld(document.getElementById('world'), {
-      brand: { name: 'moruko', href: '#world' },
+      brand: { name: 'moruko', logo: 'morukoimage/logo_wide.webp', href: '#world' },
       hint: 'スクロールして飛び込む',
       nav: true,
       links: [
@@ -386,7 +388,7 @@ if (typeof window !== 'undefined') {
         {
           label: 'はじまり',
           still: 'morukoimage/hero_bg.webp',
-          accent: '#8A7BFF',
+          accent: '#ED7014',
           eyebrow: 'AI SECRETARY',
           title: '話しかけるだけ。\nあとはモルコが働く。',
           body: 'メール・スケジュール・SNS投稿・動画編集まで、Telegramに話しかけるだけで全部やってくれる自分専用AI秘書。自宅のミニPCが24時間フル稼働します。',
@@ -397,7 +399,7 @@ if (typeof window !== 'undefined') {
           label: 'しごと',
           still: 'morukoimage/minipc.webp',
           contain: true,
-          accent: '#FFB84F',
+          accent: '#5FA448',
           eyebrow: 'WHAT MORUKO DOES',
           title: '見た目はやわらかく、\n中身はかなり働く。',
           body: 'メール管理・スケジュール調整・タスク整理・朝ブリーフ・Drive検索・SNSと動画制作。「これ頼める？」をそのまま投げてください。',
@@ -407,7 +409,7 @@ if (typeof window !== 'undefined') {
           label: 'あんしん',
           still: 'morukoimage/char.webp',
           contain: true,
-          accent: '#4F8CFF',
+          accent: '#ED7014',
           eyebrow: 'TRUST & SUPPORT',
           title: '自宅で動く。\n情報は外に出さない。',
           body: 'モルコはクラウドではなく、あなたの自宅のPCで動きます。初期設定済みでお届けし、マンツーマンのレクチャーと専用相談Botで、使いこなせるまで伴走します。',
