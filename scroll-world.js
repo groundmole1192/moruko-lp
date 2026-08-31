@@ -42,9 +42,20 @@ function mountScrollWorld(container, config) {
       const a = el('a', 'sw-links__item');
       a.href = l.href || '#';
       a.textContent = l.label || '';
+      a.addEventListener('click', () => links.classList.remove('is-open'));
       links.appendChild(a);
     });
     topbar.appendChild(links);
+
+    const menuToggle = el('button', 'sw-menu-toggle');
+    menuToggle.type = 'button';
+    menuToggle.setAttribute('aria-label', 'メニューを開く');
+    menuToggle.innerHTML = '<span></span><span></span><span></span>';
+    menuToggle.addEventListener('click', () => {
+      const open = links.classList.toggle('is-open');
+      menuToggle.classList.toggle('is-open', open);
+    });
+    topbar.appendChild(menuToggle);
   }
 
   if (config.cta?.label) {
