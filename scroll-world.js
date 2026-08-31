@@ -397,7 +397,7 @@ if (typeof window !== 'undefined') {
         },
         {
           label: 'しごと',
-          still: 'morukoimage/minipc.webp',
+          still: 'morukoimage/scene_shigoto.webp',
           contain: true,
           accent: '#5FA448',
           eyebrow: 'WHAT MORUKO DOES',
@@ -407,7 +407,7 @@ if (typeof window !== 'undefined') {
         },
         {
           label: 'あんしん',
-          still: 'morukoimage/char.webp',
+          still: 'morukoimage/scene_anshin.webp',
           contain: true,
           accent: '#ED7014',
           eyebrow: 'TRUST & SUPPORT',
