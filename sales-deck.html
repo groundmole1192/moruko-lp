@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>moruko Sales Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep-navy: #0F172A;
+  --slate: #334155;
+  --professional-blue: #2563EB;
+  --muted-blue: #64748B;
+  --light-bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --dark-surface: #1E2937;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Inter', sans-serif;
+  background: var(--light-bg);
+  color: var(--slate);
+  line-height: 1.65;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-inner {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--deep-navy);
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--deep-navy);
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--deep-navy);
+}
+
+p, li {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--slate);
+}
+
+.caption {
+  font-size: 14px;
+  color: var(--muted-blue);
+}
+
+.large-number {
+  font-size: 80px;
+  font-weight: 700;
+  color: var(--deep-navy);
+  line-height: 1;
+}
+
+.large-number.accent {
+  color: var(--professional-blue);
+}
+
+/* Cover A - Clean */
+.cover-a {
+  background: var(--light-bg);
+}
+
+.cover-a .slide-inner {
+  text-align: center;
+}
+
+.cover-a h1 {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.cover-a .subtitle {
+  font-size: 24px;
+  color: var(--muted-blue);
+  font-weight: 400;
+}
+
+.cover-a .moruko-mark {
+  position: absolute;
+  bottom: 64px;
+  right: 64px;
+  font-size: 14px;
+  color: var(--muted-blue);
+}
+
+/* Cover B - Impact */
+.cover-b {
+  background: var(--deep-navy);
+}
+
+.cover-b .slide-inner {
+  text-align: center;
+}
+
+.cover-b h1 {
+  color: var(--surface);
+  font-size: 72px;
+}
+
+.cover-b .accent-text {
+  color: var(--professional-blue);
+}
+
+.cover-b .subtitle {
+  color: var(--muted-blue);
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+/* Cover C - Character */
+.cover-c {
+  background: var(--surface);
+}
+
+.cover-c .slide-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 64px;
+}
+
+.cover-c .text-block {
+  flex: 1;
+}
+
+.cover-c .character-block {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-c .character-placeholder {
+  width: 320px;
+  height: 320px;
+  background: var(--light-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.cover-c .speech-bubble {
+  background: var(--light-bg);
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  margin-top: 24px;
+  font-size: 16px;
+  color: var(--slate);
+}
+
+/* Section Divider */
+.section-divider {
+  background: var(--surface);
+}
+
+.section-divider .slide-inner {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.section-divider .accent-bar {
+  width: 4px;
+  height: 200px;
+  background: var(--professional-blue);
+  flex-shrink: 0;
+}
+
+.section-divider .content {
+  flex: 1;
+}
+
+.section-divider .section-number {
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--muted-blue);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.section-divider h2 {
+  margin-top: 16px;
+}
+
+/* Text + List */
+.text-slide {
+  background: var(--surface);
+}
+
+.text-slide .slide-inner {
+  display: flex;
+  gap: 64px;
+  align-items: center;
+}
+
+.text-slide .text-block {
+  flex: 1;
+}
+
+.text-slide .visual-block {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-slide ul {
+  list-style: none;
+  margin-top: 40px;
+}
+
+.text-slide li {
+  padding: 16px 0;
+  padding-left: 32px;
+  position: relative;
+  border-bottom: 1px solid rgba(100, 116, 139, 0.1);
+}
+
+.text-slide li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--professional-blue);
+  border-radius: 50%;
+}
+
+/* KPI Slide */
+.kpi-slide {
+  background: var(--light-bg);
+}
+
+.kpi-slide .slide-inner {
+  text-align: center;
+}
+
+.kpi-slide .large-number {
+  font-size: 96px;
+  margin-bottom: 24px;
+}
+
+.kpi-slide .description {
+  font-size: 20px;
+  color: var(--muted-blue);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Comparison Table */
+.comparison-slide {
+  background: var(--surface);
+}
+
+.comparison-slide .slide-inner {
+  flex-direction: column;
+  gap: 40px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.comparison-table th {
+  background: var(--deep-navy);
+  color: var(--surface);
+  padding: 20px 24px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.comparison-table td {
+  padding: 16px 24px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(100, 116, 139, 0.1);
+}
+
+.comparison-table tr:nth-child(even) {
+  background: var(--light-bg);
+}
+
+.comparison-table .highlight {
+  color: var(--professional-blue);
+  font-weight: 600;
+}
+
+/* Grid Cards */
+.grid-slide {
+  background: var(--light-bg);
+}
+
+.grid-slide .slide-inner {
+  flex-direction: column;
+  gap: 40px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: var(--surface);
+  padding: 32px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.card .icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 14px;
+  color: var(--muted-blue);
+}
+
+/* Quote */
+.quote-slide {
+  background: var(--surface);
+}
+
+.quote-slide .slide-inner {
+  display: flex;
+  gap: 40px;
+}
+
+.quote-card {
+  flex: 1;
+  padding: 32px;
+  border-left: 4px solid var(--professional-blue);
+  background: var(--light-bg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.quote-card .quote-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--slate);
+  margin-bottom: 16px;
+}
+
+.quote-card .quote-author {
+  font-size: 14px;
+  color: var(--muted-blue);
+}
+
+/* Flow Diagram */
+.flow-slide {
+  background: var(--surface);
+}
+
+.flow-slide .slide-inner {
+  flex-direction: column;
+  gap: 40px;
+}
+
+.flow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.flow-step {
+  background: var(--light-bg);
+  padding: 24px 32px;
+  border-radius: var(--radius);
+  text-align: center;
+  min-width: 160px;
+}
+
+.flow-step .step-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--professional-blue);
+  margin-bottom: 8px;
+}
+
+.flow-arrow {
+  color: var(--muted-blue);
+  font-size: 24px;
+}
+
+/* Pricing */
+.pricing-slide {
+  background: var(--light-bg);
+}
+
+.pricing-slide .slide-inner {
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.pricing-card {
+  background: var(--surface);
+  padding: 48px 64px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  max-width: 480px;
+}
+
+.pricing-card .price {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--deep-navy);
+  margin: 24px 0;
+}
+
+.pricing-card .price-note {
+  font-size: 16px;
+  color: var(--muted-blue);
+}
+
+/* FAQ */
+.faq-slide {
+  background: var(--surface);
+}
+
+.faq-slide .slide-inner {
+  flex-direction: column;
+  gap: 32px;
+}
+
+.faq-item {
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(100, 116, 139, 0.1);
+}
+
+.faq-item .question {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--deep-navy);
+  margin-bottom: 12px;
+}
+
+.faq-item .answer {
+  font-size: 16px;
+  color: var(--slate);
+}
+
+/* CTA */
+.cta-slide {
+  background: var(--deep-navy);
+}
+
+.cta-slide .slide-inner {
+  text-align: center;
+}
+
+.cta-slide h2 {
+  color: var(--surface);
+  margin-bottom: 40px;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--professional-blue);
+  color: var(--surface);
+  padding: 20px 48px;
+  border-radius: var(--radius);
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 24px;
+}
+
+.cta-slide .contact-info {
+  color: var(--muted-blue);
+  font-size: 16px;
+  margin-top: 40px;
+}
+
+/* Slide Number */
+.slide-number {
+  position: absolute;
+  bottom: 24px;
+  left: 64px;
+  font-size: 12px;
+  color: var(--muted-blue);
+  opacity: 0.5;
+}
+
+/* Navigation Hint */
+.nav-hint {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--surface);
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 12px;
+  color: var(--muted-blue);
+  z-index: 100;
+}
+</style>
+</head>
+<body>
+
+<!-- Slide 1: Cover A - Clean -->
+<section class="slide cover-a" id="slide-1">
+  <div class="slide-inner">
+    <h1>moruko</h1>
+    <p class="subtitle">あなた専用のAI秘書が、ミニPCに入って届く</p>
+  </div>
+  <span class="moruko-mark">moruko — AI Secretary Service</span>
+  <span class="slide-number">01</span>
+</section>
+
+<!-- Slide 2: Cover B - Impact -->
+<section class="slide cover-b" id="slide-2">
+  <div class="slide-inner">
+    <h1>AI秘書を、<br><span class="accent-text">手元に。</span></h1>
+    <p class="subtitle">設定不要。コンセントを挿すだけで、今日から使える。</p>
+  </div>
+  <span class="slide-number">02</span>
+</section>
+
+<!-- Slide 3: Cover C - Character -->
+<section class="slide cover-c" id="slide-3">
+  <div class="slide-inner">
+    <div class="text-block">
+      <h1>はじめまして、<br>morukoです。</h1>
+      <div class="speech-bubble">
+        「こんなことできたら楽なのに」を、そのまま私に言ってください。
+      </div>
+    </div>
+    <div class="character-block">
+      <div class="character-placeholder">🐾</div>
+    </div>
+  </div>
+  <span class="slide-number">03</span>
+</section>
+
+<!-- Slide 4: Section Divider - 課題 -->
+<section class="slide section-divider" id="slide-4">
+  <div class="slide-inner">
+    <div class="accent-bar"></div>
+    <div class="content">
+      <div class="section-number">01</div>
+      <h2>AI活用の現実</h2>
+    </div>
+  </div>
+  <span class="slide-number">04</span>
+</section>
+
+<!-- Slide 5: KPI - Cost Problem -->
+<section class="slide kpi-slide" id="slide-5">
+  <div class="slide-inner">
+    <div class="large-number accent">¥30,000<span style="font-size: 32px;">/月〜</span></div>
+    <p class="description">ChatGPT Pro、最新モデルへのアクセス、自律エージェント系のAPI課金。<br>AI活用は、お金をかけられる人だけの時代になっている。</p>
+  </div>
+  <span class="slide-number">05</span>
+</section>
+
+<!-- Slide 6: Text + List - Risk -->
+<section class="slide text-slide" id="slide-6">
+  <div class="slide-inner">
+    <div class="text-block">
+      <h2>特定AIサービスへの依存リスク</h2>
+      <ul>
+        <li>サービス変更 → 全ての業務フローが崩壊</li>
+        <li>料金改定 → 使い続けられなくなる</li>
+        <li>アカウントBAN → 積み上げたものがゼロに</li>
+        <li>「チーム化」するほど、そのサービスなしでは動けなくなる</li>
+      </ul>
+    </div>
+    <div class="visual-block">
+      <div style="text-align: center; color: var(--muted-blue);">
+        <div style="font-size: 64px; margin-bottom: 16px;">⚠️</div>
+        <p>1社依存の危険性</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">06</span>
+</section>
+
+<!-- Slide 7: Section Divider - 解決策 -->
+<section class="slide section-divider" id="slide-7">
+  <div class="slide-inner">
+    <div class="accent-bar"></div>
+    <div class="content">
+      <div class="section-number">02</div>
+      <h2>morukoの解決策</h2>
+    </div>
+  </div>
+  <span class="slide-number">07</span>
+</section>
+
+<!-- Slide 8: Comparison Table -->
+<section class="slide comparison-slide" id="slide-8">
+  <div class="slide-inner">
+    <h2>morukoとは</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>moruko</th>
+          <th>普通のAIツール</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>届き方</td>
+          <td class="highlight">即使える（設定済み）</td>
+          <td>自分で設定が必要</td>
+        </tr>
+        <tr>
+          <td>操作</td>
+          <td class="highlight">Telegramのみ</td>
+          <td>PC前で作業</td>
+        </tr>
+        <tr>
+          <td>AI</td>
+          <td class="highlight">3社使い分け</td>
+          <td>1社に依存</td>
+        </tr>
+        <tr>
+          <td>BANリスク</td>
+          <td class="highlight">ゼロ</td>
+          <td>事例多数</td>
+        </tr>
+        <tr>
+          <td>カスタマイズ</td>
+          <td class="highlight">自由</td>
+          <td>制限あり</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <span class="slide-number">08</span>
+</section>
+
+<!-- Slide 9: Flow - How to Use -->
+<section class="slide flow-slide" id="slide-9">
+  <div class="slide-inner">
+    <h2>使い方は、これだけ</h2>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-number">1</div>
+        <p>Telegramを開く</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-number">2</div>
+        <p>話しかける</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-number">3</div>
+        <p>morukoが動く</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-number">4</div>
+        <p>完了報告が届く</p>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 40px; color: var(--muted-blue);">パソコンの前にいなくていい。どこからでも指示が出せる。</p>
+  </div>
+  <span class="slide-number">09</span>
+</section>
+
+<!-- Slide 10: Grid - Features -->
+<section class="slide grid-slide" id="slide-10">
+  <div class="slide-inner">
+    <h2>「これできたら楽なのに」が、そのままできる</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon">📧</div>
+        <h3>メール管理</h3>
+        <p>未読整理・下書き作成</p>
+      </div>
+      <div class="card">
+        <div class="icon">📅</div>
+        <h3>スケジュール</h3>
+        <p>追加・リマインド</p>
+      </div>
+      <div class="card">
+        <div class="icon">📝</div>
+        <h3>タスク管理</h3>
+        <p>優先度管理</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌅</div>
+        <h3>朝ブリーフ</h3>
+        <p>天気・予定を自動送信</p>
+      </div>
+      <div class="card">
+        <div class="icon">📁</div>
+        <h3>Drive整理</h3>
+        <p>検索・自動整理</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌐</div>
+        <h3>HP制作</h3>
+        <p>テキストで完成</p>
+      </div>
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>リサーチ</h3>
+        <p>補助金・競合調査</p>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>SNS・動画</h3>
+        <p>投稿文・動画作成</p>
+      </div>
+      <div class="card">
+        <div class="icon">✉️</div>
+        <h3>書類・申請</h3>
+        <p>自動記入・送信</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">10</span>
+</section>
+
+<!-- Slide 11: Section Divider - 実績 -->
+<section class="slide section-divider" id="slide-11">
+  <div class="slide-inner">
+    <div class="accent-bar"></div>
+    <div class="content">
+      <div class="section-number">03</div>
+      <h2>利用事例</h2>
+    </div>
+  </div>
+  <span class="slide-number">11</span>
+</section>
+
+<!-- Slide 12: Quote - Testimonials -->
+<section class="slide quote-slide" id="slide-12">
+  <div class="slide-inner">
+    <h2 style="margin-bottom: 40px;">実際に使っている人たちの声</h2>
+    <div style="display: flex; gap: 24px;">
+      <div class="quote-card">
+        <p class="quote-text">「知人の焼肉屋HPをmorukoで制作。商談相手の情報も自動記録してくれる。」</p>
+        <p class="quote-author">塾経営者</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">「実写サイトを自分で制作。IT補助金・確定申告の補助にも活用中。」</p>
+        <p class="quote-author">民泊オーナー</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">「独自の占い分析エンジンを自作。ChatGPTとClaudeを使い分けて文章構造設計。」</p>
+        <p class="quote-author">占い師</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">12</span>
+</section>
+
+<!-- Slide 13: Section Divider - 信頼性 -->
+<section class="slide section-divider" id="slide-13">
+  <div class="slide-inner">
+    <div class="accent-bar"></div>
+    <div class="content">
+      <div class="section-number">04</div>
+      <h2>安心して使える理由</h2>
+    </div>
+  </div>
+  <span class="slide-number">13</span>
+</section>
+
+<!-- Slide 14: Text + List - Safety -->
+<section class="slide text-slide" id="slide-14">
+  <div class="slide-inner">
+    <div class="text-block">
+      <h2>公式アプリ・公式連携のみ。<br>APIは一切使わない。</h2>
+      <ul>
+        <li>重量課金リスク → <strong style="color: var(--professional-blue);">ゼロ</strong></li>
+        <li>BANリスク → <strong style="color: var(--professional-blue);">ゼロ</strong></li>
+        <li>サービス依存 → <strong style="color: var(--professional-blue);">ゼロ</strong>（3社使い分け）</li>
+      </ul>
+    </div>
+    <div class="visual-block">
+      <div style="text-align: center;">
+        <div style="font-size: 80px; margin-bottom: 16px;">🛡️</div>
+        <p style="color: var(--muted-blue);">安心の公式連携</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">14</span>
+</section>
+
+<!-- Slide 15: Text + List - Asset -->
+<section class="slide text-slide" id="slide-15">
+  <div class="slide-inner">
+    <div class="text-block">
+      <h2>手元のPCに、<br>使えば使うほど蓄積される</h2>
+      <ul>
+        <li>解約しても積み上げたデータはあなたのもの</li>
+        <li>3社のAIを切り替えられる → 1社に振り回されない</li>
+        <li>スキル・ノウハウが手元のPCに残り続ける</li>
+      </ul>
+      <div style="margin-top: 40px; padding: 24px; border-left: 4px solid var(--professional-blue); background: var(--light-bg); border-radius: 0 12px 12px 0;">
+        <p style="font-size: 16px; font-style: italic;">「情報商材でも高額スクールでもない、地を這うような実直なアプローチで、AIを使う全ての人のそばにいたい。」</p>
+        <p style="font-size: 14px; color: var(--muted-blue); margin-top: 12px;">— 開発者 北 祐介</p>
+      </div>
+    </div>
+    <div class="visual-block">
+      <div style="text-align: center;">
+        <div style="font-size: 80px; margin-bottom: 16px;">💎</div>
+        <p style="color: var(--muted-blue);">あなたの資産になる</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">15</span>
+</section>
+
+<!-- Slide 16: Section Divider - 導入 -->
+<section class="slide section-divider" id="slide-16">
+  <div class="slide-inner">
+    <div class="accent-bar"></div>
+    <div class="content">
+      <div class="section-number">05</div>
+      <h2>導入について</h2>
+    </div>
+  </div>
+  <span class="slide-number">16</span>
+</section>
+
+<!-- Slide 17: Pricing -->
+<section class="slide pricing-slide" id="slide-17">
+  <div class="slide-inner">
+    <h2>料金</h2>
+    <div class="pricing-card">
+      <p class="caption">本体価格（税込）</p>
+      <div class="price">¥200,000</div>
+      <p class="price-note">購入後の月額料金なし</p>
+      <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(100, 116, 139, 0.1);">
+        <p style="font-size: 14px; color: var(--muted-blue);">初月サポート無料 / コミュニティ参加 option</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">17</span>
+</section>
+
+<!-- Slide 18: FAQ -->
+<section class="slide faq-slide" id="slide-18">
+  <div class="slide-inner">
+    <h2>よくある質問</h2>
+    <div class="faq-item">
+      <p class="question">Q. PCの知識がなくても大丈夫？</p>
+      <p class="answer">A. 設定済みで届くので、Telegramで話すだけですぐ使えます。</p>
+    </div>
+    <div class="faq-item">
+      <p class="question">Q. 月額料金はかかる？</p>
+      <p class="answer">A. 本体購入後の月額なし。無料プランで動作します。</p>
+    </div>
+    <div class="faq-item">
+      <p class="question">Q. カスタマイズはできる？</p>
+      <p class="answer">A. 「こんな機能ほしい」と伝えれば追加対応可能です。</p>
+    </div>
+    <div class="faq-item">
+      <p class="question">Q. 解約したらPCは？</p>
+      <p class="answer">A. PCはあなたのもの。積み上げたデータも手元に残ります。</p>
+    </div>
+  </div>
+  <span class="slide-number">18</span>
+</section>
+
+<!-- Slide 19: CTA -->
+<section class="slide cta-slide" id="slide-19">
+  <div class="slide-inner">
+    <h2>まずは、話を聞かせてください。</h2>
+    <a href="mailto:contact@milailab.teen.jp" class="cta-button">お問い合わせ</a>
+    <div class="contact-info">
+      <p>contact@milailab.teen.jp</p>
+      <p style="margin-top: 8px;">※ 24時間以内に返信いたします</p>
+    </div>
+  </div>
+  <span class="slide-number">19</span>
+</section>
+
+<div class="nav-hint">↑↓ スクロールでスライド移動</div>
+
+</body>
+</html>

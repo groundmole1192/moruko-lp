@@ -260,7 +260,10 @@ function mountScrollWorld(container, config) {
       const c = copies[i];
       c.style.opacity = cop;
       c.style.setProperty('--sw-drift', reduce ? '0vh' : `${((0.5 - pr) * 4).toFixed(2)}vh`);
-      c.style.pointerEvents = cop > 0.5 ? 'auto' : 'none';
+      const live = cop > 0.5;
+      c.style.pointerEvents = live ? 'auto' : 'none';
+      // 非表示スライドはヒットテストから完全に外す（透明ボタンがタップを横取りするのを防ぐ）
+      c.style.visibility = cop > 0.02 ? 'visible' : 'hidden';
     }
     const routeOp = clamp(1 - Math.max(0, y - worldEnd) / (0.5 * vh));
     route.style.opacity = routeOp;
@@ -392,7 +395,7 @@ if (typeof window !== 'undefined') {
         { label: '料金', href: '#pricing' },
         { label: '導入の流れ', href: '#howto' },
       ],
-      cta: { label: 'LINEで無料相談', href: 'https://lin.ee/S09YSni' },
+      cta: { label: 'LINEで無料相談', href: 'https://line.me/R/ti/p/@195gadxx' },
       diveScroll: 1.3,
       connScroll: 0.9,
       sections: [
@@ -425,7 +428,7 @@ if (typeof window !== 'undefined') {
           title: '自宅で動く。\n情報は外に出さない。',
           body: 'モルコはクラウドではなく、あなたの自宅のPCで動きます。初期設定済みでお届けし、マンツーマンのレクチャーと専用相談Botで、使いこなせるまで伴走します。',
           tags: ['自宅ローカル稼働', 'プライバシー保護', 'マンツーマンレクチャー'],
-          cta: { primary: { label: '料金を見る', href: '#pricing' }, secondary: { label: 'LINEで無料相談する', href: 'https://lin.ee/S09YSni' } },
+          cta: { primary: { label: '料金を見る', href: '#pricing' }, secondary: { label: 'LINEで無料相談する', href: 'https://line.me/R/ti/p/@195gadxx' } },
           linger: 0.3,
         },
       ],
