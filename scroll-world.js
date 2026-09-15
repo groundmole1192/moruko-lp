@@ -73,9 +73,15 @@ function mountScrollWorld(container, config) {
   hintText.textContent = config.hint || 'scroll';
   hint.appendChild(hintText);
   hint.appendChild(el('i'));
+  let skip = null;
+  if (config.skip?.href) {
+    skip = el('a', 'sw-skip');
+    skip.href = config.skip.href;
+    skip.textContent = config.skip.label || '本文へスキップ';
+  }
   const track = el('div', 'sw-track');
 
-  [sky, scrollbar, topbar, stage, copylayer, route, hint, track].forEach(n => container.appendChild(n));
+  [sky, scrollbar, topbar, stage, copylayer, route, hint, skip, track].filter(Boolean).forEach(n => container.appendChild(n));
 
   const SEGMENTS = [];
   sections.forEach((section, index) => {
@@ -268,6 +274,10 @@ function mountScrollWorld(container, config) {
     const routeOp = clamp(1 - Math.max(0, y - worldEnd) / (0.5 * vh));
     route.style.opacity = routeOp;
     route.style.pointerEvents = routeOp > 0.4 ? 'auto' : 'none';
+    if (skip) {
+      skip.style.opacity = routeOp;
+      skip.style.pointerEvents = routeOp > 0.4 ? 'auto' : 'none';
+    }
 
     const cur = SEGMENTS[ci];
     const near = clamp(cur.kind === 'dive' ? cur.si : (((y - cur.start) / (cur.end - cur.start)) > 0.5 ? cur.si + 1 : cur.si), 0, N - 1);
@@ -389,7 +399,8 @@ if (typeof window !== 'undefined') {
     mountScrollWorld(document.getElementById('world'), {
       brand: { name: 'moruko', logo: 'morukoimage/logo_wide.webp', href: '#world' },
       hint: 'スクロールして飛び込む',
-      nav: true,
+      skip: { label: '演出をとばして本文へ ↓', href: '#features' },
+      nav: false,
       links: [
         { label: 'できること', href: '#features' },
         { label: '料金', href: '#pricing' },
@@ -404,18 +415,18 @@ if (typeof window !== 'undefined') {
           still: 'morukoimage/hero_bg.webp',
           stillMobile: 'morukoimage/hero_bg_mobile.webp',
           accent: '#ED7014',
-          eyebrow: 'AI SECRETARY',
+          eyebrow: '自分専用のAI秘書',
           title: '話しかけるだけ。\nあとはモルコが働く。',
           body: 'メール・スケジュール・SNS投稿・動画編集まで、Telegramに話しかけるだけで全部やってくれる自分専用AI秘書。自宅のミニPCが24時間フル稼働します。',
           tags: ['Telegramだけで操作', '24時間稼働', '設定済みでお届け'],
-          cta: { primary: { label: '今すぐ申し込む', href: 'https://docs.google.com/forms/d/e/1FAIpQLSc1LY01G24LIM4mA3z4XuhbX2RuA8BW28mHcDHicjmD-ONxfg/viewform' }, secondary: { label: 'できることを見る', href: '#features' } },
+          cta: { primary: { label: 'LINEで無料相談する', href: 'https://line.me/R/ti/p/@195gadxx' }, secondary: { label: 'できることを見る', href: '#features' } },
         },
         {
           label: 'しごと',
           still: 'morukoimage/scene_shigoto.webp',
           contain: true,
           accent: '#5FA448',
-          eyebrow: 'WHAT MORUKO DOES',
+          eyebrow: 'モルコのしごと',
           title: '見た目はやわらかく、\n中身はかなり働く。',
           body: 'メール管理・スケジュール調整・タスク整理・朝ブリーフ・Drive検索・SNSと動画制作。「これ頼める？」をそのまま投げてください。',
           tags: ['メール管理', 'スケジュール調整', 'SNS・動画制作'],
@@ -425,11 +436,11 @@ if (typeof window !== 'undefined') {
           still: 'morukoimage/scene_anshin.webp',
           contain: true,
           accent: '#ED7014',
-          eyebrow: 'TRUST & SUPPORT',
+          eyebrow: 'あんしん・サポート',
           title: '自宅で動く。\n情報は外に出さない。',
           body: 'モルコはクラウドではなく、あなたの自宅のPCで動きます。初期設定済みでお届けし、マンツーマンのレクチャーと専用相談Botで、使いこなせるまで伴走します。',
           tags: ['自宅ローカル稼働', 'プライバシー保護', 'マンツーマンレクチャー'],
-          cta: { primary: { label: '料金を見る', href: '#pricing' }, secondary: { label: 'LINEで無料相談する', href: 'https://line.me/R/ti/p/@195gadxx' } },
+          cta: { primary: { label: 'LINEで無料相談する', href: 'https://line.me/R/ti/p/@195gadxx' }, secondary: { label: '料金を見る', href: '#pricing' } },
           linger: 0.3,
         },
       ],

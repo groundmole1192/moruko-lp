@@ -678,3 +678,103 @@ h2 {
   .feature-media img, .btn, .sw-btn, .sw-nav__item { transition: none !important; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ===== 2026-09-15 辛口評価対応の追加スタイル ===== */
+
+/* SSR用ヒーローテキスト（視覚的には非表示、JS無効時はnoscriptで表示） */
+.sr-hero {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.sr-hero--visible {
+  position: static;
+  width: auto; height: auto;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  padding: 48px 20px 8px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.sr-hero--visible a { color: var(--accent); text-decoration: underline; }
+
+/* 演出スキップ導線 */
+.sw-skip {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 70;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(251,249,246,.88);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 700;
+  backdrop-filter: blur(6px);
+  transition: color .2s ease, border-color .2s ease;
+}
+.sw-skip:hover { color: var(--accent); border-color: var(--accent); }
+
+/* 料金カード下の相談導線 */
+.plan-consult {
+  display: block;
+  margin-top: 14px;
+  text-align: center;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--muted);
+  transition: color .2s ease;
+}
+.plan-consult:hover { color: var(--accent); }
+
+/* あんしん材料（実績・保証） */
+.assure {
+  margin-top: 44px;
+  padding: 32px 30px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+.assure-title {
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-align: center;
+}
+.assure-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 26px;
+}
+.assure-item h4 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: .98rem;
+  font-weight: 800;
+  padding-left: 14px;
+  position: relative;
+}
+.assure-item h4::before {
+  content: '';
+  position: absolute;
+  left: 0; top: .35em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.assure-item p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.8; }
+.assure-item a { color: var(--accent); text-decoration: underline; }
+@media (max-width: 760px) {
+  .assure { padding: 26px 20px; }
+  .assure-grid { grid-template-columns: 1fr; }
+  .sw-skip { left: 50%; transform: translateX(-50%); bottom: 14px; white-space: nowrap; }
+}
