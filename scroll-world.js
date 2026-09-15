@@ -402,6 +402,7 @@ if (typeof window !== 'undefined') {
         {
           label: 'はじまり',
           still: 'morukoimage/hero_bg.webp',
+          stillMobile: 'morukoimage/hero_bg_mobile.webp',
           accent: '#ED7014',
           eyebrow: 'AI SECRETARY',
           title: '話しかけるだけ。\nあとはモルコが働く。',
