@@ -480,6 +480,33 @@ h2 {
   font-size: .72rem; font-weight: 800;
 }
 .plan-card .btn-block { margin-top: auto; }
+.compare { margin-top: 40px; }
+.compare-title {
+  text-align: center; font-size: 1.15rem; font-weight: 800; color: var(--ink);
+  margin: 0 0 20px; letter-spacing: -.01em;
+}
+.compare-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.compare-col {
+  padding: 22px 22px 24px; border-radius: var(--radius-lg);
+  background: var(--surface); border: 1px solid var(--line);
+}
+.compare-col p { margin: 12px 0 0; color: var(--muted); font-size: .9rem; line-height: 1.75; }
+.compare-tag {
+  display: inline-block; font-size: .8rem; font-weight: 800; letter-spacing: .02em;
+  color: var(--muted);
+}
+.compare-col--moruko {
+  background: linear-gradient(180deg, rgba(237,112,20,.08), rgba(249,160,63,.05));
+  border: 2px solid var(--accent);
+  box-shadow: var(--shadow);
+}
+.compare-col--moruko .compare-tag { color: var(--accent); font-size: .95rem; }
+.compare-col--moruko p { color: var(--ink); }
+.compare-col--moruko strong { color: var(--accent); }
+@media (max-width: 760px) {
+  .compare-grid { grid-template-columns: 1fr; }
+}
+
 .pricing-notes {
   margin-top: 22px;
   padding: 20px 26px;
