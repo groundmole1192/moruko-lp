@@ -1,5 +1,6 @@
 // moruko-lp Worker: 静的アセット配信 + 申し込み受付API（/api/apply）
 // 申し込み内容を北さんのTelegramへ通知する。秘密情報は wrangler secret（TG_BOT_TOKEN）で注入。
+// PREVIEW="1"（moruko-lp-v2 プレビュー）のときは通知を送らず、受付番号だけ返す。
 
 // カード決済: ¥250,000（税込）plink_1ULXpXIgbCdh16E59rbR4OFF
 const PAYMENT_LINK = 'https://buy.stripe.com/28EaEXh0zd6t2ZA2qu3wQ0m';
@@ -34,7 +35,7 @@ async function handleApply(request, env, url) {
       for (const [k, v] of fd.entries()) data[k] = typeof v === 'string' ? v : '';
     }
   } catch (e) {
-    return respond(isJson, { ok: false, error: 'bad_request' }, 400);
+    return respond(isJson, { ok: false, error: 'bad_request' }, 400, '', '', '', url);
   }
 
   const f = {};
@@ -46,7 +47,7 @@ async function handleApply(request, env, url) {
 
   // ボット対策（honeypot）: 埋まっていたら黙って成功扱い
   if (String(data.website ?? '').trim()) {
-    return respond(isJson, { ok: true, id: 'MRK-IGNORED', method }, 200, method);
+    return respond(isJson, { ok: true, id: 'MRK-IGNORED', method }, 200, method, '', '', url);
   }
 
   const missing = [];
@@ -57,9 +58,16 @@ async function handleApply(request, env, url) {
   if (!method) missing.push('method');
   if (!agreeContract) missing.push('agree_contract');
   if (!agree) missing.push('agree');
-  if (missing.length) return respond(isJson, { ok: false, error: 'invalid', fields: missing }, 422);
+  if (missing.length) return respond(isJson, { ok: false, error: 'invalid', fields: missing }, 422, '', '', '', url);
 
-  const id = makeId();
+  const id = makeId(env.PREVIEW === '1');
+
+  // プレビュー環境: 通知を送らない（本番と同じ検証・同じレスポンス形だけ返す）
+  if (env.PREVIEW === '1') {
+    console.log('[preview] apply received (no notification sent)', id, method);
+    return respond(isJson, { ok: true, id, method, preview: true }, 200, method, f.email, id, url);
+  }
+
   const methodLabel = method === 'card' ? 'クレジットカード（Stripe決済ページへ遷移）' : '銀行振込（振込先の案内メール待ち）';
   const text = [
     'moruko 申し込みが届きました',
@@ -83,9 +91,9 @@ async function handleApply(request, env, url) {
   ].join('\n');
 
   const sent = await notifyTelegram(env, text);
-  if (!sent) return respond(isJson, { ok: false, error: 'notify_failed' }, 502);
+  if (!sent) return respond(isJson, { ok: false, error: 'notify_failed' }, 502, '', '', '', url);
 
-  return respond(isJson, { ok: true, id, method }, 200, method, f.email, id);
+  return respond(isJson, { ok: true, id, method }, 200, method, f.email, id, url);
 }
 
 async function notifyTelegram(env, text) {
@@ -102,16 +110,17 @@ async function notifyTelegram(env, text) {
   }
 }
 
-function makeId() {
+function makeId(preview) {
   const d = new Date(Date.now() + 9 * 3600 * 1000); // JST
   const ymd = d.toISOString().slice(0, 10).replace(/-/g, '');
   const rand = crypto.getRandomValues(new Uint8Array(3));
-  return 'MRK-' + ymd + '-' + Array.from(rand, b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+  return (preview ? 'MRK-PREVIEW-' : 'MRK-') + ymd + '-' + Array.from(rand, b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
 }
 
-// JS無効時（通常のフォームPOST）はリダイレクトで返す
-function respond(isJson, body, status, method, email, id) {
+// JS無効時（通常のフォームPOST）はリダイレクトで返す。リダイレクト先は自サイト（本番=カスタムドメイン、プレビュー=workers.dev）
+function respond(isJson, body, status, method, email, id, url) {
   if (isJson) return json(body, status);
+  const site = url ? url.origin : 'https://moruko.groundmole.space';
   if (body.ok) {
     if (method === 'card') {
       const u = new URL(PAYMENT_LINK);
@@ -119,9 +128,9 @@ function respond(isJson, body, status, method, email, id) {
       if (id) u.searchParams.set('client_reference_id', id);
       return Response.redirect(u.toString(), 303);
     }
-    return Response.redirect('https://moruko.groundmole.space/thanks.html?method=bank', 303);
+    return Response.redirect(site + '/thanks.html?method=bank', 303);
   }
-  return Response.redirect('https://moruko.groundmole.space/apply.html?error=' + encodeURIComponent(body.error || 'error'), 303);
+  return Response.redirect(site + '/apply.html?error=' + encodeURIComponent(body.error || 'error'), 303);
 }
 
 function json(body, status = 200) {

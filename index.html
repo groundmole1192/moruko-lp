@@ -19,56 +19,205 @@
   <meta name="twitter:title" content="モルコ(moruko) | あなただけのAI秘書を自宅に" />
   <meta name="twitter:description" content="メール・スケジュール・SNS投稿・動画編集まで、Telegramに話しかけるだけで全部やってくれる自分専用AI秘書「モルコ」。" />
   <meta name="twitter:image" content="https://moruko.groundmole.space/morukoimage/og_image.png" />
-  <link rel="icon" type="image/webp" href="morukoimage/char.webp" />
+  <link rel="icon" type="image/webp" href="morukoimage/favicon.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style-v3.css" />
-  <script src="scroll-world.js" defer></script>
-  <noscript><style>.sr-hero { position: static; width: auto; height: auto; overflow: visible; clip: auto; clip-path: none; white-space: normal; padding: 48px 20px 8px; max-width: 720px; margin: 0 auto; text-align: center; } .sr-hero a { color: #ed7014; text-decoration: underline; }</style></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="morukoimage/hero_kv.webp" fetchpriority="high" />
+  <link rel="stylesheet" href="style-v4.css?v=1001d" />
+  <script>(function(){if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('gs');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('gs');},2500);}})();</script>
+  <style>
+    /* hero intro: CSS only so first paint is not gated by JS */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero h1 .line > span { animation: lineUp .9s cubic-bezier(.2, .8, .2, 1) both; }
+      .hero h1 .line:nth-child(2) > span { animation-delay: .1s; }
+      .hero .label, .hero .lead, .hero-ctas, .hero-facts { animation: fadeUp .8s cubic-bezier(.2, .8, .2, 1) both; }
+      .hero .label { animation-delay: 0s; }
+      .hero .lead { animation-delay: .22s; }
+      .hero-ctas { animation-delay: .32s; }
+      .hero-facts { animation-delay: .42s; }
+      .hero-kv { animation: fadeIn .6s ease both; }
+      @keyframes lineUp { from { transform: translateY(110%); } to { transform: none; } }
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MotionPathPlugin.min.js" integrity="sha384-ZdcNM4JVCcTz+LG7hy3tkzchm/ljdYJcwthjW8G4vqAXApMm4ve+3ByX+RfrAlFt" crossorigin="anonymous" defer></script>
+  <script src="main.js?v=1001d" defer></script>
 </head>
-<body class="has-mobile-cta">
-  <main>
-    <header class="sr-hero">
-      <h1>モルコ(moruko) — 話しかけるだけ。あとはモルコが働く。</h1>
-      <p>メール・スケジュール・SNS投稿・動画編集まで、Telegramに話しかけるだけで全部やってくれる自分専用AI秘書。設定済みのミニPCをお届けし、自宅で24時間働きます。</p>
-      <p><a href="#features">できることを見る</a> ／ <a href="#pricing">料金を見る</a> ／ <a href="apply.html">申し込む</a> ／ <a href="https://line.me/R/ti/p/@195gadxx">LINEで無料相談する</a></p>
-    </header>
-    <div id="world"></div>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M3.5 11.5L20.5 4l-4.5 16.5-4.5-7-8-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11.5 13.5l9-9.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-pc" viewBox="0 0 24 24"><rect x="2.5" y="8" width="19" height="9" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7" cy="12.5" r="1.3" fill="currentColor"/><path d="M12 12.5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 9.5h8M8 13.5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 17.5l1.5 1.5 3-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 8l8.5-4.5L20.5 8v8L12 20.5 3.5 16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 8L12 12.5 20.5 8M12 12.5v8" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 19c.5-3.5 3-5.5 6.5-5.5s6 2 6.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 5.5a3 3 0 010 6M18 13.8c2.2.6 3.3 2.2 3.5 4.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7.5a4 4 0 018 0V10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="15.5" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></symbol>
+    <symbol id="i-line" viewBox="0 0 24 24"><path d="M12 3.5C6.8 3.5 2.5 7 2.5 11.2c0 3.7 3.3 6.9 7.8 7.5.3.1.7.2.8.5.1.2.1.6 0 .9l-.1.8c0 .2-.2.9.8.5s5.4-3.2 7.3-5.4c1.4-1.5 2.4-3 2.4-4.8C21.5 7 17.2 3.5 12 3.5z" fill="currentColor"/></symbol>
+  </svg>
 
-    <!-- できること -->
-    <section class="features" id="features">
+  <header class="nav" id="nav">
+    <div class="shell nav-inner">
+      <a class="nav-brand" href="#top" aria-label="moruko トップ"><img src="morukoimage/logo_wide.webp" alt="moruko" width="480" height="179" /></a>
+      <nav class="nav-links" aria-label="ページ内">
+        <a href="#features">できること</a>
+        <a href="#voices">使われ方</a>
+        <a href="#pricing">料金</a>
+        <a href="#faq">よくある質問</a>
+      </nav>
+      <div class="nav-ctas">
+        <a class="btn btn-line" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">無料相談</a>
+        <a class="btn btn-primary" href="apply.html">申し込む</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="label">自宅で働く、自分専用のAI秘書</p>
+          <h1><span class="line"><span>話しかけるだけ。</span></span><span class="line"><span>あとはモルコが働く。</span></span></h1>
+          <p class="lead">メールの返信、予定の登録、SNSの投稿、動画づくりまで。スマホのチャットで頼むだけで、モルコが代わりにやってくれます。中身を設定済みの小さなパソコンをお届けするので、ご自宅のコンセントに挿せば、24時間働く秘書のできあがりです。</p>
+          <div class="cta-pair hero-ctas">
+            <a class="btn btn-primary" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener"><svg><use href="#i-line"/></svg>LINEで無料相談する</a>
+            <a class="btn btn-line" href="apply.html">申し込む</a>
+          </div>
+          <ul class="hero-facts">
+            <li><svg><use href="#i-check"/></svg>スマホのチャットで頼むだけ</li>
+            <li><svg><use href="#i-check"/></svg>24時間稼働</li>
+            <li><svg><use href="#i-check"/></svg>設定済みでお届け</li>
+          </ul>
+        </div>
+
+        <div class="hero-kv" id="heroKv" aria-hidden="true">
+          <div class="kv-img"><img src="morukoimage/hero_kv.webp" alt="" width="1400" height="788" fetchpriority="high" decoding="async" /></div>
+          <span class="kv-status" id="kvStatus"><i></i>モルコ 稼働中</span>
+          <div class="kv-card" id="kvCard">
+            <span class="kv-card__check"><svg><use href="#i-check"/></svg></span>
+            <span class="kv-card__text"><b id="kvCardTitle">お礼メール、送りました</b><small id="kvCardSub">名刺の写真から 2分</small></span>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="sec sec--sand" id="how">
       <div class="shell">
-        <p class="eyebrow reveal">FEATURES / できること</p>
-        <h2 class="reveal">「これ頼めるの？」は、<br />だいたいできます。</h2>
-        <div class="features-grid">
-          <article class="feature-card reveal">
-            <div class="feature-media"><img src="morukoimage/feat_email.webp" alt="メール管理のイメージ" loading="lazy" /></div>
+        <div class="sec-head">
+          <p class="label rv">しくみ</p>
+          <h2 class="rv">スマホで頼む。<br />自宅のPCで、モルコが働く。</h2>
+          <p class="lead rv">難しい操作はありません。いつものチャットの延長で、仕事が一つ進みます。</p>
+        </div>
+        <div class="how-grid">
+          <div class="how-visual rv">
+        <div class="hero-stage" id="heroStage" aria-hidden="true">
+          <div class="hs-bg"></div>
+          <svg class="hs-route" viewBox="0 0 100 94"><path id="hsPath" d="M40 40 C 48 18, 62 14, 70 40"/></svg>
+          <div class="hs-phone">
+            <div class="hs-screen" id="hsScreen">
+              <div class="hs-bubble hs-bubble--me" id="hsReq">この名刺の人に、お礼メール送っといて<span class="att"></span></div>
+              <div class="hs-bubble hs-bubble--bot" id="hsTyping"><span class="hs-typing"><i></i><i></i><i></i></span></div>
+              <div class="hs-bubble hs-bubble--bot" id="hsRep">送りました。文面も保存してあります。</div>
+            </div>
+          </div>
+          <div class="hs-home">
+            <div class="hs-house">
+              <svg viewBox="0 0 100 90" fill="none" stroke="#241c12" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M14 38 V86 H86 V38" fill="#ffffff" stroke="none" />
+                <path d="M6 40 L50 8 L94 40 Z" fill="#fff0e3" stroke="none" />
+                <path d="M6 40 L50 8 L94 40" />
+                <path d="M14 38 V86 H86 V38" />
+                <path d="M70 14 V24" />
+                <path d="M30 86 V72 a4 4 0 0 1 4 -4 h6 a4 4 0 0 1 4 4 V86" stroke="#ede4d7" />
+              </svg>
+            </div>
+            <span class="hs-status"><i></i>モルコ 稼働中</span>
+            <div class="hs-pc" id="hsPc"><i></i></div>
+            <div class="hs-moruko" id="hsMoruko">
+              <img class="open" src="morukoimage/moruko_open.webp" alt="" width="560" height="637" fetchpriority="high" />
+              <img class="closed" src="morukoimage/moruko_closed.webp" alt="" width="560" height="637" loading="lazy" />
+            </div>
+            <div class="hs-task" id="hsTask">
+              <span id="hsTaskText">名刺を読み取り → お礼メールを作成</span>
+              <span class="bar"><i id="hsBar"></i></span>
+              <span class="done" id="hsDone"><svg><use href="#i-check"/></svg></span>
+            </div>
+          </div>
+          <span class="hs-packet" id="hsPacket"></span>
+          <span class="hs-packet hs-packet--back" id="hsPacketBack"></span>
+        </div>
+            <p class="how-visual__cap">スマホで頼む → <b>自宅のミニPC</b>でモルコが働く → 結果がスマホに返る</p>
+          </div>
+        <div class="how-diagram" id="howDiagram">
+          <div class="how-line" id="howLine"><i></i><span class="how-packet" id="howPacket"></span></div>
+          <div class="how-line-h" id="howLineH"><i></i><b id="howPacketH"></b></div>
+          <ol class="how-nodes">
+            <li class="how-node">
+              <span class="how-icon"><svg><use href="#i-phone"/></svg></span>
+              <div><h3>スマホから話しかける</h3><p>文字でも、写真でも、スクショでも。Telegram（LINEのようなチャットアプリ）に送るだけ。</p></div>
+            </li>
+            <li class="how-node">
+              <span class="how-icon"><svg><use href="#i-send"/></svg></span>
+              <div><h3>頼みごとが自宅のパソコンに届く</h3><p>送るのは文字だけなので、通信量はわずか。電波が弱い場所でも届きます。</p></div>
+            </li>
+            <li class="how-node">
+              <span class="how-icon"><svg><use href="#i-pc"/></svg></span>
+              <div><h3>自宅のミニPCでモルコが働く</h3><p>ファイルを読み、調べ、作り、送る。コンセントに挿したまま24時間稼働。</p></div>
+            </li>
+            <li class="how-node">
+              <span class="how-icon"><svg><use href="#i-list"/></svg></span>
+              <div><h3>結果がスマホに返ってくる</h3><p>完了報告と成果物が届く。外出先でも仕事が進んでいます。</p></div>
+            </li>
+          </ol>
+        </div>
+        </div>
+        <p class="how-note rv"><b>大事なデータは、手元に。</b>モルコはネット上のどこかではなく、あなたの自宅のパソコンで動きます。作ったファイルもそのパソコンに保存されます。</p>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="sec" id="features">
+      <div class="shell">
+        <div class="sec-head">
+          <p class="label rv">できること</p>
+          <h2 class="rv">「これ頼めるの？」は、<br />だいたいできます。</h2>
+        </div>
+        <div class="feat-grid rv-grid">
+          <article class="feat">
+            <div class="feat-img"><img src="morukoimage/feat_email.webp" alt="メール管理のイメージ" loading="lazy" width="900" height="900" /></div>
             <h3>メール管理</h3>
             <p>「未読100件…」そのストレスをゼロに。重要メールをチェックして返信の下書きまで自動で作成します。</p>
           </article>
-          <article class="feature-card reveal">
-            <div class="feature-media"><img src="morukoimage/feat_schedule.webp" alt="スケジュール調整のイメージ" loading="lazy" /></div>
+          <article class="feat">
+            <div class="feat-img"><img src="morukoimage/feat_schedule.webp" alt="スケジュール調整のイメージ" loading="lazy" width="900" height="900" /></div>
             <h3>スケジュール調整</h3>
             <p>「来週どこかで打ち合わせしたい」→ そのままモルコに伝えると、カレンダーに追加＆リマインドまで完了。</p>
           </article>
-          <article class="feature-card reveal">
-            <div class="feature-media"><img src="morukoimage/feat_tasks.webp" alt="タスク管理のイメージ" loading="lazy" /></div>
+          <article class="feat">
+            <div class="feat-img"><img src="morukoimage/feat_tasks.webp" alt="タスク管理のイメージ" loading="lazy" width="900" height="900" /></div>
             <h3>タスク管理</h3>
             <p>ふと思いついたタスクをチャットで送るだけ。優先順位をつけてリスト化し、忘れずに進捗管理します。</p>
           </article>
-          <article class="feature-card reveal">
-            <div class="feature-media"><img src="morukoimage/feat_diary.webp" alt="日記・朝ブリーフのイメージ" loading="lazy" /></div>
-            <h3>日記・朝ブリーフ</h3>
+          <article class="feat">
+            <div class="feat-img"><img src="morukoimage/feat_diary.webp" alt="毎朝のお知らせと日記のイメージ" loading="lazy" width="900" height="900" /></div>
+            <h3>毎朝のお知らせと日記</h3>
             <p>毎朝8時に天気・ニュース・今日の予定を自動送信。毎晩23時半には今日の振り返り日記が届きます。</p>
           </article>
-          <article class="feature-card reveal">
-            <div class="feature-media"><img src="morukoimage/feat_drive.webp" alt="Drive操作・整理のイメージ" loading="lazy" /></div>
-            <h3>Drive操作・整理</h3>
-            <p>「あのファイルどこだっけ」→ 秒で出てきます。Google Drive内の検索・アップロード・自動整理に対応。</p>
+          <article class="feat">
+            <div class="feat-img"><img src="morukoimage/feat_drive.webp" alt="ファイル探し・整理のイメージ" loading="lazy" width="900" height="900" /></div>
+            <h3>ファイル探し・整理</h3>
+            <p>「あのファイルどこだっけ」→ すぐに出てきます。Googleドライブ（ネット上の保管庫）の中を探して、保存も整理もやってくれます。</p>
           </article>
-          <article class="feature-card reveal">
-            <div class="feature-media"><img src="morukoimage/feat_sns.webp" alt="SNS・動画制作のイメージ" loading="lazy" /></div>
+          <article class="feat">
+            <div class="feat-img"><img src="morukoimage/feat_sns.webp" alt="SNS・動画制作のイメージ" loading="lazy" width="900" height="900" /></div>
             <h3>SNS・動画制作</h3>
             <p>「これ投稿したい」→ 文章・ハッシュタグ・画像まで完成形で出てきます。テロップ・BGM付き動画も作れます。</p>
           </article>
@@ -76,413 +225,433 @@
       </div>
     </section>
 
-    <!-- スマホだけで完結 -->
-    <section class="scenes" id="scenes">
+    <!-- ===== SCENES ===== -->
+    <section class="sec sec--sand" id="scenes">
       <div class="shell">
-        <p class="eyebrow reveal">PHONE ONLY / スマホだけで完結</p>
-        <h2 class="reveal">パソコンの前にいなくても、<br />仕事は進みます。</h2>
-        <p class="lead reveal">モルコは自宅のミニPCで動き、あなたはスマホのTelegramから頼むだけ。外出先で実際に使われている使い方です。</p>
-        <div class="scenes-grid">
-          <article class="scene-card reveal">
-            <span class="scene-num">1</span>
-            <h3>名刺を撮る → お礼メール送信</h3>
-            <p>もらった名刺を撮って送るだけ。モルコが読み取って、その日のうちに「本日はありがとうございました」のメールを送ります。</p>
+        <div class="sec-head">
+          <p class="label rv">スマホだけで完結</p>
+          <h2 class="rv">パソコンの前にいなくても、<br />仕事は進みます。</h2>
+          <p class="lead rv">モルコは自宅のパソコンで動き、あなたはスマホから頼むだけ。どれも、外出先で実際に使われている頼み方です。</p>
+        </div>
+        <div class="scene-list">
+          <article class="scene rv">
+            <div class="scene-visual">
+              <div class="scene-img rv-img"><img src="morukoimage/uc_meishi.webp" alt="" loading="lazy" width="1400" height="875" /></div>
+            <div class="scene-stage" id="vg1" aria-hidden="true">
+              <div class="vg vg-card v1-card"><b>山田 太郎</b><div class="vg-lines"><i></i><i></i><i></i></div></div>
+              <span class="vg-tag v1-tag" style="left:12%;top:8%">名刺を撮って送る</span>
+              <div class="vg vg-card v1-mail">
+                <div class="to">To: 山田様</div>
+                <div class="subj">本日はありがとうございました</div>
+                <div class="vg-lines"><i></i><i style="width:85%"></i><i style="width:60%"></i></div>
+              </div>
+              <div class="vg v1-sent"><span class="vg-check"><svg><use href="#i-check"/></svg></span>送信しました</div>
+              <div class="vg-flash"></div>
+            </div>
+            </div>
+            <div>
+              <h3><span class="num">1</span>名刺を撮る → お礼メール送信</h3>
+              <p>もらった名刺を撮って送るだけ。モルコが読み取って、その日のうちに「本日はありがとうございました」のメールを送ります。</p>
+            </div>
           </article>
-          <article class="scene-card reveal">
-            <span class="scene-num">2</span>
-            <h3>住所のスクショ → 送り状 → コンビニで発送</h3>
-            <p>お客さんからLINEで届いた住所をスクショして送ると、発送伝票を作成。印刷して荷物と一緒にコンビニの店員さんに渡せば発送完了です。</p>
+          <article class="scene rv">
+            <div class="scene-visual">
+              <div class="scene-img rv-img"><img src="morukoimage/uc_okurijo.webp" alt="" loading="lazy" width="1400" height="875" /></div>
+            <div class="scene-stage" id="vg2" aria-hidden="true">
+              <div class="vg v2-shot"><div class="msg"><b>お届け先</b>奈良県○○市○○町1-2-3<br />○○マンション101</div></div>
+              <span class="vg-tag" style="left:6%;top:6%">LINEの住所をスクショ</span>
+              <div class="vg vg-card v2-label">
+                <div class="hd">送り状</div>
+                <div class="vg-lines"><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i></div>
+                <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              </div>
+              <div class="vg v2-store">
+                <svg viewBox="0 0 80 80" fill="none" stroke="#241c12" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+                  <path d="M10 30 L18 14 H62 L70 30" /><path d="M10 30 H70" stroke="#ed7014" stroke-width="5" /><path d="M14 30 V70 H66 V30" /><rect x="30" y="46" width="20" height="24" rx="2" /></svg>
+              </div>
+              <div class="vg v2-done"><span class="vg-check"><svg><use href="#i-check"/></svg></span>コンビニで発送完了</div>
+            </div>
+            </div>
+            <div>
+              <h3><span class="num">2</span>住所のスクショ → 送り状 → コンビニで発送</h3>
+              <p>お客さんからLINEで届いた住所をスクショして送ると、発送伝票を作成。印刷して荷物と一緒にコンビニの店員さんに渡せば発送完了です。</p>
+            </div>
           </article>
-          <article class="scene-card reveal">
-            <span class="scene-num">3</span>
-            <h3>旅先で資料を印刷</h3>
-            <p>「この資料、今すぐ紙で欲しい」と頼むと、ネットプリントのQRコードを発行。近くのコンビニのプリンターで読み込めば、その場で印刷できます。</p>
+          <article class="scene rv">
+            <div class="scene-visual">
+              <div class="scene-img rv-img"><img src="morukoimage/uc_print.webp" alt="" loading="lazy" width="1400" height="875" /></div>
+            <div class="scene-stage" id="vg3" aria-hidden="true">
+              <div class="vg v3-bubble">この資料、今すぐ紙で欲しい</div>
+              <div class="vg vg-card v3-qr"><div class="grid" id="v3Grid"></div></div>
+              <span class="vg-tag" style="left:10%;top:62%;transform:translateY(-120%)">コンビニ印刷のQR</span>
+              <div class="vg v3-printer">
+                <svg viewBox="0 0 120 80" fill="none" stroke="#241c12" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+                  <rect x="10" y="26" width="100" height="36" rx="6" /><path d="M30 26 V12 H90 V26" /><circle cx="94" cy="44" r="3" fill="#ed7014" stroke="none" /><path d="M24 62 V74 H96 V62" />
+                </svg>
+              </div>
+              <div class="vg vg-card v3-paper"><div class="vg-lines"><i></i><i></i><i></i></div></div>
+            </div>
+            </div>
+            <div>
+              <h3><span class="num">3</span>旅先で資料を印刷</h3>
+              <p>「この資料、今すぐ紙で欲しい」と頼むと、コンビニで印刷するためのQRコードが届きます。近くのコンビニのコピー機に読み込ませれば、その場で印刷できます。</p>
+            </div>
           </article>
         </div>
-        <p class="scene-note reveal"><strong>回線が遅くても止まりません。</strong>Telegramは文字を送るだけなので、通信制限がかかったスマホでも、指示さえ届けば仕事が進みます。</p>
+        <p class="scene-note rv"><strong>電波が弱くても大丈夫。</strong>スマホから送るのは文字だけ。通信制限がかかっていても、頼みごとさえ届けば、自宅のモルコが仕事を進めます。</p>
       </div>
     </section>
 
-    <!-- CM動画 -->
-    <section class="video" id="video">
+    <!-- ===== VIDEO ===== -->
+    <section class="sec" id="video">
       <div class="shell">
-        <p class="eyebrow reveal">MOVIE / 1分でわかるCM動画</p>
-        <h2 class="reveal">モルコって、何ができるの？</h2>
-        <p class="lead reveal">文章より早いので、まず1分だけ。実際に使っている人の声は、このすぐ下にあります。</p>
-        <div class="video-frame reveal">
-          <iframe src="https://www.youtube.com/embed/h4Vyb0HzrWw" title="モルコ CM動画" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="sec-head">
+          <p class="label rv">1分でわかるCM動画</p>
+          <h2 class="rv">モルコって、何ができるの？</h2>
+          <p class="lead rv">文章より早いので、まず1分だけ。実際に使っている人の声は、このすぐ下にあります。</p>
+        </div>
+        <div class="video-frame rv" id="videoFrame">
+          <button class="video-poster" type="button" id="videoPlay" aria-label="CM動画を再生する">
+            <img src="https://i.ytimg.com/vi/h4Vyb0HzrWw/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" />
+            <span><svg><use href="#i-play"/></svg></span>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- 利用者の声 -->
-    <section class="voices" id="voices">
+    <!-- ===== VOICES ===== -->
+    <section class="sec sec--sand" id="voices">
       <div class="shell">
-        <p class="eyebrow reveal">VOICE / 使ってみると、こうなった</p>
-        <h2 class="reveal">実際のユーザーから<br />届いた声です。</h2>
-        <div class="voices-grid">
-          <article class="voice-card reveal">
+        <div class="sec-head">
+          <p class="label rv">使ってみると、こうなった</p>
+          <h2 class="rv">実際のユーザーから<br />届いた声です。</h2>
+        </div>
+        <div class="voice-grid rv-grid">
+          <article class="voice">
             <h3>民泊オーナー</h3>
             <blockquote>「清掃スタッフの『終わりました』報告を毎回LINEでやり取りしてたのが、モルコと10分話しただけでひとつの仕組みに。完了通知も、月ごとの支払い集計も自動になりました」</blockquote>
-            <ul class="voice-tags">
-              <li>清掃報告の自動化</li>
-              <li>写真も自動保存</li>
-              <li>支払い集計まで自動</li>
-            </ul>
+            <ul><li>清掃報告の自動化</li><li>写真も自動保存</li><li>支払い集計まで自動</li></ul>
           </article>
-          <article class="voice-card reveal">
+          <article class="voice">
             <h3>学習塾オーナー</h3>
             <blockquote>「保護者から大量に届く時間割の希望を、モルコが重複まで見つけて整理してくれる。個人情報を伏せた時間割も自動で作れて、毎回の講習で使い回せるようになりました」</blockquote>
-            <ul class="voice-tags">
-              <li>時間割の自動生成</li>
-              <li>重複を自動チェック</li>
-              <li>毎回使い回せる</li>
-            </ul>
+            <ul><li>時間割の自動生成</li><li>重複を自動チェック</li><li>毎回使い回せる</li></ul>
           </article>
-          <article class="voice-card reveal">
+          <article class="voice">
             <h3>占い師・EC運営</h3>
-            <blockquote>「毎週の占いコンテンツをモルコが自動で作ってスプレッドシートに溜めてくれる。Instagramのインサイトはスクショを送るだけで転記。カルーセル投稿まで作れて、発信がぐっと楽になりました」</blockquote>
-            <ul class="voice-tags">
-              <li>週次コンテンツ自動生成</li>
-              <li>SNS運用の自動化</li>
-              <li>スクショ送るだけ</li>
-            </ul>
+            <blockquote>「毎週の占いコンテンツをモルコが自動で作ってスプレッドシートに溜めてくれる。Instagramの反応の数字も、画面のスクショを送るだけで記録してくれる。何枚もめくれる投稿まで作れて、発信がぐっと楽になりました」</blockquote>
+            <ul><li>週次コンテンツ自動生成</li><li>SNS運用の自動化</li><li>スクショ送るだけ</li></ul>
           </article>
         </div>
-        <div class="askit reveal">
-          <p class="askit-q">「買っても、使いこなせるか不安です」</p>
-          <p class="askit-a">答えはいつも同じです。<strong>「モルコに聞いてください」</strong></p>
+        <div class="askit rv">
+          <p class="q">「買っても、使いこなせるか不安です」</p>
+          <p class="a">答えはいつも同じです。<br /><mark id="askMark">「モルコに聞いてください」</mark></p>
           <p>最初は「これをしたいけど、どうしたら？」という相談がたくさん届きました。返したのは毎回、「モルコに聞いて、やらせてみてください」。それを続けるうちに、宿の予約システムや売上管理システム、ホームページを自分で作るユーザーが出てきました。やり方を調べるのも、作るのも、モルコの仕事です。</p>
         </div>
       </div>
     </section>
 
-    <!-- 作った人 -->
-    <section class="maker" id="maker">
+    <!-- ===== MAKER ===== -->
+    <section class="sec" id="maker">
       <div class="shell">
-        <p class="eyebrow reveal">作った人</p>
-        <div class="maker-layout">
-          <figure class="maker-photo reveal">
+        <p class="label rv">作った人</p>
+        <div class="maker-grid">
+          <figure class="maker-photo rv">
             <img src="morukoimage/kita_profile.webp" alt="モルコを作った北 祐介" loading="lazy" width="800" height="1000" />
           </figure>
-          <div class="maker-body">
-            <h2 class="reveal"><span class="ib">コードを1行も</span><span class="ib">書かない人が、</span><br /><span class="ib">作りました。</span></h2>
-            <p class="maker-name reveal">北 祐介<span>Mi-LAI Lab ／ AI講座を開いてきた人</span></p>
-            <div class="maker-proof reveal">
-              <div class="maker-proof-item">
+          <div>
+            <h2 class="rv">コードを1行も書かない人が、<br />作りました。</h2>
+            <p class="maker-name rv">北 祐介<span>Mi-LAI Lab ／ AI講座を開いてきた人</span></p>
+            <div class="maker-proof rv-grid">
+              <div>
                 <h3>プログラミングを勉強したことはありません。</h3>
                 <p>コードは1行も書かず、全部AIと一緒に作りました。<strong>だから、あなたも書かなくていい。</strong></p>
               </div>
-              <div class="maker-proof-item">
+              <div>
                 <h3>壊れる前提で、復旧の仕組みから設計しました。</h3>
                 <ul>
-                  <li>見守り係（keeper）：止まってもボタン1つで遠隔再起動</li>
-                  <li>24時間応答するサポートBot</li>
+                  <li>見守り係：止まっても、スマホのボタン1つで離れた場所から再起動</li>
+                  <li>24時間いつでも答える、相談用のチャット窓口</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="ba reveal">
+        <div class="ba rv" id="ba">
           <p class="ba-title">いちばん使っているユーザーは、作った本人です。</p>
-          <div class="ba-grid">
-            <div class="ba-col ba-col--before">
-              <span class="ba-tag">モルコ以前</span>
-              <h3>パソコンの前から離れられなかった</h3>
-              <p>AI開発ツール「Antigravity」を使うには、ずっとPCの前に座っていなければいけない。外に出なくなり、ついには「AIブレインフライ」（認知負荷による不調）に。</p>
+          <div class="ba-stage" id="baStage">
+            <div class="ba-panel ba-panel--before">
+              <div class="ba-img"><img src="morukoimage/ba_before.webp" alt="" loading="lazy" width="1400" height="788" /></div>
+              <div class="ba-content" id="baBeforeContent">
+                <span class="ba-tag">モルコ以前</span>
+                <h3>一日中、パソコンの前から動けなかった</h3>
+                <p>AIに仕事を頼むには、ずっとパソコンの前に座っていないといけない。気づけば何日も外に出ず、頭も体もくたくたになっていました。</p>
+              </div>
             </div>
-            <div class="ba-col ba-col--after">
-              <span class="ba-tag">モルコ以後</span>
-              <h3>スマホで、歩きながら開発</h3>
-              <p>Telegramで頼むだけになり、散歩中も電車の中も仕事が進む。18きっぷで旅をしながら、撮った写真をその場でショート動画にして投稿しています。</p>
+            <div class="ba-panel ba-panel--after" id="baAfter">
+              <div class="ba-img"><img src="morukoimage/ba_after.webp" alt="" loading="lazy" width="1400" height="788" /></div>
+              <div class="ba-content" id="baAfterContent">
+                <span class="ba-tag">モルコ以後</span>
+                <h3>スマホ片手に、歩きながら仕事</h3>
+                <p>頼みごとはスマホから送るだけ。散歩中も電車の中も、仕事が進むようになりました。今は青春18きっぷで旅をしながら、撮った写真をその場で短い動画にして投稿しています。</p>
+              </div>
             </div>
+            <div class="ba-handle" id="baHandle"></div>
           </div>
+          <p class="ba-hint">スクロールすると「以前」から「以後」へ切り替わります</p>
         </div>
 
-        <div class="vision reveal">
-          <p class="vision-main">モルコの本質は、インフラです。</p>
-          <p class="vision-sub">最初のPC代と、月約3,000円（Claude Pro）。それだけで、次々に出てくる最新の機能に追いつき続けられる。</p>
+        <div class="vision rv">
+          <p class="main">一度そろえれば、ずっと最新。</p>
+          <p class="sub">かかるのは最初の本体代と、AIの月額利用料 約<span class="num">3,000</span>円だけ。AIは毎月のように賢くなりますが、モルコはその新しい力をそのまま使えます。買い替えなしで、時代に置いていかれません。</p>
         </div>
       </div>
     </section>
 
-    <!-- 料金 -->
-    <section class="pricing" id="pricing">
+    <!-- ===== HONEST ===== -->
+    <section class="sec sec--sand" id="honest">
       <div class="shell">
-        <p class="eyebrow reveal">PRICING / 料金</p>
-        <h2 class="reveal">「秘書を雇うほどじゃないけど、<br />自動化したい」を叶える価格で。</h2>
-        <div class="pricing-layout">
-          <div class="pricing-story reveal">
-            <p>人を雇えば月30〜50万円。AI導入の伴走コンサルも、数十万〜百万円かかることが珍しくありません。モルコは<strong>完成品をお届けして買い切り。月額の顧問料もかかりません。</strong></p>
-            <p>クラウド型のAI秘書は毎月払い続ける上に、情報を外部サーバーに預けます。設定代行だけを頼んでも、動かすPCは自分で用意が必要です。モルコは<strong>設定済みのミニPCが箱で届き、あなたの自宅で動く。届いたその日から使えて、情報は外に出ません。</strong></p>
-            <div class="pricing-visual">
-              <img src="morukoimage/minipc.webp" alt="モルコとミニPC" loading="lazy" />
-              <span class="pricing-visual-note">設定済みでお届け</span>
-            </div>
-          </div>
-          <div class="plan-card reveal">
-            <span class="plan-badge">正式サービス開始</span>
-            <h3>買い切りプラン</h3>
-            <div class="plan-price"><span class="yen">¥</span>240,000<span class="tax">（税込・買い切り・銀行振込）</span></div>
-            <p class="plan-sub">カード決済は ¥250,000（税込）<br />PC本体・初期設定・カスタマイズすべて込み<br />＋ 月々のAI利用料 約¥3,000（他社サブスク／下記参照）</p>
-            <ul class="plan-features">
-              <li>ミニPC本体 お買い上げ</li>
-              <li>モバイルモニター付属</li>
-              <li>キーボード付属</li>
-              <li>マウス付属</li>
-              <li>初期設定・カスタマイズ込み</li>
-              <li>Telegram 使い方レクチャー</li>
-              <li>専用相談Bot 利用権</li>
-            </ul>
-            <a class="btn btn-primary btn-block" href="apply.html">このプランを申し込む</a>
-            <p class="plan-pay">お支払い：銀行振込 ¥240,000／カード決済（Stripe）¥250,000（いずれも税込）</p>
-            <a class="plan-consult" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">迷ったら、まずLINEで無料相談 →</a>
-          </div>
+        <div class="sec-head">
+          <p class="label rv">正直に</p>
+          <h2 class="rv">弱点も、先にお伝えします。</h2>
         </div>
-        <div class="compare reveal">
-          <h3 class="compare-title">AIを仕事に取り入れる、3つの選び方</h3>
-          <div class="compare-grid">
-            <div class="compare-col">
-              <span class="compare-tag">クラウド型のAI秘書</span>
-              <p>毎月払い続ける。情報は外部サーバーに預ける。</p>
-            </div>
-            <div class="compare-col">
-              <span class="compare-tag">導入コンサル・伴走支援</span>
-              <p>数十万〜百万円。数ヶ月の役務で、手元には何も残らない。</p>
-            </div>
-            <div class="compare-col compare-col--moruko">
-              <span class="compare-tag">モルコ</span>
-              <p><strong>完成品を買い切り¥240,000〜。</strong>自宅のミニPCで動き、データは手元に残る。届いたその日から。</p>
-            </div>
-          </div>
-        </div>
-        <div class="pricing-notes reveal">
-          <p>※別途 AI サブスクリプション「<strong>Claude Pro 以上のプラン</strong>」（Pro・Max いずれも可／月額約¥3,000〜）へのご加入が必要です。お申し込み・設定はこちらでご案内します。</p>
-          <p>※2回目以降の個別サポートは有償（1時間¥3,000／月額¥10,000・月2時間まで、いずれも税込）、独自機能の追加開発は1機能¥10,000（税込）です。条件の詳細は<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>をご確認ください。</p>
-        </div>
-        <div class="assure reveal">
-          <h3 class="assure-title">¥240,000の不安に、正直に答えます</h3>
-          <div class="assure-grid">
-            <div class="assure-item">
-              <h4>すでに複数業種で毎日稼働中</h4>
-              <p>民泊・学習塾・占い/EC運営など、実際のユーザーの現場で毎日働いています。上の「使ってみると、こうなった」は全部実話です。</p>
-            </div>
-            <div class="assure-item">
-              <h4>使えるようになるまで伴走</h4>
-              <p>届いて終わりではなく、1対1の使い方レクチャー付き。その後も専用相談Botで困りごとに答えます（個別の追加サポートは1時間¥3,000〜、開発は有償）。</p>
-            </div>
-            <div class="assure-item">
-              <h4>不調は自動で立て直す</h4>
-              <p>モルコには見守り係が同居していて、不調を検知したら自動で復旧を試み、状況をお知らせします。直らないときは遠隔サポートで対応します。</p>
-            </div>
-            <div class="assure-item">
-              <h4>条件はすべて明文化</h4>
-              <p>料金・返金・サポート・データの扱いは<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>に、返品・キャンセル条件とお支払い方法は<a href="legal.html">特定商取引法に基づく表記</a>に記載しています。不明点は購入前にLINEでご確認ください。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- サポート -->
-    <section class="support" id="support">
-      <div class="shell">
-        <p class="eyebrow reveal">SUPPORT / サポート</p>
-        <h2 class="reveal">「使えなかったらどうしよう」を<br />全部解決します。</h2>
-        <div class="support-grid">
-          <article class="support-card reveal">
-            <span class="support-num">1</span>
-            <h3>届いてすぐ使える</h3>
-            <p>PC設定・モルコのインストール・初期チューニングはすべて完了済みでお届け。難しい作業は一切ありません。</p>
-          </article>
-          <article class="support-card reveal">
-            <span class="support-num">2</span>
-            <h3>マンツーマンで使い方レクチャー</h3>
-            <p>「Telegramってどう使うの？」という方でも安心。セットアップからモルコとの話し方まで、1対1でサポートします。</p>
-          </article>
-          <article class="support-card reveal">
-            <span class="support-num">3</span>
-            <h3>プライバシーは完全に守ります</h3>
-            <p>モルコはクラウドではなく、あなたの自宅のPCで動きます。情報が外部サーバーに送られる心配がありません。解約返却時はデータを即時完全消去。</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 弱点と対策 -->
-    <section class="honest" id="honest">
-      <div class="shell">
-        <p class="eyebrow reveal">HONEST / 正直に</p>
-        <h2 class="reveal">弱点も、先にお伝えします。</h2>
-        <div class="honest-list">
-          <div class="honest-row reveal">
+        <div class="honest-list rv-grid">
+          <div class="honest-row">
             <div class="honest-weak"><span>弱点</span>返事はチャットアプリより遅い</div>
             <div class="honest-fix"><span>理由と使い方</span>ファイルを読み込んでから丁寧に仕事をするためです。さっと調べ物はいつものAIアプリ、まとまった仕事はモルコ、という使い分けがおすすめです。</div>
           </div>
-          <div class="honest-row reveal">
+          <div class="honest-row">
             <div class="honest-weak"><span>弱点</span>音声での会話はできない</div>
             <div class="honest-fix"><span>理由と使い方</span>指示は文字・写真・スクショで送ります。そのぶん通信量が少なく、電波の弱い場所でも仕事が止まりません。</div>
           </div>
-          <div class="honest-row reveal">
+          <div class="honest-row">
             <div class="honest-weak"><span>弱点</span>止まったとき、自分で直す場面がある</div>
-            <div class="honest-fix"><span>対策</span>見守り係（keeper）でボタン1つの遠隔再起動、24時間応答するサポートBot、ユーザー同士で教え合えるコミュニティ。直し方まで、ひとりで抱えなくていい仕組みを用意しています。</div>
+            <div class="honest-fix"><span>対策</span>スマホのボタン1つで再起動できる「見守り係」、24時間いつでも答える相談窓口、ユーザー同士で教え合える交流の場。ひとりで抱え込まなくていい仕組みを用意しています。</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 導入の流れ -->
-    <section class="howto" id="howto">
+    <!-- ===== SUPPORT ===== -->
+    <section class="sec" id="support">
       <div class="shell">
-        <p class="eyebrow reveal">FLOW / 導入の流れ</p>
-        <h2 class="reveal">お申し込みから使い始めるまで、<br />4ステップ。</h2>
-        <ol class="howto-steps">
-          <li class="reveal">
-            <span class="howto-num">STEP 1</span>
-            <h3>申し込み・お支払い</h3>
-            <p>「申し込む」ボタンからフォームに入力。カード払いならその場で決済、銀行振込なら振込先を案内メールでお送りします。入金を確認したら、担当者からご連絡します。</p>
+        <div class="sec-head">
+          <p class="label rv">サポート</p>
+          <h2 class="rv">「使えなかったらどうしよう」を<br />全部解決します。</h2>
+        </div>
+        <div class="support-banner rv-img"><img src="morukoimage/support_scene.webp" alt="設定済みのミニPC一式が箱で届くイメージ" loading="lazy" width="1400" height="700" /></div>
+        <div class="support-grid rv-grid">
+          <article class="support-card">
+            <span class="ic"><svg><use href="#i-box"/></svg></span>
+            <h3>届いてすぐ使える</h3>
+            <p>パソコンの設定も、モルコの準備も、すべて済ませてお届けします。難しい作業は一切ありません。</p>
+          </article>
+          <article class="support-card">
+            <span class="ic"><svg><use href="#i-people"/></svg></span>
+            <h3>マンツーマンで使い方レクチャー</h3>
+            <p>「チャットアプリって何？」という方でも安心。使い始めの準備から、モルコへの頼み方まで、1対1でお教えします。</p>
+          </article>
+          <article class="support-card">
+            <span class="ic"><svg><use href="#i-lock"/></svg></span>
+            <h3>プライバシーは完全に守ります</h3>
+            <p>モルコはネット上のどこかではなく、あなたの自宅のパソコンで動きます。作ったファイルやデータは、そのパソコンに保存されます。ご返却時はデータをすぐに完全消去します。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FLOW ===== -->
+    <section class="sec sec--sand" id="howto">
+      <div class="shell">
+        <div class="sec-head">
+          <p class="label rv">導入の流れ</p>
+          <h2 class="rv">お申し込みから使い始めるまで、<br />4ステップ。</h2>
+        </div>
+        <ol class="flow" id="flow">
+          <div class="flow-line" id="flowLine"><i></i></div>
+          <li>
+            <span class="flow-num">1</span>
+            <div><span class="flow-step">STEP 1</span><h3>申し込み・お支払い</h3><p>「申し込む」ボタンからフォームに入力。カード払いならその場で決済、銀行振込なら振込先を案内メールでお送りします。入金を確認したら、担当者からご連絡します。</p></div>
           </li>
-          <li class="reveal">
-            <span class="howto-num">STEP 2</span>
-            <h3>準備はスマホにアプリ1つだけ</h3>
-            <p>事前にお願いするのは、スマホにTelegramアプリを入れておくことだけ。専用GmailやAIサブスクの設定は、初回打ち合わせでこちらが画面を見ながら一緒に進めます。</p>
+          <li>
+            <span class="flow-num">2</span>
+            <div><span class="flow-step">STEP 2</span><h3>準備はスマホにアプリ1つだけ</h3><p>事前にお願いするのは、スマホにチャットアプリ「Telegram」を入れておくことだけ。メールアドレスの作成やAIの申し込みは、初回打ち合わせで画面を見ながら一緒に進めます。</p></div>
           </li>
-          <li class="reveal">
-            <span class="howto-num">STEP 3</span>
-            <h3>初回打ち合わせ（一緒に設定）</h3>
-            <p>オンラインまたは対面で30〜60分。Gmail作成・Google連携・Telegram設定・AIサブスク加入まで、すべて一緒に進めるので迷いません。入金確認後、7営業日以内に発送します。</p>
+          <li>
+            <span class="flow-num">3</span>
+            <div><span class="flow-step">STEP 3</span><h3>初回打ち合わせ（一緒に設定）</h3><p>オンラインまたは対面で30〜60分。メールアドレスの作成、アプリの設定、AIの申し込みまで、すべて一緒に進めるので迷いません。入金確認後、7営業日以内に発送します。</p></div>
           </li>
-          <li class="reveal">
-            <span class="howto-num">STEP 4</span>
-            <h3>お届け・スタート</h3>
-            <p>設定済みのモルコをお届け。コンセントを挿してネットに繋げば、すぐ使えます。</p>
+          <li>
+            <span class="flow-num">4</span>
+            <div><span class="flow-step">STEP 4</span><h3>お届け・スタート</h3><p>設定済みのモルコをお届け。コンセントを挿してネットに繋げば、すぐ使えます。</p></div>
           </li>
         </ol>
-        <div class="howto-prep reveal">
+        <div class="flow-prep rv">
           <h3>使うために必要なもの（難しい設定は一緒にやります）</h3>
           <ul>
-            <li><strong>Telegramアプリ</strong> — 事前にスマホへインストールをお願いします。アカウント作成も打ち合わせで一緒にできます。</li>
-            <li><strong>Gmail専用アカウント</strong> — モルコがメール・カレンダーを操作するための専用アカウント。初回打ち合わせで一緒に作成します。</li>
-            <li><strong>AIサブスク（Claude Pro 以上／月額約¥3,000〜）</strong> — 加入手順はこちらでご案内し、設定まで一緒に行います。</li>
+            <li><b>Telegramアプリ</b> — 事前にスマホへインストールをお願いします。アカウント作成も打ち合わせで一緒にできます。</li>
+            <li><b>Gmail専用アカウント</b> — モルコがメール・カレンダーを操作するための専用アカウント。初回打ち合わせで一緒に作成します。</li>
+            <li><b>AIの月額利用料（Claude Pro 以上／月額約¥3,000〜）</b> — 加入手順はこちらでご案内し、設定まで一緒に行います。</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- よくある質問 -->
-    <section class="faq" id="faq">
+    <!-- ===== PRICING ===== -->
+    <section class="sec" id="pricing">
       <div class="shell">
-        <p class="eyebrow reveal">FAQ / よくある質問</p>
-        <h2 class="reveal">申し込む前に、<br />よく聞かれること。</h2>
-        <div class="faq-list reveal">
-          <details class="faq-item">
-            <summary>料金はいくらですか？</summary>
-            <p>買い切りで、銀行振込なら¥240,000（税込）、カード決済なら¥250,000（税込）です。ミニPC本体・初期設定・カスタマイズ込みで、月額の顧問料はかかりません。独自機能の追加開発などは別途有償です。</p>
-          </details>
-          <details class="faq-item">
-            <summary>毎月かかる費用はありますか？</summary>
-            <p>AIサブスク「Claude Pro」以上のプラン（Pro・Max いずれも可／月額約¥3,000〜）へのご加入が別途必要です。お客様ご自身でのご契約になりますが、加入手順は初回打ち合わせで一緒に進めます。</p>
-          </details>
-          <details class="faq-item">
-            <summary>何が届きますか？</summary>
-            <p>設定済みのミニPC本体に、モバイルモニター・キーボード・マウスが付属します。Telegramの使い方レクチャーと、専用相談Botの利用権も含まれます。</p>
-          </details>
-          <details class="faq-item">
-            <summary>申し込みから使い始めるまでの流れは？</summary>
-            <p>お申し込み・お支払いのあと、オンラインの利用契約書 同意フォームへのご記入（担当者からご案内します）と、スマホへのTelegramアプリのインストールをお願いします。初回打ち合わせ（オンラインまたは対面で30〜60分）で専用Gmail・AIサブスクなどの設定を一緒に進め、入金確認後、7営業日以内に発送します。届いたらコンセントを挿してネットに繋ぐだけで使えます。</p>
-          </details>
-          <details class="faq-item">
-            <summary>支払い方法は？</summary>
-            <p>銀行振込（¥240,000）とカード決済（Stripe、¥250,000・税込）に対応しています。カードはお申し込みフォームからそのまま決済、銀行振込は振込先を確認メールでお知らせします。<a href="apply.html">お申し込みはこちら</a></p>
-          </details>
-          <details class="faq-item">
-            <summary>パソコンに詳しくなくても使えますか？</summary>
-            <p>設定はすべて済ませてお届けし、1対1の使い方レクチャーも付いています。その後も専用相談Botで困りごとに答えます（個別の追加サポートは1時間¥3,000〜、開発は有償）。不調は見守り係が自動で復旧を試み、直らないときは遠隔サポートで対応します。</p>
-          </details>
-          <details class="faq-item">
-            <summary>情報が外に漏れる心配は？</summary>
-            <p>モルコはクラウドではなく、あなたの自宅のミニPCで動き、データもそのミニPCに保存されます。ただし、AIへの指示内容と生成結果は、AIの提供元（Anthropic）のサーバーを経由します（利用契約書 第5条）。</p>
-          </details>
-          <details class="faq-item">
-            <summary>返品やキャンセルはできますか？</summary>
-            <p>初期設定済みのミニPCという商品の性質上、お申し込み後の解約・返金は原則お受けできません。ただし、納品後7日以内に動作不良が認められた場合は、当方の責任で修理・交換します。条件は<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>と<a href="legal.html">特定商取引法に基づく表記</a>に記載しています。不安な点は、申し込む前にLINEでご相談ください。</p>
-          </details>
+        <div class="sec-head">
+          <p class="label rv">料金</p>
+          <h2 class="rv">「秘書を雇うほどじゃないけど、<br />自動化したい」を叶える価格で。</h2>
+        </div>
+        <div class="price-grid">
+          <div class="price-story rv">
+            <p>人を雇えば月30〜50万円。AI導入の専門家に手伝ってもらうと、数十万〜百万円かかることも珍しくありません。モルコは<strong>完成品をお届けして買い切り。月額の顧問料もかかりません。</strong></p>
+            <p>ネットで契約するAI秘書サービスは、毎月払い続ける上に、データを他社に預けることになります。設定だけを頼んでも、動かすパソコンは自分で用意しなければいけません。モルコは<strong>設定済みのパソコンが箱で届き、あなたの自宅で動きます。届いたその日から使えて、データは手元に残ります。</strong></p>
+            <div class="box-visual" id="boxVisual" aria-label="お届けするもの：ミニPC、モバイルモニター、キーボード、マウス">
+              <svg viewBox="0 0 320 170">
+                <rect class="d" x="24" y="30" width="150" height="92" rx="6" />
+                <rect class="d" x="36" y="40" width="126" height="72" rx="2" />
+                <path class="d" d="M80 134 H118" />
+                <path class="d" d="M99 122 V134" />
+                <rect class="d acc" x="196" y="86" width="96" height="30" rx="8" />
+                <circle class="d acc" cx="208" cy="101" r="3" />
+                <path class="d" d="M196 68 H292" />
+                <rect class="d" x="30" y="140" width="150" height="20" rx="4" />
+                <path class="d" d="M44 150 H166" />
+                <rect class="d" x="214" y="128" width="30" height="40" rx="14" />
+                <path class="d" d="M229 128 V142" />
+                <path class="d acc" d="M258 148 h30 M258 156 h20" />
+              </svg>
+              <p>設定済みでお届け：ミニPC・モバイルモニター・キーボード・マウス</p>
+            </div>
+          </div>
+          <div class="plan rv">
+            <span class="plan-badge">正式サービス開始</span>
+            <h3>買い切りプラン</h3>
+            <div class="plan-price">
+              <span class="yen">¥</span><span class="amt" data-count="240000">240,000</span>
+              <span class="tax">（税込・買い切り・銀行振込）</span>
+            </div>
+            <p class="plan-alt">カード決済は <b>¥250,000</b>（税込）</p>
+            <p class="plan-sub">PC本体・初期設定・カスタマイズすべて込み<br />＋ 月々のAI利用料 約<span class="num">¥3,000</span>（Claude Pro／下記参照）</p>
+            <ul>
+              <li><svg><use href="#i-check"/></svg>ミニPC本体 お買い上げ</li>
+              <li><svg><use href="#i-check"/></svg>モバイルモニター付属</li>
+              <li><svg><use href="#i-check"/></svg>キーボード付属</li>
+              <li><svg><use href="#i-check"/></svg>マウス付属</li>
+              <li><svg><use href="#i-check"/></svg>初期設定・カスタマイズ込み</li>
+              <li><svg><use href="#i-check"/></svg>1対1の使い方レクチャー</li>
+              <li><svg><use href="#i-check"/></svg>24時間の相談窓口</li>
+            </ul>
+            <a class="btn btn-primary btn-block" href="apply.html">このプランを申し込む</a>
+            <p class="plan-pay">お支払い：銀行振込 ¥240,000／カード決済 ¥250,000（いずれも税込）<br />入金確認後、<span class="num">7</span>営業日以内に発送</p>
+            <a class="plan-consult" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">迷ったら、まずLINEで無料相談</a>
+          </div>
+        </div>
+
+        <div class="compare rv">
+          <h3>AIを仕事に取り入れる、3つの選び方</h3>
+          <div class="compare-grid">
+            <div class="compare-col"><span>ネットのAI秘書サービス</span><p>毎月払い続ける。データは他社に預ける。</p></div>
+            <div class="compare-col"><span>AI導入の専門家に依頼</span><p>数十万〜百万円。数ヶ月の手伝いが終わると、手元には何も残らない。</p></div>
+            <div class="compare-col compare-col--moruko"><span>モルコ</span><p><strong>完成品を買い切り¥240,000〜。</strong>自宅のミニPCで動き、データは手元に残る。届いたその日から。</p></div>
+          </div>
+        </div>
+        <div class="price-notes rv">
+          <p>※別途 AI サブスクリプション「<strong>Claude Pro 以上のプラン</strong>」（Pro・Max いずれも可／月額約¥3,000〜）へのご加入が必要です。お申し込み・設定はこちらでご案内します。</p>
+          <p>※2回目以降の個別サポートは有償（1時間¥3,000／月額¥10,000・月2時間まで、いずれも税込）、独自機能の追加開発は1機能¥10,000（税込）です。条件の詳細は<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>をご確認ください。</p>
+        </div>
+        <div class="assure rv">
+          <h3>¥240,000の不安に、正直に答えます</h3>
+          <div class="assure-grid">
+            <div class="assure-item"><h4>すでに複数業種で毎日稼働中</h4><p>民泊・学習塾・占い/EC運営など、実際のユーザーの現場で毎日働いています。上の「使ってみると、こうなった」は全部実話です。</p></div>
+            <div class="assure-item"><h4>使えるようになるまで付き添います</h4><p>届いて終わりではなく、1対1の使い方レクチャー付き。その後も24時間の相談窓口で困りごとに答えます（個別の追加サポートは1時間¥3,000〜、開発は有償）。</p></div>
+            <div class="assure-item"><h4>不調は自動で立て直す</h4><p>モルコには見守り係が同居していて、不調を検知したら自動で復旧を試み、状況をお知らせします。直らないときは遠隔サポートで対応します。</p></div>
+            <div class="assure-item"><h4>条件はすべて明文化</h4><p>料金・返金・サポート・データの扱いは<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>に、返品・キャンセル条件とお支払い方法は<a href="legal.html">特定商取引法に基づく表記</a>に記載しています。不明点は購入前にLINEでご確認ください。</p></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- コミュニティ -->
-    <section class="community" id="community">
-      <div class="shell community-card reveal">
-        <div class="community-text">
-          <p class="eyebrow">COMMUNITY / サポートコミュニティ</p>
-          <h2>morukoコミュニティで、<br />使い方を一緒に育てよう。</h2>
-          <p class="lead">モルコユーザー限定のサポートコミュニティ。使い方のシェア・自動化のアイデア・困ったときの相談まで、同じ環境で使っている仲間がいます。</p>
-          <a class="btn btn-ghost" href="https://morucommunity.groundmole.space" target="_blank" rel="noopener">コミュニティを見る</a>
+    <!-- ===== FAQ ===== -->
+    <section class="sec sec--sand" id="faq">
+      <div class="shell">
+        <div class="sec-head">
+          <p class="label rv">よくある質問</p>
+          <h2 class="rv">申し込む前に、<br />よく聞かれること。</h2>
         </div>
-        <div class="community-visual">
-          <img src="morukoimage/char.webp" alt="モルコキャラクター" loading="lazy" />
-        </div>
-      </div>
-    </section>
-
-    <!-- 最終CTA -->
-    <section class="cta" id="contact">
-      <div class="shell cta-shell">
-        <p class="eyebrow reveal">まずは無料相談から</p>
-        <p class="cta-pitch reveal">シンギュラリティは、もう来ました。<br />AIが仕事を引き受けてくれる時代です。</p>
-        <h2 class="reveal">あなたの相棒として、<br />AIを雇ってみませんか。</h2>
-        <p class="cta-sign reveal">— モルコを作った 北 祐介</p>
-        <p class="lead reveal">まずは30分。今いちばん時間のかかっている仕事を教えてください。そこから、モルコがどこまで役に立てるか一緒に考えます。</p>
-        <div class="cta-row reveal">
-          <a class="btn btn-primary" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINEで無料相談する</a>
-          <a class="btn btn-ghost" href="apply.html">申し込む</a>
+        <div class="faq-list rv">
+          <details class="faq-item"><summary>料金はいくらですか？</summary><div class="faq-body"><p>買い切りで、銀行振込なら¥240,000（税込）、カード決済なら¥250,000（税込）です。ミニPC本体・初期設定・カスタマイズ込みで、月額の顧問料はかかりません。独自機能の追加開発などは別途有償です。</p></div></details>
+          <details class="faq-item"><summary>毎月かかる費用はありますか？</summary><div class="faq-body"><p>AIの月額プラン「Claude Pro」以上（Pro・Max いずれも可／月額約¥3,000〜）へのご加入が別途必要です。お客様ご自身でのご契約になりますが、加入手順は初回打ち合わせで一緒に進めます。</p></div></details>
+          <details class="faq-item"><summary>何が届きますか？</summary><div class="faq-body"><p>設定済みのミニPC本体に、モバイルモニター・キーボード・マウスが付属します。1対1の使い方レクチャーと、24時間の相談窓口も含まれます。</p></div></details>
+          <details class="faq-item"><summary>申し込みから使い始めるまでの流れは？</summary><div class="faq-body"><p>お申し込み・お支払いのあと、オンラインの利用契約書 同意フォームへのご記入（担当者からご案内します）と、スマホへのチャットアプリ「Telegram」のインストールをお願いします。初回打ち合わせ（オンラインまたは対面で30〜60分）でメールアドレスやAIの申し込みなどを一緒に進め、入金確認後、7営業日以内に発送します。届いたらコンセントを挿してネットに繋ぐだけで使えます。</p></div></details>
+          <details class="faq-item"><summary>支払い方法は？</summary><div class="faq-body"><p>銀行振込（¥240,000）とカード決済（¥250,000・税込）に対応しています。カードはお申し込みフォームからそのまま決済、銀行振込は振込先を確認メールでお知らせします。<a href="apply.html">お申し込みはこちら</a></p></div></details>
+          <details class="faq-item"><summary>パソコンに詳しくなくても使えますか？</summary><div class="faq-body"><p>設定はすべて済ませてお届けし、1対1の使い方レクチャーも付いています。その後も24時間の相談窓口で困りごとに答えます（個別の追加サポートは1時間¥3,000〜、開発は有償）。不調は見守り係が自動で復旧を試み、直らないときは遠隔サポートで対応します。</p></div></details>
+          <details class="faq-item"><summary>情報が外に漏れる心配は？</summary><div class="faq-body"><p>モルコはネット上のどこかではなく、あなたの自宅のパソコンで動き、データもそのパソコンに保存されます。ただし、AIに頼んだ内容とその返事は、AIを提供している会社（Anthropic社）のサーバーを経由します（利用契約書 第5条）。</p></div></details>
+          <details class="faq-item"><summary>返品やキャンセルはできますか？</summary><div class="faq-body"><p>初期設定済みのミニPCという商品の性質上、お申し込み後の解約・返金は原則お受けできません。ただし、納品後7日以内に動作不良が認められた場合は、当方の責任で修理・交換します。条件は<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>と<a href="legal.html">特定商取引法に基づく表記</a>に記載しています。不安な点は、申し込む前にLINEでご相談ください。</p></div></details>
         </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <div class="shell footer-inner">
-        <div class="footer-brand">
-          <img src="morukoimage/logo_wide.webp" alt="moruko" />
-          <p>あなたの毎日に、専属AI秘書を。</p>
+    <!-- ===== COMMUNITY ===== -->
+    <section class="sec" id="community">
+      <div class="shell">
+        <div class="community-card rv">
+          <div>
+            <p class="label">サポートコミュニティ</p>
+            <h2>morukoコミュニティで、<br />使い方を一緒に育てよう。</h2>
+            <p class="lead">モルコユーザー限定のサポートコミュニティ。使い方のシェア・自動化のアイデア・困ったときの相談まで、同じ環境で使っている仲間がいます。</p>
+            <a class="btn btn-line" href="https://morucommunity.groundmole.space" target="_blank" rel="noopener">コミュニティを見る</a>
+          </div>
+          <div class="community-visual" id="communityMoruko">
+            <img src="morukoimage/moruko_open.webp" alt="モルコ" loading="lazy" width="560" height="637" />
+          </div>
         </div>
-        <nav class="footer-links">
+      </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="final" id="contact">
+      <div class="shell final-inner">
+        <p class="label rv">まずは無料相談から</p>
+        <p class="pitch rv">AIが仕事を引き受けてくれる時代は、<br />もう来ています。</p>
+        <h2 class="rv">あなたの相棒として、<br />AIを雇ってみませんか。</h2>
+        <p class="sign rv">— モルコを作った 北 祐介</p>
+        <p class="lead rv">まずは30分。今いちばん時間のかかっている仕事を教えてください。そこから、モルコがどこまで役に立てるか一緒に考えます。</p>
+        <div class="cta-pair rv">
+          <a class="btn btn-primary" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener"><svg><use href="#i-line"/></svg>LINEで無料相談する</a>
+          <a class="btn btn-line" href="apply.html">申し込む</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="shell footer-inner">
+      <div class="footer-brand">
+        <img src="morukoimage/logo_wide.webp" alt="moruko" width="480" height="179" />
+        <p>あなたの毎日に、専属AI秘書を。</p>
+      </div>
+      <div>
+        <div class="footer-ctas">
+          <a class="btn btn-primary" href="apply.html">申し込む</a>
+          <a class="btn btn-line" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINEで無料相談</a>
+        </div>
+        <nav class="footer-links" style="margin-top:18px" aria-label="フッター">
           <a href="legal.html">特定商取引法に基づく表記</a>
           <a href="legal.html#privacy">プライバシーポリシー</a>
-          <a href="apply.html">お申し込み</a>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1LY01G24LIM4mA3z4XuhbX2RuA8BW28mHcDHicjmD-ONxfg/viewform" target="_blank" rel="noopener">お問い合わせ</a>
         </nav>
       </div>
-      <p class="footer-bottom">© 2026 moruko. All rights reserved.</p>
-    </footer>
-
-    <!-- モバイル固定バー -->
-    <div class="mobile-cta" role="navigation" aria-label="お申し込み・ご相談">
-      <a class="mobile-cta__btn mobile-cta__btn--apply" href="apply.html">申し込む</a>
-      <a class="mobile-cta__btn mobile-cta__btn--line" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINEで無料相談</a>
     </div>
-  </main>
+    <p class="shell footer-bottom">© 2026 moruko. All rights reserved.</p>
+  </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const els = document.querySelectorAll('.reveal');
-      if (reduce || !('IntersectionObserver' in window)) {
-        els.forEach(e => e.classList.add('is-in'));
-        return;
-      }
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-in');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      els.forEach(e => io.observe(e));
-    });
-  </script>
+  <div class="mbar" id="mbar" role="navigation" aria-label="お申し込み・ご相談">
+    <a class="btn btn-primary" href="apply.html">申し込む</a>
+    <a class="btn btn-line" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINEで無料相談</a>
+  </div>
 </body>
 </html>

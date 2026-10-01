@@ -1,117 +1,90 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>特定商取引法に基づく表記 | モルコ(moruko)</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .legal-page { padding: 160px 0 80px; }
-        .legal-title { font-size: 2rem; font-weight: 800; margin-bottom: 2rem; }
-        .legal-table { width: 100%; border-collapse: collapse; margin-bottom: 3rem; }
-        .legal-table th, .legal-table td { border: 1px solid #E5E5E5; padding: 1rem 1.25rem; text-align: left; font-size: 0.95rem; line-height: 1.7; }
-        .legal-table th { background: #FAFAFB; width: 30%; font-weight: 700; color: #555; white-space: nowrap; }
-        .legal-table td { color: var(--text-main); }
-        .legal-section-title { font-size: 1.5rem; font-weight: 800; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); }
-        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-weight: 600; margin-bottom: 2rem; }
-        .back-link:hover { text-decoration: underline; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>特定商取引法に基づく表記 | モルコ(moruko)</title>
+  <meta name="theme-color" content="#fbf9f6" />
+  <link rel="icon" type="image/webp" href="morukoimage/favicon.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style-v4.css?v=1001d" />
 </head>
 <body>
-    <nav class="navbar nav-scrolled" id="navbar">
-        <div class="container nav-container">
-            <div class="logo">
-                <a href="index.html"><img src="morukoimage/moruko_logo_wide.png" alt="Moruko"></a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="legal-page">
-        <div class="container" style="max-width: 900px;">
-            <a href="index.html" class="back-link">← トップページに戻る</a>
-
-            <!-- 特定商取引法 -->
-            <h1 class="legal-title">特定商取引法に基づく表記</h1>
-            <table class="legal-table">
-                <tr><th>販売業者</th><td>北祐介（個人事業主）</td></tr>
-                <tr><th>代表者</th><td>北 祐介</td></tr>
-                <tr><th>所在地</th><td>※お申し込み後、請求に応じて開示いたします。</td></tr>
-                <tr><th>電話番号</th><td>※お申し込み後、請求に応じて開示いたします。</td></tr>
-                <tr><th>メールアドレス</th><td>contact@milailab.teen.jp</td></tr>
-                <tr><th>販売価格</th><td>
-                    買い切りプラン（銀行振込）：240,000円（税込）<br>
-                    買い切りプラン（クレジットカード決済）：250,000円（税込）<br>
-                    ※ミニPC本体・モバイルモニター・キーボード・マウス・初期設定・カスタマイズ・使い方レクチャー込み<br>
-                    ※独自機能の追加開発・2回目以降の個別サポートは別途有償です（1時間3,000円／月額10,000円・月2時間まで、独自機能開発は1機能10,000円、いずれも税込）（<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a> 第8条・別紙2）。
-                </td></tr>
-                <tr><th>販売価格以外の費用</th><td>別途、Claude（Anthropic社）のサブスクリプション費用（Claude Pro 以上のプラン、月額約3,000円〜）が必要です。<br>インターネット接続にかかる費用はお客様のご負担です。<br>送料は当方が負担します。ただし、お客様のご都合による再配送・返送の費用はお客様のご負担となります。</td></tr>
-                <tr><th>支払方法</th><td>銀行振込：240,000円（税込・割引なし）。お申し込み後、確認メールで振込先をご案内します。<br>クレジットカード（Stripe）：250,000円（税込・割引なし）</td></tr>
-                <tr><th>支払時期</th><td>クレジットカード：お申し込み時に決済されます。<br>銀行振込：お申し込み後、ご案内するお振込期日までにお支払いください。</td></tr>
-                <tr><th>商品の引渡し時期</th><td>入金確認後（クレジットカードの場合は決済完了後）、7営業日以内に発送いたします。</td></tr>
-                <tr><th>返品・キャンセルについて</th><td>
-                    商品の性質上、初期設定済みのミニPCのため、お申し込み後の解約・返金は原則お受けできません。<br>
-                    ただし、納品後7日以内に動作不良が認められた場合は、当方の責任で修理・交換いたします。<br>
-                    旧サブスクプランをご契約中の方は、途中解約時にミニPCをご返却ください。返却確認後、翌月以降の請求を停止します。<br>
-                    なお、返却されたPCのデータは即時・完全消去されます。
-                </td></tr>
-                <tr><th>契約条件</th><td>お申し込み後、オンラインの<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">moruko 利用契約書</a>への同意をお願いしています。</td></tr>
-                <tr><th>動作環境</th><td>Telegramアプリ（iOS / Android）、インターネット接続環境、Googleアカウント（専用）</td></tr>
-            </table>
-
-            <!-- プライバシーポリシー -->
-            <h2 class="legal-section-title" id="privacy">プライバシーポリシー</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.8;">
-                北祐介（以下「当方」）は、Moruko（モルコ）サービス（以下「本サービス」）において取得するお客様の個人情報の取り扱いについて、以下のとおり定めます。
-            </p>
-
-            <h3 class="legal-section-title" style="font-size:1.2rem;">1. 取得する情報</h3>
-            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom:1.5rem;">
-                本サービスのご利用にあたり、以下の情報を取得する場合があります。<br>
-                ・氏名・住所・電話番号・メールアドレス（お申し込み時）<br>
-                ・Telegramアカウント情報（サービス連携時）<br>
-                ・Google Workspace のデータ（Gmail、カレンダー等。お客様が専用アカウントを提供した場合のみ）
-            </p>
-
-            <h3 class="legal-section-title" style="font-size:1.2rem;">2. 利用目的</h3>
-            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom:1.5rem;">
-                取得した情報は、以下の目的にのみ使用します。<br>
-                ・本サービスの提供・運営<br>
-                ・お問い合わせへの対応<br>
-                ・サービスに関するご連絡
-            </p>
-            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom:1.5rem;">
-                クレジットカードでのお支払いは、決済代行サービス Stripe（Stripe, Inc.）の決済ページで行われます。カード情報は Stripe が管理し、当方がカード番号等を取得・保存することはありません。
-            </p>
-
-            <h3 class="legal-section-title" style="font-size:1.2rem;">3. 第三者提供</h3>
-            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom:1.5rem;">
-                法令に基づく場合を除き、お客様の事前の同意なく第三者に個人情報を提供することはありません。
-            </p>
-
-            <h3 class="legal-section-title" style="font-size:1.2rem;">4. データの安全管理</h3>
-            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom:1.5rem;">
-                取得した個人情報は、適切な安全管理措置を講じて厳重に管理します。サービス解約・PC返却時には、お客様のデータをミニPC上から完全消去します。
-            </p>
-
-            <h3 class="legal-section-title" style="font-size:1.2rem;">5. お問い合わせ</h3>
-            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom:3rem;">
-                個人情報の開示・訂正・削除等のご要望は、以下までご連絡ください。<br>
-                メール：contact@milailab.teen.jp
-            </p>
-
-            <p style="color: var(--text-muted); font-size:0.875rem;">制定日：2026年6月</p>
-        </div>
+  <header class="nav is-scrolled">
+    <div class="shell nav-inner">
+      <a class="nav-brand" href="index.html"><img src="morukoimage/logo_wide.webp" alt="moruko" width="480" height="179" /></a>
+      <nav class="nav-links" aria-label="ページ内"><a href="index.html">トップページに戻る</a></nav>
     </div>
+  </header>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                &copy; 2026 Moruko AI Project. All rights reserved.
-            </div>
-        </div>
-    </footer>
+  <main class="page">
+    <div class="shell legal">
+      <p class="label">法的表記</p>
+      <h1>特定商取引法に基づく表記</h1>
+      <table>
+        <tr><th>販売業者</th><td>北祐介（個人事業主）</td></tr>
+        <tr><th>代表者</th><td>北 祐介</td></tr>
+        <tr><th>所在地</th><td>※お申し込み後、請求に応じて開示いたします。</td></tr>
+        <tr><th>電話番号</th><td>※お申し込み後、請求に応じて開示いたします。</td></tr>
+        <tr><th>メールアドレス</th><td>contact@milailab.teen.jp</td></tr>
+        <tr><th>販売価格</th><td>
+          買い切りプラン（銀行振込）：240,000円（税込）<br />
+          買い切りプラン（クレジットカード決済）：250,000円（税込）<br />
+          ※ミニPC本体・モバイルモニター・キーボード・マウス・初期設定・カスタマイズ・使い方レクチャー込み<br />
+          ※独自機能の追加開発・2回目以降の個別サポートは別途有償です（1時間3,000円／月額10,000円・月2時間まで、独自機能開発は1機能10,000円、いずれも税込）（<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a> 第8条・別紙2）。
+        </td></tr>
+        <tr><th>販売価格以外の費用</th><td>別途、Claude（Anthropic社）のサブスクリプション費用（Claude Pro 以上のプラン、月額約3,000円〜）が必要です。<br />インターネット接続にかかる費用はお客様のご負担です。<br />送料は当方が負担します。ただし、お客様のご都合による再配送・返送の費用はお客様のご負担となります。</td></tr>
+        <tr><th>支払方法</th><td>銀行振込：240,000円（税込・割引なし）。お申し込み後、確認メールで振込先をご案内します。<br />クレジットカード（Stripe）：250,000円（税込・割引なし）</td></tr>
+        <tr><th>支払時期</th><td>クレジットカード：お申し込み時に決済されます。<br />銀行振込：お申し込み後、ご案内するお振込期日までにお支払いください。</td></tr>
+        <tr><th>商品の引渡し時期</th><td>入金確認後（クレジットカードの場合は決済完了後）、7営業日以内に発送いたします。</td></tr>
+        <tr><th>返品・キャンセルについて</th><td>
+          商品の性質上、初期設定済みのミニPCのため、お申し込み後の解約・返金は原則お受けできません。<br />
+          ただし、納品後7日以内に動作不良が認められた場合は、当方の責任で修理・交換いたします。<br />
+          旧サブスクプランをご契約中の方は、途中解約時にミニPCをご返却ください。返却確認後、翌月以降の請求を停止します。<br />
+          なお、返却されたPCのデータは即時・完全消去されます。
+        </td></tr>
+        <tr><th>契約条件</th><td>お申し込み後、オンラインの<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">moruko 利用契約書</a>への同意をお願いしています。</td></tr>
+        <tr><th>動作環境</th><td>Telegramアプリ（iOS / Android）、インターネット接続環境、Googleアカウント（専用）</td></tr>
+      </table>
+
+      <h2 id="privacy">プライバシーポリシー</h2>
+      <p>北祐介（以下「当方」）は、Moruko（モルコ）サービス（以下「本サービス」）において取得するお客様の個人情報の取り扱いについて、以下のとおり定めます。</p>
+
+      <h3>1. 取得する情報</h3>
+      <p>本サービスのご利用にあたり、以下の情報を取得する場合があります。<br />・氏名・住所・電話番号・メールアドレス（お申し込み時）<br />・Telegramアカウント情報（サービス連携時）<br />・Google Workspace のデータ（Gmail、カレンダー等。お客様が専用アカウントを提供した場合のみ）</p>
+
+      <h3>2. 利用目的</h3>
+      <p>取得した情報は、以下の目的にのみ使用します。<br />・本サービスの提供・運営<br />・お問い合わせへの対応<br />・サービスに関するご連絡</p>
+      <p>クレジットカードでのお支払いは、決済代行サービス Stripe（Stripe, Inc.）の決済ページで行われます。カード情報は Stripe が管理し、当方がカード番号等を取得・保存することはありません。</p>
+
+      <h3>3. 第三者提供</h3>
+      <p>法令に基づく場合を除き、お客様の事前の同意なく第三者に個人情報を提供することはありません。</p>
+
+      <h3>4. データの安全管理</h3>
+      <p>取得した個人情報は、適切な安全管理措置を講じて厳重に管理します。サービス解約・PC返却時には、お客様のデータをミニPC上から完全消去します。</p>
+
+      <h3>5. お問い合わせ</h3>
+      <p>個人情報の開示・訂正・削除等のご要望は、以下までご連絡ください。<br />メール：contact@milailab.teen.jp</p>
+
+      <p style="font-size:.85rem;margin-top:40px;">制定日：2026年6月</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div class="footer-brand">
+        <img src="morukoimage/logo_wide.webp" alt="moruko" width="480" height="179" />
+        <p>あなたの毎日に、専属AI秘書を。</p>
+      </div>
+      <nav class="footer-links" aria-label="フッター">
+        <a href="index.html">トップページ</a>
+        <a href="apply.html">お申し込み</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1LY01G24LIM4mA3z4XuhbX2RuA8BW28mHcDHicjmD-ONxfg/viewform" target="_blank" rel="noopener">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="shell footer-bottom">© 2026 moruko. All rights reserved.</p>
+  </footer>
 </body>
 </html>

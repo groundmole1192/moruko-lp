@@ -7,31 +7,34 @@
   <meta name="description" content="モルコ 買い切りプランのお申し込みページ。銀行振込 ¥240,000（税込）、カード決済 ¥250,000（税込）。お支払いはクレジットカード（Stripe）または銀行振込。" />
   <meta name="theme-color" content="#fbf9f6" />
   <meta name="robots" content="noindex" />
-  <link rel="icon" type="image/webp" href="morukoimage/char.webp" />
+  <link rel="icon" type="image/webp" href="morukoimage/favicon.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style-v3.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style-v4.css?v=1001d" />
 </head>
 <body>
-  <header class="page-top">
-    <div class="page-top__inner">
-      <a class="page-top__brand" href="index.html"><img src="morukoimage/logo_wide.webp" alt="moruko" /></a>
-      <div class="page-top__links">
-        <a class="page-top__back" href="index.html#pricing">料金・プランに戻る</a>
-        <a class="sw-topcta" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINEで無料相談</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+  <header class="nav is-scrolled">
+    <div class="shell nav-inner">
+      <a class="nav-brand" href="index.html"><img src="morukoimage/logo_wide.webp" alt="moruko" width="480" height="179" /></a>
+      <nav class="nav-links" aria-label="ページ内"><a href="index.html#pricing">料金・プランに戻る</a></nav>
+      <div class="nav-ctas">
+        <a class="btn btn-line" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINEで無料相談</a>
       </div>
     </div>
   </header>
 
-  <main class="apply">
+  <main class="page">
     <div class="shell">
-      <p class="eyebrow">お申し込み</p>
+      <p class="label">お申し込み</p>
       <h1>モルコ 買い切りプランの<br />お申し込み</h1>
       <p class="lead">入力は2分ほど。カード払いはこのあとStripeの決済ページでそのまま決済、銀行振込は振込先を確認メールでお知らせします。</p>
 
-      <div class="apply-layout">
-        <form class="apply-form" id="applyForm" action="/api/apply" method="post" novalidate>
+      <div class="apply-grid">
+        <form class="form" id="applyForm" action="/api/apply" method="post" novalidate>
           <div class="form-error" id="formError" role="alert"></div>
 
           <div class="field">
@@ -103,7 +106,7 @@
               <div><dt>お届けするもの</dt><dd>設定済みのミニPC本体・モバイルモニター・キーボード・マウスの一式。初期設定と基本スキル（契約書 別紙1）を入れた状態でお届けします。<span class="terms-ref">第3条</span></dd></div>
               <div><dt>納品と所有権</dt><dd>入金確認後、7営業日以内に発送します。代金のお支払いが完了してから納品し、ミニPC一式の所有権はお客様に移ります。利用期間は納品日から期限なしです（外部サービスの都合による利用制限はあります）。<span class="terms-ref">第3条</span></dd></div>
               <div><dt>送料</dt><dd>配送費用は当方が負担します。お客様のご都合による再配送・返送の費用はお客様のご負担です。<span class="terms-ref">第3条</span></dd></div>
-              <div><dt>別途必要なもの</dt><dd>AIサブスク「Claude Pro」以上のプラン（Pro・Max いずれも可、月額約¥3,000〜）をお客様ご自身でご契約ください。ほかに Telegram アカウント・Google アカウント・インターネット回線が必要です。<span class="terms-ref">第4条</span></dd></div>
+              <div><dt>別途必要なもの</dt><dd>AIの月額プラン「Claude Pro」以上（Pro・Max いずれも可、月額約¥3,000〜）をお客様ご自身でご契約ください。ほかに Telegram アカウント・Google アカウント・インターネット回線が必要です。<span class="terms-ref">第4条</span></dd></div>
               <div><dt>解約・返金</dt><dd>原則として解約・返金はできません。ただし納品後7日以内に動作不良が認められた場合は、当方の責任で修理・交換します。<span class="terms-ref">第6条</span></dd></div>
               <div><dt>サポート</dt><dd>初回のトラブル相談と、よくある質問の範囲の操作方法のご質問は無料です。2回目以降の個別サポート・追加設定は有償（1時間¥3,000／月額¥10,000・月2時間まで、いずれも税込）、独自機能の開発は1機能¥10,000（税込）です。<span class="terms-ref">第8条</span></dd></div>
               <div><dt>データ</dt><dd>お客様のデータと生成物の権利はお客様のものです。AIへの指示内容と生成結果は、AIの提供元（Anthropic）のサーバーを経由します。<span class="terms-ref">第5条</span></dd></div>
@@ -129,24 +132,24 @@
           <p class="apply-consult"><a href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">申し込む前に相談したい方は、LINEで無料相談</a></p>
         </form>
 
-        <aside class="apply-summary">
-          <div class="plan-card">
+        <aside>
+          <div class="plan">
             <span class="plan-badge">お申し込み内容</span>
             <h3>買い切りプラン</h3>
-            <div class="plan-price"><span class="yen">¥</span><span id="sumPrice">240,000</span><span class="tax">（税込）</span></div>
-            <p class="plan-sub" id="sumMethod">クレジットカード決済</p>
+            <div class="plan-price"><span class="yen">¥</span><span class="amt" id="sumPrice">240,000</span><span class="tax">（税込）</span></div>
+            <p class="plan-alt" id="sumMethod">クレジットカード決済</p>
             <p class="plan-sub">PC本体・初期設定・カスタマイズすべて込み</p>
-            <ul class="plan-features">
-              <li>ミニPC本体 お買い上げ</li>
-              <li>モバイルモニター・キーボード・マウス付属</li>
-              <li>初期設定・カスタマイズ込み</li>
-              <li>Telegram 使い方レクチャー</li>
-              <li>専用相談Bot 利用権</li>
+            <ul>
+              <li><svg><use href="#i-check"/></svg>ミニPC本体 お買い上げ</li>
+              <li><svg><use href="#i-check"/></svg>モバイルモニター・キーボード・マウス付属</li>
+              <li><svg><use href="#i-check"/></svg>初期設定・カスタマイズ込み</li>
+              <li><svg><use href="#i-check"/></svg>Telegram 使い方レクチャー</li>
+              <li><svg><use href="#i-check"/></svg>専用相談Bot 利用権</li>
             </ul>
           </div>
-          <div class="apply-paynote">
-            <p style="margin:0 0 8px;"><strong>別途かかる費用：</strong>AIサブスク「Claude Pro」以上のプラン（月額約¥3,000〜）はお客様ご自身でご契約いただきます。加入手順は初回打ち合わせで一緒に進めます。</p>
-            <p style="margin:0;"><strong>お届け：</strong>入金確認後に担当者からご連絡し、初回打ち合わせで一緒に設定を進めます。設定済みのミニPCは入金確認後、7営業日以内に発送します。お申し込み後の解約・返金は原則お受けできません（納品後7日以内の動作不良は修理・交換で対応）。詳しくは<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>と<a href="legal.html">特定商取引法に基づく表記</a>をご確認ください。</p>
+          <div class="summary-note">
+            <p><strong>別途かかる費用：</strong>AIの月額プラン「Claude Pro」以上（月額約¥3,000〜）はお客様ご自身でご契約いただきます。加入手順は初回打ち合わせで一緒に進めます。</p>
+            <p><strong>お届け：</strong>入金確認後に担当者からご連絡し、初回打ち合わせで一緒に設定を進めます。設定済みのミニPCは入金確認後、7営業日以内に発送します。お申し込み後の解約・返金は原則お受けできません（納品後7日以内の動作不良は修理・交換で対応）。詳しくは<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>と<a href="legal.html">特定商取引法に基づく表記</a>をご確認ください。</p>
           </div>
         </aside>
       </div>
@@ -156,16 +159,16 @@
   <footer class="footer">
     <div class="shell footer-inner">
       <div class="footer-brand">
-        <img src="morukoimage/logo_wide.webp" alt="moruko" />
+        <img src="morukoimage/logo_wide.webp" alt="moruko" width="480" height="179" />
         <p>あなたの毎日に、専属AI秘書を。</p>
       </div>
-      <nav class="footer-links">
+      <nav class="footer-links" aria-label="フッター">
         <a href="legal.html">特定商取引法に基づく表記</a>
         <a href="legal.html#privacy">プライバシーポリシー</a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1LY01G24LIM4mA3z4XuhbX2RuA8BW28mHcDHicjmD-ONxfg/viewform" target="_blank" rel="noopener">お問い合わせ</a>
       </nav>
     </div>
-    <p class="footer-bottom">© 2026 moruko. All rights reserved.</p>
+    <p class="shell footer-bottom">© 2026 moruko. All rights reserved.</p>
   </footer>
 
   <script>
