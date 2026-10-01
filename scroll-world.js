@@ -39,7 +39,7 @@ function mountScrollWorld(container, config) {
   if (config.links?.length) {
     const links = el('div', 'sw-links');
     config.links.forEach(l => {
-      const a = el('a', 'sw-links__item');
+      const a = el('a', 'sw-links__item' + (l.mobileOnly ? ' sw-links__item--mobile' : ''));
       a.href = l.href || '#';
       a.textContent = l.label || '';
       a.addEventListener('click', () => links.classList.remove('is-open'));
@@ -58,12 +58,14 @@ function mountScrollWorld(container, config) {
     topbar.appendChild(menuToggle);
   }
 
-  if (config.cta?.label) {
-    const topCta = el('a', 'sw-topcta');
-    topCta.href = config.cta.href || '#';
-    topCta.textContent = config.cta.label;
+  const topCtas = config.ctas || (config.cta ? [config.cta] : []);
+  topCtas.forEach(c => {
+    if (!c?.label) return;
+    const topCta = el('a', 'sw-topcta' + (c.variant ? ' sw-topcta--' + c.variant : ''));
+    topCta.href = c.href || '#';
+    topCta.textContent = c.label;
     topbar.appendChild(topCta);
-  }
+  });
 
   const stage = el('div', 'sw-stage');
   const copylayer = el('div', 'sw-copylayer');
@@ -403,10 +405,16 @@ if (typeof window !== 'undefined') {
       nav: false,
       links: [
         { label: 'できること', href: '#features' },
+        { label: '作った人', href: '#maker' },
         { label: '料金', href: '#pricing' },
         { label: '導入の流れ', href: '#howto' },
+        { label: 'よくある質問', href: '#faq' },
+        { label: 'お申し込み', href: 'apply.html', mobileOnly: true },
       ],
-      cta: { label: 'LINEで無料相談', href: 'https://line.me/R/ti/p/@195gadxx' },
+      ctas: [
+        { label: '申し込む', href: 'apply.html', variant: 'apply' },
+        { label: 'LINEで無料相談', href: 'https://line.me/R/ti/p/@195gadxx' },
+      ],
       diveScroll: 1.3,
       connScroll: 0.9,
       sections: [
@@ -419,7 +427,7 @@ if (typeof window !== 'undefined') {
           title: '話しかけるだけ。\nあとはモルコが働く。',
           body: 'メール・スケジュール・SNS投稿・動画編集まで、Telegramに話しかけるだけで全部やってくれる自分専用AI秘書。自宅のミニPCが24時間フル稼働します。',
           tags: ['Telegramだけで操作', '24時間稼働', '設定済みでお届け'],
-          cta: { primary: { label: 'LINEで無料相談する', href: 'https://line.me/R/ti/p/@195gadxx' }, secondary: { label: 'できることを見る', href: '#features' } },
+          cta: { primary: { label: 'LINEで無料相談する', href: 'https://line.me/R/ti/p/@195gadxx' }, secondary: { label: '申し込む', href: 'apply.html' } },
         },
         {
           label: 'しごと',

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お申し込みありがとうございます | モルコ(moruko)</title>
+  <meta name="theme-color" content="#fbf9f6" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/webp" href="morukoimage/char.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style-v3.css" />
+</head>
+<body>
+  <header class="page-top">
+    <div class="page-top__inner">
+      <a class="page-top__brand" href="index.html"><img src="morukoimage/logo_wide.webp" alt="moruko" /></a>
+      <div class="page-top__links">
+        <a class="page-top__back" href="index.html">トップへ戻る</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="apply">
+    <div class="shell">
+      <div class="thanks-card">
+        <p class="eyebrow">お申し込み完了</p>
+
+        <!-- カード決済完了 -->
+        <div class="thanks-panel" id="panel-card">
+          <h1>お支払いありがとうございました</h1>
+          <p>カード決済が完了しました。モルコをお選びいただき、ありがとうございます。</p>
+          <ul class="thanks-steps">
+            <li>担当者より、初回打ち合わせの日程についてご連絡します。</li>
+            <li>それまでに、スマホへTelegramアプリを入れておいてください（準備はこれだけです）。</li>
+            <li>初回打ち合わせで専用Gmail・AIサブスク（Claude Pro）の設定を一緒に進め、設定済みのモルコをお届けします（入金確認後、7営業日以内に発送）。</li>
+          </ul>
+        </div>
+
+        <!-- 銀行振込 -->
+        <div class="thanks-panel" id="panel-bank">
+          <h1>お申し込みを受け付けました</h1>
+          <p id="bank-id"></p>
+          <ul class="thanks-steps">
+            <li><strong>振込先は確認メールでお知らせします。</strong>ご入力いただいたメールアドレスに、振込先とお振込期日をお送りします。</li>
+            <li>メールのご案内に沿って、期日までにお振込みください。</li>
+            <li>入金を確認したら、担当者から初回打ち合わせの日程についてご連絡します。</li>
+          </ul>
+          <p style="margin-top:18px;font-size:.86rem;">しばらく経ってもメールが届かない場合は、迷惑メールフォルダをご確認のうえ、LINE または contact@milailab.teen.jp までご連絡ください。</p>
+        </div>
+
+        <div class="thanks-next">
+          <h2>次のステップ：利用契約書の同意フォーム</h2>
+          <p>お支払い・お申し込みのあと、オンラインの「moruko 利用契約書 同意フォーム」へのご記入をお願いします。<strong>担当者からのご連絡でご案内します。</strong>契約内容は<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書の全文</a>で事前にご確認いただけます。</p>
+          <p style="margin-top:8px;">同意フォーム：<a href="https://moruko-contract.vercel.app/" target="_blank" rel="noopener">moruko-contract.vercel.app</a></p>
+        </div>
+
+        <div class="thanks-actions">
+          <a class="btn btn-ghost" href="index.html">トップへ戻る</a>
+          <a class="btn btn-primary" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINEで質問する</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div class="footer-brand">
+        <img src="morukoimage/logo_wide.webp" alt="moruko" />
+        <p>あなたの毎日に、専属AI秘書を。</p>
+      </div>
+      <nav class="footer-links">
+        <a href="legal.html">特定商取引法に基づく表記</a>
+        <a href="legal.html#privacy">プライバシーポリシー</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1LY01G24LIM4mA3z4XuhbX2RuA8BW28mHcDHicjmD-ONxfg/viewform" target="_blank" rel="noopener">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="footer-bottom">© 2026 moruko. All rights reserved.</p>
+  </footer>
+
+  <script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var m = q.get('method') === 'bank' ? 'bank' : 'card';
+    document.getElementById('panel-' + m).classList.add('is-shown');
+    var id = q.get('id');
+    if (m === 'bank' && id && /^MRK-[0-9A-F-]+$/i.test(id)) {
+      document.getElementById('bank-id').textContent = '受付番号：' + id;
+    }
+  })();
+  </script>
+  <noscript><style>#panel-card{display:block}</style></noscript>
+</body>
+</html>

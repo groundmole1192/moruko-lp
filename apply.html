@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お申し込み | モルコ(moruko)</title>
+  <meta name="description" content="モルコ 買い切りプランのお申し込みページ。銀行振込 ¥240,000（税込）、カード決済 ¥250,000（税込）。お支払いはクレジットカード（Stripe）または銀行振込。" />
+  <meta name="theme-color" content="#fbf9f6" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/webp" href="morukoimage/char.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style-v3.css" />
+</head>
+<body>
+  <header class="page-top">
+    <div class="page-top__inner">
+      <a class="page-top__brand" href="index.html"><img src="morukoimage/logo_wide.webp" alt="moruko" /></a>
+      <div class="page-top__links">
+        <a class="page-top__back" href="index.html#pricing">料金・プランに戻る</a>
+        <a class="sw-topcta" href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINEで無料相談</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="apply">
+    <div class="shell">
+      <p class="eyebrow">お申し込み</p>
+      <h1>モルコ 買い切りプランの<br />お申し込み</h1>
+      <p class="lead">入力は2分ほど。カード払いはこのあとStripeの決済ページでそのまま決済、銀行振込は振込先を確認メールでお知らせします。</p>
+
+      <div class="apply-layout">
+        <form class="apply-form" id="applyForm" action="/api/apply" method="post" novalidate>
+          <div class="form-error" id="formError" role="alert"></div>
+
+          <div class="field">
+            <label for="f-name">お名前<span class="req">必須</span></label>
+            <input type="text" id="f-name" name="name" autocomplete="name" maxlength="80" required placeholder="山田 花子" />
+          </div>
+          <div class="field">
+            <label for="f-email">メールアドレス<span class="req">必須</span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email" maxlength="160" required placeholder="you@example.com" />
+            <p class="field-hint">確認メール・振込先のご案内はこのアドレスにお送りします。</p>
+          </div>
+          <div class="field">
+            <label for="f-phone">電話番号<span class="req">必須</span></label>
+            <input type="tel" id="f-phone" name="phone" autocomplete="tel" maxlength="30" required placeholder="090-1234-5678" />
+          </div>
+          <div class="field">
+            <span class="field-label">配送先住所<span class="req">必須</span></span>
+            <div class="field-row">
+              <div>
+                <label for="f-zip" class="field-hint" style="margin:0 0 6px;font-weight:700;">郵便番号</label>
+                <input type="text" id="f-zip" name="zip" autocomplete="postal-code" inputmode="numeric" maxlength="10" placeholder="123-4567" />
+              </div>
+              <div>
+                <label for="f-address" class="field-hint" style="margin:0 0 6px;font-weight:700;">住所</label>
+                <input type="text" id="f-address" name="address" autocomplete="street-address" maxlength="300" required placeholder="奈良県〇〇市〇〇町1-2-3 〇〇マンション101" />
+              </div>
+            </div>
+            <p class="field-hint">設定済みのミニPC一式をこちらにお届けします。</p>
+          </div>
+          <div class="field">
+            <label for="f-purpose">モルコに任せたいこと<span class="opt">任意</span></label>
+            <textarea id="f-purpose" name="purpose" maxlength="2000" placeholder="例：メールの下書き、予約の管理、Instagramの投稿づくり など"></textarea>
+            <p class="field-hint">初回打ち合わせの準備に使います。ざっくりで大丈夫です。</p>
+          </div>
+
+          <div class="field">
+            <span class="field-label">お支払い方法<span class="req">必須</span></span>
+            <p class="price-by-method">銀行振込 <strong>¥240,000</strong>（税込）／カード決済 <strong>¥250,000</strong>（税込）</p>
+            <div class="pay-options">
+              <label class="pay-option">
+                <input type="radio" name="method" value="card" required checked />
+                <span class="pay-option__box">
+                  <span class="pay-option__title">クレジットカード（Stripe）</span>
+                  <span class="pay-option__price">¥250,000（税込）</span>
+                  <span class="pay-option__desc">このあとStripeの決済ページへ移動し、その場で決済が完了します。</span>
+                </span>
+              </label>
+              <label class="pay-option">
+                <input type="radio" name="method" value="bank" />
+                <span class="pay-option__box">
+                  <span class="pay-option__title">銀行振込</span>
+                  <span class="pay-option__price">¥240,000（税込）</span>
+                  <span class="pay-option__desc">振込先は確認メールでお知らせします。入金確認後にご連絡します。</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="hp-field" aria-hidden="true">
+            <label for="f-website">ウェブサイト</label>
+            <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <section class="terms-box" aria-labelledby="terms-title">
+            <h2 class="terms-box__title" id="terms-title">お申し込みの前に（主な条件）</h2>
+            <p class="terms-box__lead">「moruko 利用契約書」の主な内容です。お申し込みの前に必ずご確認ください。</p>
+            <dl class="terms-list">
+              <div><dt>料金</dt><dd>銀行振込 ¥240,000（税込）／カード決済 ¥250,000（税込）。買い切りで、割引はありません。<span class="terms-ref">第3条</span></dd></div>
+              <div><dt>お届けするもの</dt><dd>設定済みのミニPC本体・モバイルモニター・キーボード・マウスの一式。初期設定と基本スキル（契約書 別紙1）を入れた状態でお届けします。<span class="terms-ref">第3条</span></dd></div>
+              <div><dt>納品と所有権</dt><dd>入金確認後、7営業日以内に発送します。代金のお支払いが完了してから納品し、ミニPC一式の所有権はお客様に移ります。利用期間は納品日から期限なしです（外部サービスの都合による利用制限はあります）。<span class="terms-ref">第3条</span></dd></div>
+              <div><dt>送料</dt><dd>配送費用は当方が負担します。お客様のご都合による再配送・返送の費用はお客様のご負担です。<span class="terms-ref">第3条</span></dd></div>
+              <div><dt>別途必要なもの</dt><dd>AIサブスク「Claude Pro」以上のプラン（Pro・Max いずれも可、月額約¥3,000〜）をお客様ご自身でご契約ください。ほかに Telegram アカウント・Google アカウント・インターネット回線が必要です。<span class="terms-ref">第4条</span></dd></div>
+              <div><dt>解約・返金</dt><dd>原則として解約・返金はできません。ただし納品後7日以内に動作不良が認められた場合は、当方の責任で修理・交換します。<span class="terms-ref">第6条</span></dd></div>
+              <div><dt>サポート</dt><dd>初回のトラブル相談と、よくある質問の範囲の操作方法のご質問は無料です。2回目以降の個別サポート・追加設定は有償（1時間¥3,000／月額¥10,000・月2時間まで、いずれも税込）、独自機能の開発は1機能¥10,000（税込）です。<span class="terms-ref">第8条</span></dd></div>
+              <div><dt>データ</dt><dd>お客様のデータと生成物の権利はお客様のものです。AIへの指示内容と生成結果は、AIの提供元（Anthropic）のサーバーを経由します。<span class="terms-ref">第5条</span></dd></div>
+              <div><dt>責任の範囲</dt><dd>AIの出力の正確さは保証できません。送信・登録などを実行する前の最終確認はお客様にお願いします。当方の賠償責任は、お支払いいただいた料金の総額が上限です。<span class="terms-ref">第10条</span></dd></div>
+            </dl>
+            <a class="terms-box__link" href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書の全文を読む（別タブで開きます）</a>
+          </section>
+
+          <label class="agree">
+            <input type="checkbox" name="agree_contract" id="f-agree-contract" value="on" required />
+            <span><a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>の内容を確認し、同意します</span>
+          </label>
+
+          <label class="agree agree--second">
+            <input type="checkbox" name="agree" id="f-agree" value="on" required />
+            <span><a href="legal.html" target="_blank" rel="noopener">特定商取引法に基づく表記</a>（返品・キャンセル条件を含む）と<a href="legal.html#privacy" target="_blank" rel="noopener">プライバシーポリシー</a>に同意します。</span>
+          </label>
+
+          <div class="apply-submit">
+            <button type="submit" class="btn btn-primary" id="submitBtn">カード決済へ進む</button>
+            <p class="apply-submit__note" id="submitNote">Stripeの安全な決済ページに移動します。カード情報が当方に届くことはありません。</p>
+          </div>
+          <p class="apply-consult"><a href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">申し込む前に相談したい方は、LINEで無料相談</a></p>
+        </form>
+
+        <aside class="apply-summary">
+          <div class="plan-card">
+            <span class="plan-badge">お申し込み内容</span>
+            <h3>買い切りプラン</h3>
+            <div class="plan-price"><span class="yen">¥</span><span id="sumPrice">240,000</span><span class="tax">（税込）</span></div>
+            <p class="plan-sub" id="sumMethod">クレジットカード決済</p>
+            <p class="plan-sub">PC本体・初期設定・カスタマイズすべて込み</p>
+            <ul class="plan-features">
+              <li>ミニPC本体 お買い上げ</li>
+              <li>モバイルモニター・キーボード・マウス付属</li>
+              <li>初期設定・カスタマイズ込み</li>
+              <li>Telegram 使い方レクチャー</li>
+              <li>専用相談Bot 利用権</li>
+            </ul>
+          </div>
+          <div class="apply-paynote">
+            <p style="margin:0 0 8px;"><strong>別途かかる費用：</strong>AIサブスク「Claude Pro」以上のプラン（月額約¥3,000〜）はお客様ご自身でご契約いただきます。加入手順は初回打ち合わせで一緒に進めます。</p>
+            <p style="margin:0;"><strong>お届け：</strong>入金確認後に担当者からご連絡し、初回打ち合わせで一緒に設定を進めます。設定済みのミニPCは入金確認後、7営業日以内に発送します。お申し込み後の解約・返金は原則お受けできません（納品後7日以内の動作不良は修理・交換で対応）。詳しくは<a href="https://moruko-contract.vercel.app/terms" target="_blank" rel="noopener">利用契約書</a>と<a href="legal.html">特定商取引法に基づく表記</a>をご確認ください。</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div class="footer-brand">
+        <img src="morukoimage/logo_wide.webp" alt="moruko" />
+        <p>あなたの毎日に、専属AI秘書を。</p>
+      </div>
+      <nav class="footer-links">
+        <a href="legal.html">特定商取引法に基づく表記</a>
+        <a href="legal.html#privacy">プライバシーポリシー</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1LY01G24LIM4mA3z4XuhbX2RuA8BW28mHcDHicjmD-ONxfg/viewform" target="_blank" rel="noopener">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="footer-bottom">© 2026 moruko. All rights reserved.</p>
+  </footer>
+
+  <script>
+  (function () {
+    // カード決済 ¥250,000（税込）／銀行振込 ¥240,000（税込）。割引なし。
+    var PAYMENT_LINK = 'https://buy.stripe.com/28EaEXh0zd6t2ZA2qu3wQ0m';
+    var form = document.getElementById('applyForm');
+    var btn = document.getElementById('submitBtn');
+    var note = document.getElementById('submitNote');
+    var errBox = document.getElementById('formError');
+    var CONTACT = '時間をおいて再度お試しいただくか、<a href="https://line.me/R/ti/p/@195gadxx" target="_blank" rel="noopener">LINE</a> または contact@milailab.teen.jp までご連絡ください。';
+
+    function method() {
+      var r = form.querySelector('input[name="method"]:checked');
+      return r ? r.value : '';
+    }
+    function syncButton() {
+      if (method() === 'bank') {
+        btn.textContent = '銀行振込で申し込む';
+        note.textContent = '送信後、振込先とお振込期日を確認メールでお知らせします。';
+      } else {
+        btn.textContent = 'カード決済へ進む';
+        note.textContent = 'Stripeの安全な決済ページに移動します。カード情報が当方に届くことはありません。';
+      }
+    }
+    function syncPlan() {
+      var bank = method() === 'bank';
+      document.getElementById('sumPrice').textContent = bank ? '240,000' : '250,000';
+      document.getElementById('sumMethod').textContent = bank ? '銀行振込' : 'クレジットカード決済';
+    }
+    form.querySelectorAll('input[name="method"]').forEach(function (r) { r.addEventListener('change', function () { syncButton(); syncPlan(); }); });
+    syncButton();
+    syncPlan();
+
+    var q = new URLSearchParams(location.search);
+    if (q.get('error')) showError('送信できませんでした。入力内容をご確認ください。');
+
+    function showError(html) {
+      errBox.innerHTML = html;
+      errBox.classList.add('is-shown');
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    var LABELS = { name: 'お名前', email: 'メールアドレス', phone: '電話番号', address: '配送先住所', method: 'お支払い方法', agree: '特定商取引法表記・プライバシーポリシーへの同意', agree_contract: '利用契約書への同意' };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errBox.classList.remove('is-shown');
+      var fd = new FormData(form);
+      var data = {};
+      fd.forEach(function (v, k) { data[k] = String(v).trim(); });
+      data.agree = document.getElementById('f-agree').checked;
+      data.agree_contract = document.getElementById('f-agree-contract').checked;
+      data.method = method();
+
+      var bad = [];
+      if (!data.name) bad.push('name');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '')) bad.push('email');
+      if ((data.phone || '').replace(/[^0-9]/g, '').length < 10) bad.push('phone');
+      if (!data.address) bad.push('address');
+      if (!data.method) bad.push('method');
+      if (!data.agree_contract) bad.push('agree_contract');
+      if (!data.agree) bad.push('agree');
+      if (bad.length) {
+        showError('次の項目をご確認ください：' + bad.map(function (k) { return LABELS[k]; }).join('、'));
+        return;
+      }
+
+      btn.disabled = true;
+      var label = btn.textContent;
+      btn.textContent = '送信中…';
+
+      fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (r) {
+        return r.json().catch(function () { return { ok: false }; });
+      }).catch(function () {
+        return { ok: false, error: 'network' };
+      }).then(function (res) {
+        if (data.method === 'card') {
+          // カードは通知の成否に関わらず決済へ（Stripe側で氏名・連絡先・配送先を必ず取得する）
+          var u = new URL(PAYMENT_LINK);
+          u.searchParams.set('prefilled_email', data.email);
+          if (res && res.id) u.searchParams.set('client_reference_id', res.id);
+          location.href = u.toString();
+          return;
+        }
+        if (res && res.ok) {
+          location.href = 'thanks.html?method=bank&id=' + encodeURIComponent(res.id || '');
+          return;
+        }
+        btn.disabled = false;
+        btn.textContent = label;
+        if (res && res.error === 'invalid' && res.fields) {
+          showError('次の項目をご確認ください：' + res.fields.map(function (k) { return LABELS[k] || k; }).join('、'));
+        } else {
+          showError('申し込みを送信できませんでした。' + CONTACT);
+        }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

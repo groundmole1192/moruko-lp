@@ -1,9 +1,14 @@
 {
   "name": "moruko-lp",
+  "account_id": "ec333967227331206460720ac4b38e19",
   "compatibility_date": "2026-08-18",
+  "main": "worker.js",
+  "vars": { "TG_CHAT_ID": "7001643529" },
   "assets": {
     "directory": ".",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
   }
 }
