@@ -240,7 +240,7 @@
     gsap.fromTo(kv, { y: 0 }, { y: -6, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     var dones = [
       ['お礼メール、送りました', '名刺の写真から 2分'],
-      ['送り状、作れました', '住所のスクショから'],
+      ['日程、調整しました', 'LINEのスクショから'],
       ['打ち合わせ、登録しました', '木曜14時・リマインド付き']
     ];
     var di = 0;
@@ -319,7 +319,7 @@
     var packet = $('#hsPacket'), packetBack = $('#hsPacketBack'), moruko = $('#hsMoruko'), pc = $('#hsPc');
     var scenarios = [
       { req: 'この名刺の人に、お礼メール送っといて', att: true, task: '名刺を読み取り → お礼メールを作成', rep: '送りました。文面はDriveにも保存しています。' },
-      { req: 'この住所に発送。送り状つくって', att: true, task: '住所を読み取り → 送り状PDFを作成', rep: '送り状できました。印刷してコンビニへどうぞ。' },
+      { req: 'この日程のLINE、返信しといて', att: true, task: '空き時間を確認 → 返信文を作成 → 予定を登録', rep: '木曜14時で返信して、予定にも入れました。' },
       { req: '来週どこかで打ち合わせ入れたい', att: false, task: '空き時間を確認 → カレンダーに登録', rep: '木曜14時で登録しました。リマインドも設定済みです。' }
     ];
     var idx = 0;
