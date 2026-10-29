@@ -184,6 +184,10 @@ async function submit() {
     show("result");
   } catch (e) {
     console.error(e);
+    const busy = /rate_limited|busy/.test(String(e && e.message));
+    document.querySelector("#failed .lead").textContent = busy
+      ? "ただいま診断が混み合っているため、受付を一時止めています。時間をおいて（明日以降に）もう一度お試しください。"
+      : "時間をおいてもう一度お試しください。回答はこの画面に残っています。";
     show("failed");
   }
 }

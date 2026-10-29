@@ -2,6 +2,7 @@
 import { validateAnswers } from "./validate.js";
 import { diagnose } from "./gemini.js";
 import { buildNotifyText } from "./notify.js";
+import { takeQuota } from "./counter.js";
 
 const MAX_BODY = 16 * 1024;
 const RATE_LIMIT = 5; // 同じIPから1時間に5回まで
@@ -51,6 +52,22 @@ export async function handleDiagnose(request, env, ctx, { json, allowedOrigins, 
 
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (rateLimited(ip)) return json({ error: "rate_limited" }, 429);
+
+  // 1日の総数・同じ人の1日あたり回数（Durable Object で全体を数える）。数えられない時はAIを呼ばずに止める
+  let quota;
+  try {
+    quota = await takeQuota(env, ip);
+  } catch (e) {
+    console.error("quota check failed:", e.message);
+    return json({ error: "busy" }, 503);
+  }
+  if (!quota.ok) {
+    if (quota.notify && env.PREVIEW !== "1") {
+      const p = notifyTelegram(env, "【無料AI業務診断】今日の上限（1日の総数）に達したので、今日はこれ以降の診断を止めています。").catch(() => false);
+      if (ctx && typeof ctx.waitUntil === "function") ctx.waitUntil(p);
+    }
+    return json({ error: quota.reason === "daily_total" ? "busy" : "rate_limited" }, 429);
+  }
 
   let result;
   try {

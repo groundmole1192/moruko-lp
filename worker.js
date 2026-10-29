@@ -1,4 +1,5 @@
 import { handleDiagnose } from './shindan_api/handler.js';
+export { ShindanCounter } from './shindan_api/counter.js';
 
 // moruko-lp Worker: 静的アセット配信 + 申し込み受付API（/api/apply）
 // 無料AI業務診断: /shindan（静的）+ /api/diagnose（Gemini診断 → 北さんのTelegramへ要約通知）

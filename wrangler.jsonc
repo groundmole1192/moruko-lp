@@ -4,6 +4,8 @@
   "compatibility_date": "2026-08-18",
   "main": "worker.js",
   "vars": { "TG_CHAT_ID": "7001643529" },
+  "durable_objects": { "bindings": [{ "name": "SHINDAN_COUNTER", "class_name": "ShindanCounter" }] },
+  "migrations": [{ "tag": "v1-shindan-counter", "new_sqlite_classes": ["ShindanCounter"] }],
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
