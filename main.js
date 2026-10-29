@@ -32,8 +32,8 @@
     vp.addEventListener('click', function () {
       var f = $('#videoFrame');
       var ifr = document.createElement('iframe');
-      ifr.src = 'https://www.youtube.com/embed/h4Vyb0HzrWw?autoplay=1&rel=0';
-      ifr.title = 'モルコ CM動画';
+      ifr.src = 'https://www.youtube.com/embed/eLnM6xlFTWM?autoplay=1&rel=0';
+      ifr.title = 'モルコ 紹介動画（5分解説）';
       ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       ifr.allowFullscreen = true;
       f.innerHTML = '';
