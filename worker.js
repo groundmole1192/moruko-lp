@@ -1,4 +1,7 @@
+import { handleDiagnose } from './shindan_api/handler.js';
+
 // moruko-lp Worker: 静的アセット配信 + 申し込み受付API（/api/apply）
+// 無料AI業務診断: /shindan（静的）+ /api/diagnose（Gemini診断 → 北さんのTelegramへ要約通知）
 // 申し込み内容を北さんのTelegramへ通知する。秘密情報は wrangler secret（TG_BOT_TOKEN）で注入。
 // PREVIEW="1"（moruko-lp-v2 プレビュー）のときは通知を送らず、受付番号だけ返す。
 
@@ -8,8 +11,11 @@ const ALLOWED_ORIGINS = ['https://moruko.groundmole.space'];
 const LIMITS = { name: 80, email: 160, phone: 30, zip: 10, address: 300, purpose: 2000 };
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === '/api/diagnose') {
+      return handleDiagnose(request, env, ctx, { json, allowedOrigins: ALLOWED_ORIGINS, notifyTelegram });
+    }
     if (url.pathname === '/api/apply') {
       if (request.method !== 'POST') return json({ ok: false, error: 'method_not_allowed' }, 405);
       return handleApply(request, env, url);

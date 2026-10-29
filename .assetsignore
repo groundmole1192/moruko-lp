@@ -9,3 +9,8 @@ moruko_slide_draft.md
 worker.js
 .wrangler
 CRITIQUE_2026-09-15.md
+shindan_api
+shindan/README.md
+shindan/shots
+.dev.vars
+.wrangler

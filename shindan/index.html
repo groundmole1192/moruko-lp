@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>無料AI業務診断｜あなたの仕事でAIに任せられること3つ</title>
+<meta name="description" content="10個の質問に答えると、あなたの仕事でAIに任せられること3つを、その場でお返しします。所要3〜5分・無料。">
+<meta name="theme-color" content="#FFF9F0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shindan/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-inner">
+    <span class="brand">moruko</span>
+    <span class="brand-sub">無料AI業務診断</span>
+  </div>
+  <div class="progress" hidden><div class="progress-bar"></div></div>
+</header>
+
+<main class="wrap" id="app">
+  <!-- はじめの画面 -->
+  <section class="screen" id="intro">
+    <p class="eyebrow">所要 3〜5分・無料</p>
+    <h1>あなたの仕事で、<br>AIに任せられること3つ。</h1>
+    <p class="lead">10個の質問に答えると、AIが「任せられそうな作業」と「人に残したほうがいい作業」をその場でお返しします。</p>
+    <ul class="points">
+      <li>選ぶだけの質問がほとんどです。自由に書く欄は2つだけ。</li>
+      <li>名前や電話番号は聞きません。</li>
+      <li>結果はこの画面に出ます。登録はいりません。</li>
+    </ul>
+    <button class="btn-primary" id="start" type="button">はじめる</button>
+    <p class="note">回答内容は、診断と、サービス改善のための集計だけに使います。</p>
+  </section>
+
+  <!-- 質問の画面（app.js が中身を作る） -->
+  <section class="screen" id="question" hidden>
+    <p class="step-count" id="step-count"></p>
+    <h2 id="q-title"></h2>
+    <p class="hint" id="q-hint"></p>
+    <div id="q-body"></div>
+    <p class="error" id="q-error" hidden></p>
+    <div class="nav">
+      <button class="btn-text" id="back" type="button">戻る</button>
+      <button class="btn-primary" id="next" type="button">次へ</button>
+    </div>
+  </section>
+
+  <!-- 最後の確認（メールは任意） -->
+  <section class="screen" id="finish" hidden>
+    <p class="step-count">最後に</p>
+    <h2>結果を見る前に</h2>
+    <label class="field-label" for="email">メールアドレス（任意）</label>
+    <p class="hint">有料のオンライン診断の案内を希望する方だけ入れてください。空欄のままで結果は見られます。</p>
+    <input class="input" id="email" type="email" inputmode="email" autocomplete="email" placeholder="例：name@example.com" maxlength="254">
+    <input class="hp" id="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="privacy">
+      <p><strong>個人情報の扱いについて</strong></p>
+      <p>いただいた回答と日時、任意で入力されたメールアドレスは、moruko（北 祐介）が診断とサービス改善のためだけに使い、第三者に渡しません。メールアドレスは有料診断のご案内にだけ使います。回答内容は診断結果を作るために AI（Google Gemini）へ送ります。お名前や会社名などは書かないでください。</p>
+    </div>
+    <p class="error" id="f-error" hidden></p>
+    <div class="nav">
+      <button class="btn-text" id="back2" type="button">戻る</button>
+      <button class="btn-primary" id="submit" type="button">同意して結果を見る</button>
+    </div>
+  </section>
+
+  <!-- 待ち時間 -->
+  <section class="screen" id="loading" hidden>
+    <div class="spinner" aria-hidden="true"></div>
+    <h2 class="center">あなたの仕事を読んでいます</h2>
+    <p class="hint center">20〜40秒ほどかかります。この画面のままお待ちください。</p>
+  </section>
+
+  <!-- 結果 -->
+  <section class="screen" id="result" hidden>
+    <p class="eyebrow">診断結果</p>
+    <h1>AIに任せられること3つ</h1>
+    <p class="lead" id="r-summary"></p>
+
+    <div class="total" id="r-total">
+      <p class="card-label">3つ合わせて、減りそうな手間</p>
+      <p class="total-hours">月に <strong id="r-total-hours"></strong> <span class="est">（推定）</span></p>
+      <p class="total-yen">お金にすると <span class="nw">月 <strong id="r-total-yen"></strong></span></p>
+      <p class="total-basis" id="r-total-calc"></p>
+      <p class="total-basis" id="r-total-basis"></p>
+    </div>
+
+    <div class="chart-card" id="r-bars-card">
+      <p class="card-label">作業ごとの、減りそうな時間（月）</p>
+      <div id="r-bars"></div>
+      <p class="chart-note">濃い部分が少なめの見積もり、薄い部分が多めの見積もりです。</p>
+    </div>
+
+    <div class="chart-card" id="r-radar-card">
+      <p class="card-label">AIに任せられる伸びしろ</p>
+      <div id="r-radar"></div>
+      <p class="chart-note" id="r-radar-note"></p>
+      <p class="chart-note">外側ほど、AIが手伝える余地が大きい分野です（5段階の目安）。</p>
+    </div>
+
+    <ol class="tasks" id="r-tasks"></ol>
+
+    <div class="card keep">
+      <p class="card-label">人に残したほうがいいこと</p>
+      <h3 id="r-keep-title"></h3>
+      <p id="r-keep-why"></p>
+    </div>
+
+    <div class="card">
+      <p class="card-label">今日からできる小さな一歩</p>
+      <p id="r-next"></p>
+    </div>
+
+    <p class="note">「月に何時間」「お金にすると」は、回答をもとにした推定です。実際の仕事の進め方や、どこまでAIに任せるかによって変わります。AIは間違えることがあるので、どの作業も最後は人の目で確かめてください。</p>
+
+    <div class="data-note">
+      <h3>データは、あなたのパソコンの中に</h3>
+      <p>名簿やお客さんとのやりとりのような大事なデータは、外のサービスに預けず、自分のパソコンの中に置いたままAIに手伝わせる、という使い方もできます。</p>
+    </div>
+
+    <div class="offer">
+      <h3>この結果を、一緒に磨き込む60分</h3>
+      <p>ここまでの内容は、10個の答えだけから組み立てたものです。実際のパソコンや道具、仕事の流れを見ると、順番や向き不向きが変わることがよくあります。</p>
+      <p>有料のオンライン診断では、この結果を moruko の北 祐介が一緒に見ながら、あなたのパソコン・使っている道具・実際の業務に合わせて手順を磨き込み、続けられる仕組みの形にするところまでご一緒します。</p>
+      <p class="price">60分 10,000円（税込）<span>オンライン（Google Meet）。日程は平日の日中（10:00〜18:00）、水曜が中心です。<br>moruko（AI秘書PC）をご購入の場合は、本体代金から差し引きます。</span></p>
+      <p class="hint" id="offer-mail" hidden>メールアドレスをいただいた方には、後日ご案内をお送りします。</p>
+      <a class="btn-outline" id="offer-link" href="#" target="_blank" rel="noopener" hidden>60分の診断を申し込む（10,000円・税込）</a>
+    </div>
+
+    <button class="btn-text restart" id="restart" type="button">もう一度答える</button>
+  </section>
+
+  <!-- 失敗 -->
+  <section class="screen" id="failed" hidden>
+    <h2>うまく結果を作れませんでした</h2>
+    <p class="lead">時間をおいてもう一度お試しください。回答はこの画面に残っています。</p>
+    <button class="btn-primary" id="retry" type="button">もう一度送る</button>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <p>運営：moruko（北 祐介）</p>
+</footer>
+
+<script type="module" src="/shindan/app.js"></script>
+</body>
+</html>
