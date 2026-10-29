@@ -12,7 +12,11 @@ moruko.groundmole.space/shindan で公開する無料AI業務診断フォーム�
 - `shindan_api/` と `shindan/README.md` と `shindan/shots/` は `.assetsignore` で静的配信から除外済み
 - 回答の保存はしない（D1/KVなし）。IP・ブラウザ情報も保存しない
 
-## 公開前に必要なこと（未実施）
+## 公開状況（2026-10-29 公開済み）
+- GEMINI_API_KEY には kitabot/.env の GEMINI_API_KEY_PRO の値を登録（メインキーは月次上限で429のため）
+- 上限: Durable Object `ShindanCounter`（shindan_api/counter.js）で1日（JST）総数50件・同一IP1日5回。上限到達時は北さんのTelegramへ1回だけ通知。加えて従来のメモリ上IP 1時間5回・本文16KB・各欄の文字数上限・honeypot
+
+## 公開前に必要だったこと（実施済み）
 1. `wrangler secret put GEMINI_API_KEY`（AI Studio発行のキー。モデルは既定 gemini-3.8-flash、変更は環境変数 GEMINI_MODEL）
 2. 既存の TG_BOT_TOKEN / TG_CHAT_ID がそのまま通知に使われる。PREVIEW="1" の環境では通知しない
 3. `wrangler deploy`（moruko-lp は git push だけでは反映されない場合あり。既存運用に従う）
