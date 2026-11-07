@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>お申し込み | モルコ(moruko)</title>
-  <meta name="description" content="モルコ 買い切りプランのお申し込みページ。銀行振込 ¥240,000（税込）、カード決済 ¥250,000（税込）。お支払いはクレジットカード（Stripe）または銀行振込。" />
+  <meta name="description" content="モルコ 買い切りプランのお申し込みページ。¥300,000（税込）。お支払いはクレジットカード（Stripe）または銀行振込。" />
   <meta name="theme-color" content="#fbf9f6" />
   <meta name="robots" content="noindex" />
   <link rel="icon" type="image/webp" href="morukoimage/favicon.webp" />
@@ -71,14 +71,20 @@
           </div>
 
           <div class="field">
+            <label for="f-referral">紹介者コード<span class="opt">任意</span></label>
+            <input type="text" id="f-referral" name="referral" maxlength="40" autocomplete="off" placeholder="お持ちの方のみ" />
+            <p class="field-hint" id="referralHint">ご紹介を受けた方は、紹介者コードを入力すると価格が変わります。</p>
+          </div>
+
+          <div class="field">
             <span class="field-label">お支払い方法<span class="req">必須</span></span>
-            <p class="price-by-method">銀行振込 <strong>¥240,000</strong>（税込）／カード決済 <strong>¥250,000</strong>（税込）</p>
+            <p class="price-by-method">¥<strong>300,000</strong>（税込・銀行振込／カード決済共通）</p>
             <div class="pay-options">
               <label class="pay-option">
                 <input type="radio" name="method" value="card" required checked />
                 <span class="pay-option__box">
                   <span class="pay-option__title">クレジットカード（Stripe）</span>
-                  <span class="pay-option__price">¥250,000（税込）</span>
+                  <span class="pay-option__price">¥300,000（税込）</span>
                   <span class="pay-option__desc">このあとStripeの決済ページへ移動し、その場で決済が完了します。</span>
                 </span>
               </label>
@@ -86,7 +92,7 @@
                 <input type="radio" name="method" value="bank" />
                 <span class="pay-option__box">
                   <span class="pay-option__title">銀行振込</span>
-                  <span class="pay-option__price">¥240,000（税込）</span>
+                  <span class="pay-option__price">¥300,000（税込）</span>
                   <span class="pay-option__desc">振込先は確認メールでお知らせします。入金確認後にご連絡します。</span>
                 </span>
               </label>
@@ -102,7 +108,7 @@
             <h2 class="terms-box__title" id="terms-title">お申し込みの前に（主な条件）</h2>
             <p class="terms-box__lead">「moruko 利用契約書」の主な内容です。お申し込みの前に必ずご確認ください。</p>
             <dl class="terms-list">
-              <div><dt>料金</dt><dd>銀行振込 ¥240,000（税込）／カード決済 ¥250,000（税込）。買い切りで、割引はありません。<span class="terms-ref">第3条</span></dd></div>
+              <div><dt>料金</dt><dd>¥300,000（税込）。買い切りで、割引はありません。<span class="terms-ref">第3条</span></dd></div>
               <div><dt>お届けするもの</dt><dd>設定済みのミニPC本体・モバイルモニター・キーボード・マウスの一式。初期設定と基本スキル（契約書 別紙1）を入れた状態でお届けします。<span class="terms-ref">第3条</span></dd></div>
               <div><dt>納品と所有権</dt><dd>入金確認後、7営業日以内に発送します。代金のお支払いが完了してから納品し、ミニPC一式の所有権はお客様に移ります。利用期間は納品日から期限なしです（外部サービスの都合による利用制限はあります）。<span class="terms-ref">第3条</span></dd></div>
               <div><dt>送料</dt><dd>配送費用は当方が負担します。お客様のご都合による再配送・返送の費用はお客様のご負担です。<span class="terms-ref">第3条</span></dd></div>
@@ -136,7 +142,7 @@
           <div class="plan">
             <span class="plan-badge">お申し込み内容</span>
             <h3>買い切りプラン</h3>
-            <div class="plan-price"><span class="yen">¥</span><span class="amt" id="sumPrice">240,000</span><span class="tax">（税込）</span></div>
+            <div class="plan-price"><span class="yen">¥</span><span class="amt" id="sumPrice">300,000</span><span class="tax">（税込）</span></div>
             <p class="plan-alt" id="sumMethod">クレジットカード決済</p>
             <p class="plan-sub">PC本体・初期設定・カスタマイズすべて込み</p>
             <ul>
@@ -174,8 +180,10 @@
 
   <script>
   (function () {
-    // カード決済 ¥250,000（税込）／銀行振込 ¥240,000（税込）。割引なし。
-    var PAYMENT_LINK = 'https://buy.stripe.com/28EaEXh0zd6t2ZA2qu3wQ0m';
+    // 銀行振込・カード決済とも ¥300,000（税込）。割引なし。
+    var PAYMENT_LINK = 'https://buy.stripe.com/aFa00j8u33vT6bMc143wQ0s'; // 通常¥300,000。紹介者コード時はサーバーが返すリンクを使う
+    var currentPrice = 300000;
+    function yen(n) { return n.toLocaleString('en-US'); }
     var form = document.getElementById('applyForm');
     var btn = document.getElementById('submitBtn');
     var note = document.getElementById('submitNote');
@@ -197,12 +205,27 @@
     }
     function syncPlan() {
       var bank = method() === 'bank';
-      document.getElementById('sumPrice').textContent = bank ? '240,000' : '250,000';
+      document.getElementById('sumPrice').textContent = yen(currentPrice);
+      var pm = document.querySelector('.price-by-method strong'); if (pm) pm.textContent = yen(currentPrice);
+      document.querySelectorAll('.pay-option__price').forEach(function (e) { e.textContent = '¥' + yen(currentPrice) + '（税込）'; });
       document.getElementById('sumMethod').textContent = bank ? '銀行振込' : 'クレジットカード決済';
     }
     form.querySelectorAll('input[name="method"]').forEach(function (r) { r.addEventListener('change', function () { syncButton(); syncPlan(); }); });
     syncButton();
     syncPlan();
+
+    var refInput = document.getElementById('f-referral');
+    var refHint = document.getElementById('referralHint');
+    function checkReferral() {
+      var c = refInput.value.trim();
+      if (!c) { currentPrice = 300000; refHint.textContent = 'ご紹介を受けた方は、紹介者コードを入力すると価格が変わります。'; syncPlan(); return; }
+      fetch('/api/referral?code=' + encodeURIComponent(c)).then(function (r) { return r.json(); }).then(function (res) {
+        currentPrice = res.ok ? res.price : 300000;
+        refHint.textContent = res.ok ? '紹介者コードを確認しました。¥' + yen(res.price) + '（税込）が適用されます。' : 'このコードは確認できませんでした。通常価格（¥300,000）になります。';
+        syncPlan();
+      }).catch(function () {});
+    }
+    refInput.addEventListener('change', checkReferral);
 
     var q = new URLSearchParams(location.search);
     if (q.get('error')) showError('送信できませんでした。入力内容をご確認ください。');
@@ -253,7 +276,7 @@
       }).then(function (res) {
         if (data.method === 'card') {
           // カードは通知の成否に関わらず決済へ（Stripe側で氏名・連絡先・配送先を必ず取得する）
-          var u = new URL(PAYMENT_LINK);
+          var u = new URL((res && res.payment_link) || PAYMENT_LINK);
           u.searchParams.set('prefilled_email', data.email);
           if (res && res.id) u.searchParams.set('client_reference_id', res.id);
           location.href = u.toString();

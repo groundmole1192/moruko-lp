@@ -6,16 +6,29 @@ export { ShindanCounter } from './shindan_api/counter.js';
 // 申し込み内容を北さんのTelegramへ通知する。秘密情報は wrangler secret（TG_BOT_TOKEN）で注入。
 // PREVIEW="1"（moruko-lp-v2 プレビュー）のときは通知を送らず、受付番号だけ返す。
 
-// カード決済: ¥250,000（税込）plink_1ULXpXIgbCdh16E59rbR4OFF
-const PAYMENT_LINK = 'https://buy.stripe.com/28EaEXh0zd6t2ZA2qu3wQ0m';
+// 通常 ¥300,000（税込）plink_1UZ0KUIgbCdh16E58UaXnMBp ／ 紹介者コード適用 ¥250,000 plink_1ULXpXIgbCdh16E59rbR4OFF
+// 紹介者コードは wrangler secret REFERRAL_CODES（カンマ区切り、大小無視）で管理。サーバー側で判定する。
+const PAYMENT_LINK = 'https://buy.stripe.com/aFa00j8u33vT6bMc143wQ0s';
+const PAYMENT_LINK_REFERRAL = 'https://buy.stripe.com/28EaEXh0zd6t2ZA2qu3wQ0m';
+const PRICE_NORMAL = 300000;
+const PRICE_REFERRAL = 250000;
+function referralOk(env, code) {
+  const c = String(code || '').trim().toUpperCase();
+  if (!c || c.length > 40) return false;
+  return String(env.REFERRAL_CODES || '').split(',').map(x => x.trim().toUpperCase()).filter(Boolean).includes(c);
+}
 const ALLOWED_ORIGINS = ['https://moruko.groundmole.space'];
-const LIMITS = { name: 80, email: 160, phone: 30, zip: 10, address: 300, purpose: 2000 };
+const LIMITS = { name: 80, email: 160, phone: 30, zip: 10, address: 300, purpose: 2000, referral: 40 };
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname === '/api/diagnose') {
       return handleDiagnose(request, env, ctx, { json, allowedOrigins: ALLOWED_ORIGINS, notifyTelegram });
+    }
+    if (url.pathname === '/api/referral') {
+      const ok = referralOk(env, url.searchParams.get('code'));
+      return json({ ok, price: ok ? PRICE_REFERRAL : PRICE_NORMAL }, 200);
     }
     if (url.pathname === '/api/apply') {
       if (request.method !== 'POST') return json({ ok: false, error: 'method_not_allowed' }, 405);
@@ -67,12 +80,16 @@ async function handleApply(request, env, url) {
   if (!agree) missing.push('agree');
   if (missing.length) return respond(isJson, { ok: false, error: 'invalid', fields: missing }, 422, '', '', '', url);
 
+  const referral = referralOk(env, f.referral);
+  const price = referral ? PRICE_REFERRAL : PRICE_NORMAL;
+  const priceStr = '¥' + price.toLocaleString('en-US');
+  const paymentLink = referral ? PAYMENT_LINK_REFERRAL : PAYMENT_LINK;
   const id = makeId(env.PREVIEW === '1');
 
   // プレビュー環境: 通知を送らない（本番と同じ検証・同じレスポンス形だけ返す）
   if (env.PREVIEW === '1') {
     console.log('[preview] apply received (no notification sent)', id, method);
-    return respond(isJson, { ok: true, id, method, preview: true }, 200, method, f.email, id, url);
+    return respond(isJson, { ok: true, id, method, preview: true, payment_link: paymentLink }, 200, method, f.email, id, url, paymentLink);
   }
 
   const methodLabel = method === 'card' ? 'クレジットカード（Stripe決済ページへ遷移）' : '銀行振込（振込先の案内メール待ち）';
@@ -81,8 +98,8 @@ async function handleApply(request, env, url) {
     '',
     '受付番号: ' + id,
     'プラン: ' + (method === 'card'
-      ? '買い切りプラン ¥250,000（税込・カード決済）'
-      : '買い切りプラン ¥240,000（税込・銀行振込）'),
+      ? '買い切りプラン ' + priceStr + '（税込・カード決済）'
+      : '買い切りプラン ' + priceStr + '（税込・銀行振込）') + (referral ? '　※紹介者コード適用: ' + f.referral.toUpperCase() : (f.referral ? '　※紹介者コード「' + f.referral + '」は無効のため通常価格' : '')),
     '利用契約書への同意: あり（申し込みフォームで確認）',
     'お支払い方法: ' + methodLabel,
     '',
@@ -93,14 +110,14 @@ async function handleApply(request, env, url) {
     '使いたいこと: ' + (f.purpose || '（未記入）'),
     '',
     method === 'bank'
-      ? '対応: 振込先と期日を ' + f.email + ' へメールで案内してください（振込額 ¥240,000）。'
+      ? '対応: 振込先と期日を ' + f.email + ' へメールで案内してください（振込額 ' + priceStr + '）。'
       : '対応: Stripeで決済完了を確認してください（client_reference_id = ' + id + '）。未決済のまま離脱している場合あり。',
   ].join('\n');
 
   const sent = await notifyTelegram(env, text);
   if (!sent) return respond(isJson, { ok: false, error: 'notify_failed' }, 502, '', '', '', url);
 
-  return respond(isJson, { ok: true, id, method }, 200, method, f.email, id, url);
+  return respond(isJson, { ok: true, id, method, payment_link: paymentLink }, 200, method, f.email, id, url, paymentLink);
 }
 
 async function notifyTelegram(env, text) {
@@ -125,12 +142,12 @@ function makeId(preview) {
 }
 
 // JS無効時（通常のフォームPOST）はリダイレクトで返す。リダイレクト先は自サイト（本番=カスタムドメイン、プレビュー=workers.dev）
-function respond(isJson, body, status, method, email, id, url) {
+function respond(isJson, body, status, method, email, id, url, paymentLink) {
   if (isJson) return json(body, status);
   const site = url ? url.origin : 'https://moruko.groundmole.space';
   if (body.ok) {
     if (method === 'card') {
-      const u = new URL(PAYMENT_LINK);
+      const u = new URL(paymentLink || PAYMENT_LINK);
       if (email) u.searchParams.set('prefilled_email', email);
       if (id) u.searchParams.set('client_reference_id', id);
       return Response.redirect(u.toString(), 303);
