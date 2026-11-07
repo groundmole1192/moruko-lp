@@ -12,12 +12,21 @@ const PAYMENT_LINK = 'https://buy.stripe.com/aFa00j8u33vT6bMc143wQ0s';
 const PAYMENT_LINK_REFERRAL = 'https://buy.stripe.com/28EaEXh0zd6t2ZA2qu3wQ0m';
 const PRICE_NORMAL = 300000;
 const PRICE_REFERRAL = 250000;
-function referralOk(env, code) {
+// 紹介者コード: サポートbotがTelegramアカウントごとに発行（MR<chat_id36進>-<HMAC6桁>）。REFERRAL_SECRET で検証。
+// 手動発行コードは wrangler secret REFERRAL_CODES（カンマ区切り）でも受け付ける。
+async function referralCheck(env, code) {
   const c = String(code || '').trim().toUpperCase();
-  if (!c || c.length > 40) return false;
-  return String(env.REFERRAL_CODES || '').split(',').map(x => x.trim().toUpperCase()).filter(Boolean).includes(c);
+  if (!c || c.length > 40) return { ok: false };
+  if (String(env.REFERRAL_CODES || '').split(',').map(x => x.trim().toUpperCase()).filter(Boolean).includes(c)) return { ok: true, referrer: 'manual' };
+  const m = /^MR([0-9A-Z]{1,13})-([0-9A-F]{6})$/.exec(c);
+  if (!m || !env.REFERRAL_SECRET) return { ok: false };
+  const id = parseInt(m[1].toLowerCase(), 36);
+  if (!Number.isSafeInteger(id) || id <= 0) return { ok: false };
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.REFERRAL_SECRET), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode('ref:' + id));
+  const mac = Array.from(new Uint8Array(sig), b => b.toString(16).padStart(2, '0')).join('').slice(0, 6).toUpperCase();
+  return mac === m[2] ? { ok: true, referrer: String(id) } : { ok: false };
 }
-const ALLOWED_ORIGINS = ['https://moruko.groundmole.space'];
 const LIMITS = { name: 80, email: 160, phone: 30, zip: 10, address: 300, purpose: 2000, referral: 40 };
 
 export default {
@@ -27,7 +36,7 @@ export default {
       return handleDiagnose(request, env, ctx, { json, allowedOrigins: ALLOWED_ORIGINS, notifyTelegram });
     }
     if (url.pathname === '/api/referral') {
-      const ok = referralOk(env, url.searchParams.get('code'));
+      const ok = (await referralCheck(env, url.searchParams.get('code'))).ok;
       return json({ ok, price: ok ? PRICE_REFERRAL : PRICE_NORMAL }, 200);
     }
     if (url.pathname === '/api/apply') {
@@ -80,7 +89,8 @@ async function handleApply(request, env, url) {
   if (!agree) missing.push('agree');
   if (missing.length) return respond(isJson, { ok: false, error: 'invalid', fields: missing }, 422, '', '', '', url);
 
-  const referral = referralOk(env, f.referral);
+  const ref = await referralCheck(env, f.referral);
+  const referral = ref.ok;
   const price = referral ? PRICE_REFERRAL : PRICE_NORMAL;
   const priceStr = '¥' + price.toLocaleString('en-US');
   const paymentLink = referral ? PAYMENT_LINK_REFERRAL : PAYMENT_LINK;
@@ -99,7 +109,7 @@ async function handleApply(request, env, url) {
     '受付番号: ' + id,
     'プラン: ' + (method === 'card'
       ? '買い切りプラン ' + priceStr + '（税込・カード決済）'
-      : '買い切りプラン ' + priceStr + '（税込・銀行振込）') + (referral ? '　※紹介者コード適用: ' + f.referral.toUpperCase() : (f.referral ? '　※紹介者コード「' + f.referral + '」は無効のため通常価格' : '')),
+      : '買い切りプラン ' + priceStr + '（税込・銀行振込）') + (referral ? '　※紹介者コード適用: ' + f.referral.toUpperCase() + '（紹介者 chat_id: ' + ref.referrer + '）' : (f.referral ? '　※紹介者コード「' + f.referral + '」は無効のため通常価格' : '')),
     '利用契約書への同意: あり（申し込みフォームで確認）',
     'お支払い方法: ' + methodLabel,
     '',
