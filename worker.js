@@ -37,7 +37,10 @@ export default {
     }
     if (url.pathname === '/api/referral') {
       const ok = (await referralCheck(env, url.searchParams.get('code'))).ok;
-      return json({ ok, price: ok ? PRICE_REFERRAL : PRICE_NORMAL }, 200);
+      const res = json({ ok, price: ok ? PRICE_REFERRAL : PRICE_NORMAL }, 200);
+      const o = request.headers.get('Origin');
+      if (o === 'https://moruko-contract.vercel.app') res.headers.set('Access-Control-Allow-Origin', o);
+      return res;
     }
     if (url.pathname === '/api/apply') {
       if (request.method !== 'POST') return json({ ok: false, error: 'method_not_allowed' }, 405);
